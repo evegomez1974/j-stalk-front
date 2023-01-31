@@ -1,0 +1,13 @@
+:root {
+    --jstalk-color-primary: #a663cc;
+    --jstalk-color-secondary: #b9faf8;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        --jstalk-color-primary: #000000;
+        --jstalk-color-secondary: #ffffff;
+    }
+    
+}
