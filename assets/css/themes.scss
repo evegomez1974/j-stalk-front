@@ -1,13 +1,33 @@
 :root {
     --jstalk-color-primary: #a663cc;
+    --jstalk-color-primary-contrast: #6f2dbd;
+
     --jstalk-color-secondary: #b9faf8;
+    --jstalk-color-secondary-contrast: #b8d0eb;
+
+    --jstalk-color-tertiary: #b298dc;
+
+    --jstalk-color-background: #ffffff;
+    --jstalk-color-dark: #000000;
+    --jstalk-color-light: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
 
     body {
-        --jstalk-color-primary: #000000;
-        --jstalk-color-secondary: #ffffff;
+
+        --jstalk-color-primary: #a663cc;
+        --jstalk-color-primary-contrast: #6f2dbd;
+    
+        --jstalk-color-secondary: #b9faf8;
+        --jstalk-color-secondary-contrast: #b8d0eb;
+    
+        --jstalk-color-tertiary: #b298dc;
+    
+        --jstalk-color-background: #000000;
+        --jstalk-color-dark: #ffffff;
+        --jstalk-color-light: #000000;
+    
     }
     
 }
