@@ -1,16 +1,19 @@
 <template>
-  <p>test</p>
+  <div>
+    <p>test du titre</p>
+    <FormLogin />
+  </div>
 </template>
 
 <script>
+import FormLogin from '../components/formLogin.vue';
 export default {
-  name: 'Login'
+  name: 'Login',
+  components: {FormLogin}
 }
 </script>
 
 
 <style>
-body {
-  background: blue;
-}
+
 </style>
