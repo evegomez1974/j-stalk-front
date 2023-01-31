@@ -1,18 +1,16 @@
 <template>
-   <p>test</p>
-  <Login/>
+  <p>test</p>
 </template>
 
 <script>
-
-
 export default {
-    name: "IndexPage",
-
+  name: 'Login'
 }
 </script>
 
 
 <style>
-
+body {
+  background: blue;
+}
 </style>
