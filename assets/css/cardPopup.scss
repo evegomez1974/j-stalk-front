@@ -3,12 +3,12 @@
     src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
   }
 
-.card-title {
+  .modal-header{
     background: var(--jstalk-color-primary) ;
     color: var(--jstalk-color-dark);
     flex: 1 1;
     padding: 1rem;
-}
+  }
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';
@@ -20,13 +20,9 @@ body {
     font-family: "Candara";
 }
 
-.card {
-    width: 40vw
-}
+
 
 @media only screen and (max-width: 1000px) {
  
-    .card{
-        width: 60vw
-    }
+  
 }
