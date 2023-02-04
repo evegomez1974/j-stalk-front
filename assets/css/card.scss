@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Candara";
+    src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
+  }
+
 .card-title {
     background: var(--jstalk-color-primary) ;
     color: var(--jstalk-color-dark);
@@ -12,6 +17,7 @@
 
 body {
     background: var(--jstalk-color-background);
+    font-family: "Candara";
 }
 
 .card {
