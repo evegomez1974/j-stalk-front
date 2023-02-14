@@ -1,32 +1,30 @@
 <template>
   <div>
-  <b-card
-    header="Connexion"
-    header-text-variant="white"
-    header-tag="header"
-    header-bg-variant="dark"
-    style="max-width: 30rem;"
-  >
-    <b-card-text>
-      <b-container fluid>
-        <b-row class="my-1" v-for="type in types" :key="type">
-          <b-col sm="3">
-            <label :for="`type-${type}`"> <code>{{ type }}</code></label>
-          </b-col>
-          <b-col sm="9">
-            <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
-          </b-col>
-        </b-row>
-        <b-button variant="success">Valider</b-button>
-        <b-button>S'inscrire</b-button>
-      </b-container>
-    </b-card-text>
-  </b-card>
-</div>
+    <div class="backgroundLogin">
+    <img class="img-fond" src="../static/Fond1.jpg" fluid-grow alt="Responsive image"/>
+    <div>
+      <img class="img-logo" src="../static/j-stalk-logo2.png" fluid alt="Responsive image"/>
+    </div>
+    <div class="zoneForm">
+      <b-form @submit.stop.prevent>
+        <label for="text-password">Password</label>
+        <b-form-input type="password" id="text-password" aria-describedby="password-help-block"></b-form-input>
+        <b-form-text id="password-help-block">
+          Your password must be 8-20 characters long, contain letters and numbers, and must not
+          contain spaces, special characters, or emoji.
+        </b-form-text>
+   </b-form>
+    </div>
+    </div>
+
+
+  </div>
+
 
 </template>
 
 <script>
+// <img class="img-logo" src="../static/j-stalk-logo2.png" fluid alt="Responsive image"/>S
 import FormLogin from '../components/formLogin.vue';
 export default {
   name: 'Login',
@@ -44,5 +42,6 @@ export default {
 
 
 <style>
+
 
 </style>
