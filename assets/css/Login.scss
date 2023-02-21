@@ -40,15 +40,17 @@ body{
 
 }
 
-.lien {
-  margin: auto;
-  height: 40px;
-  width: 25%;
-  float: right;
-}
+
 
 .labelOublie {
   color: var(--jstalk-color-dark) ;
+  text-align: right !important;
+  float: right;
+  font-style: italic;
+}
+
+.labelOublie:hover {
+  color: var(--jstalk-color-secondary) ;
   text-align: right !important;
   float: right;
   font-style: italic;
@@ -62,14 +64,6 @@ body{
 
 }
 
-div.btnVal {
-  width: 17%;
-  display: inline-block;
-  border-radius: 10px;
-  border-color: #4e4a55 ;
-  background-color: #b298dc ;
-  margin-inline: 20px;
-}
 
 button {
   display: inline-block;

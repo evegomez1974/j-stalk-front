@@ -1,47 +1,70 @@
 <template>
-  <div>
-    <div class="backgroundLogin">
-    <img class="img-fond" src="../static/Fond1.jpg" fluid-grow alt="Responsive image"/>
+  <form @submit.prevent="submitForm">
+  <div class="containerLog">
     <div>
-      <img class="img-logo" src="../static/j-stalk-logo2.png" fluid alt="Responsive image"/>
+      <input class="inputLog" type="email" v-model="FormData.email" placeholder="Email">
     </div>
-    <div class="zoneForm">
-      <b-form @submit.stop.prevent>
-        <label for="text-password">Password</label>
-        <b-form-input type="password" id="text-password" aria-describedby="password-help-block"></b-form-input>
-        <b-form-text id="password-help-block">
-          Your password must be 8-20 characters long, contain letters and numbers, and must not
-          contain spaces, special characters, or emoji.
-        </b-form-text>
-   </b-form>
+    <div>
+      <input class="inputLog" type="password" v-model="FormData.password" placeholder="Mot de passe">
     </div>
+    <div class="lien">
+      <router-link to="/"><label class="labelOublie">Mot de passe oublié ?</label></router-link>
     </div>
-
-
-  </div>
-
-
+    <div class="btnRouter">
+      <div class="btnVal">
+        <router-link to="/"><button type="submit">Se connecter</button></router-link>
+      </div>
+      <div class="btnVal">
+        <router-link to="/"><button type="submit">Inscription</button></router-link>
+      </div>
+    </div>
+ </div>
+</form>
 </template>
 
 <script>
-// <img class="img-logo" src="../static/j-stalk-logo2.png" fluid alt="Responsive image"/>S
-import FormLogin from '../components/formLogin.vue';
+
+
 export default {
-  name: 'Login',
-  components: {FormLogin},
-  data() {
-      return {
-        types: [
-          'email',
-          'password',
-        ]
-      }
+  name: 'FormLogin',
+  components: {},
+  data (){
+    return {
+    FormData: {
+      email:'',
+      password: '',
     }
+  }
+  },
+  methods: {
+    async submitForm() {
+      try {
+        const response = await axios.post('http://localhost:3000', this.formData)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }}
+
 }
 </script>
 
 
 <style>
+.lien {
+  margin: auto;
+  height: 40px;
+  width: 25%;
+  float: right;
+}
 
+div.btnVal {
+  width: 17%;
+  display: inline-block;
+  border-radius: 10px;
+  border-color: #4e4a55 ;
+  background-color: #b298dc ;
+  margin-inline: 20px;
+}
 
 </style>
