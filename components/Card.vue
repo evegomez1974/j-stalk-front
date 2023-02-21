@@ -18,12 +18,15 @@
         </BIconCircleFill>
         Optimiser l'expérience utilisateur
       </p>
-      <a v-b-modal.modal-center href="#" class="card-link">Voir plus</a>
+      <div class="footer-card">
+        <p style="font-style: italic;">Il y a 15h</p>
+        <a v-b-modal.modal-center href="#" class="card-link">Voir plus</a>
+      </div>
     </div>
     <!-- <b-button v-b-modal.modal-center>Launch centered modal</b-button> -->
 
-    <b-modal id="modal-center" centered >
-      <template #modal-title> {{FormData.jobTitle}} </template>
+    <b-modal id="modal-center" centered>
+      <template #modal-title> {{ FormData.jobTitle }} </template>
 
       <h6 class="card-subtitle mb-2 text-muted">{{ FormData.company }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">
@@ -46,6 +49,7 @@
 </template>
 
 <script>
+import "../assets/css/card.scss";
 import { BIconCircleFill } from "bootstrap-vue";
 export default {
   name: "Card",

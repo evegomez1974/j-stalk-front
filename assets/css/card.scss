@@ -3,12 +3,7 @@
     src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
   }
 
-.card-title {
-    background: var(--jstalk-color-primary) ;
-    color: var(--jstalk-color-dark);
-    flex: 1 1;
-    padding: 1rem;
-}
+$primary : #a663cc;
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';
@@ -19,9 +14,30 @@ body {
     background: var(--jstalk-color-background);
     font-family: "Candara";
 }
+a {
+    color: var(--jstalk-color-primary)  
+}
+
+a:hover {
+    color: var(--jstalk-color-primary-contrast); 
+}
 
 .card {
     width: 40vw
+}
+
+.card-title {
+    background: var(--jstalk-color-primary) ;
+    color: var(--jstalk-color-dark);
+    flex: 1 1;
+    padding: 1rem;
+}
+
+.modal-header{
+    background: var(--jstalk-color-primary) ;
+    color: var(--jstalk-color-dark);
+    flex: 1 1;
+    padding: 1rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -29,4 +45,9 @@ body {
     .card{
         width: 60vw
     }
+}
+
+.footer-card {
+    display: flex;
+    justify-content: space-between;
 }

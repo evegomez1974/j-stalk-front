@@ -1,20 +1,16 @@
 <template>
   <div class="test">
       <Card />
-      <!-- <CardPopup /> -->
   </div>
 </template>
 
 <script>
-import "../assets/css/card.scss";
-import "../assets/css/cardPopup.scss";
 import "../assets/css/themes.scss";
-import Card from "../components/Card.vue";
-// import CardPopup from "../components/CardPopup.vue";
+import Card from "../components/card.vue";
 
 export default {
   name: "name",
-  components: { Card /*, CardPopup*/ },
+  components: { Card },
 };
 </script>
 
