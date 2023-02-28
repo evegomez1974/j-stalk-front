@@ -14,7 +14,6 @@
 <script>
 import { defineComponent } from 'vue';
 import '../assets/css/themes.scss'
-import  '../assets/css/main.scss'
 import  '../assets/css/Login.scss'
 import formLogin from '../components/formLogin.vue'
 import forgetWord from '../components/forgetWord.vue'

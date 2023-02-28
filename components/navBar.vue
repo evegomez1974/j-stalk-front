@@ -2,11 +2,7 @@
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#"
-        ><img
-          src="../assets/img/j-stalk-logo.png"
-          height="60vh"
-          alt="J-Stalk logo"
-      /></b-navbar-brand>
+        ></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -28,7 +24,7 @@
               >Search</b-button
             >
           </b-nav-form>
-          
+
 
           <!-- <b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -48,7 +44,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    
+
   </div>
 </template>
 
