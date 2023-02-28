@@ -6,7 +6,7 @@
 
 <script>
 import "../assets/css/themes.scss";
-import Card from "../components/card.vue";
+import Card from "../components/card";
 
 export default {
   name: "name",
