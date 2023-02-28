@@ -2,7 +2,11 @@
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#"
-        ></b-navbar-brand>
+        ><img
+          src="../assets/img/j-stalk-logo.png"
+          height="60vh"
+          alt="J-Stalk logo"
+      /></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
