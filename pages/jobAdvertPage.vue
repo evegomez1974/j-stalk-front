@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import "../assets/css/themes.scss";
+import "../assets/css/jobAdvertPage.scss";
 
-import NavBar from "../components/navBar.vue";
-import Card from "../components/card.vue";
+import NavBar from "../components/navBar";
+import Card from "../components/card";
 
 export default {
   name: "IndexPage",

@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import "../assets/css/navBar.scss";
-
 export default {
   name: "NavBar",
 };

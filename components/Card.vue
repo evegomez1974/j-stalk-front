@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import "../assets/css/card.scss";
+
 import { BIconCircleFill } from "bootstrap-vue";
 export default {
   name: "Card",

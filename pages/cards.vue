@@ -1,5 +1,6 @@
 <template>
-<b-container class="bv-example-row">
+  <Card />
+<!-- <b-container class="bv-example-row">
   <b-row>
     <b-col>Column</b-col>
     <b-col>Column</b-col>
@@ -7,13 +8,17 @@
     <b-col>Column</b-col>
     <b-col>Column</b-col>
   </b-row>
-</b-container>
+</b-container> -->
 </template>
 
 <script>
-
+import Card from "../components/card";
+import "../assets/css/themes.scss";
+import "../assets/css/card.scss";
 export default {
-  name: "name",};
+  name: "name",
+  components: {Card}
+  };
 </script>
 
 <style lang="scss">
