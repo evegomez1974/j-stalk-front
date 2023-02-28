@@ -1,25 +1,25 @@
 <template>
   <form @submit.prevent="submitForm">
-  <div class="containerLog">
-    <div>
-      <input class="inputLog" type="email" v-model="FormData.email" placeholder="Email">
+      <div class="containerLog">
+        <div>
+          <input class="inputLog" type="email" v-model="FormData.email" placeholder="Email">
+        </div>
+        <div>
+          <input class="inputLog" type="password" v-model="FormData.password" placeholder="Mot de passe">
+        </div>
+        <div class="lien">
+          <button @click="methVal"><label class="labelOublie">Mot de passe oublié ?</label></button>
+        </div>
+        <div class="btnRouter">
+          <div class="btnVal">
+            <router-link to="/"><button type="submit" >Se connecter</button></router-link>
+          </div>
+          <div class="btnVal">
+            <router-link to="/"><button type="submit">Inscription</button></router-link>
+          </div>
+        </div>
     </div>
-    <div>
-      <input class="inputLog" type="password" v-model="FormData.password" placeholder="Mot de passe">
-    </div>
-    <div class="lien">
-      <router-link to="/"><label class="labelOublie">Mot de passe oublié ?</label></router-link>
-    </div>
-    <div class="btnRouter">
-      <div class="btnVal">
-        <router-link to="/"><button type="submit">Se connecter</button></router-link>
-      </div>
-      <div class="btnVal">
-        <router-link to="/"><button type="submit">Inscription</button></router-link>
-      </div>
-    </div>
- </div>
-</form>
+  </form>
 </template>
 
 <script>
@@ -33,7 +33,8 @@ export default {
     FormData: {
       email:'',
       password: '',
-    }
+    },
+    myValueOublieMotDePasse: "oublieMotDePasse"
   }
   },
   methods: {
@@ -44,7 +45,11 @@ export default {
       } catch (error) {
         console.error(error)
       }
-    }}
+    },
+    methVal() {
+      this.$emit('message-sent', this.myValueOublieMotDePasse);
+    }
+  }
 
 }
 </script>
