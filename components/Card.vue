@@ -1,10 +1,10 @@
 <template>
   <div class="card">
-    <h5 class="card-title">{{ FormData.jobTitle }}</h5>
+    <h5 class="card-title">{{ jobTitle }}</h5>
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">{{ FormData.company }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">
-        {{ FormData.city }}, {{ FormData.department }}
+        {{ city }}, {{ department }}
       </h6>
       <p class="card-text">
         <BIconCircleFill
@@ -19,18 +19,18 @@
         Optimiser l'expérience utilisateur
       </p>
       <div class="footer-card">
-        <p style="font-style: italic;">Il y a 15h</p>
+        <p style="font-style: italic">Il y a 15h</p>
         <a v-b-modal.modal-center href="#" class="card-link">Voir plus</a>
       </div>
     </div>
     <!-- <b-button v-b-modal.modal-center>Launch centered modal</b-button> -->
 
     <b-modal id="modal-center" centered>
-      <template #modal-title> {{ FormData.jobTitle }} </template>
+      <template #modal-title> {{ jobTitle }} </template>
 
-      <h6 class="card-subtitle mb-2 text-muted">{{ FormData.company }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">
-        {{ FormData.city }}, {{ FormData.department }}
+        {{ city }}, {{ department }}
       </h6>
       <p class="card-text">
         <BIconCircleFill
@@ -56,15 +56,12 @@ export default {
   components: {
     BIconCircleFill,
   },
-  data() {
-    return {
-      FormData: {
-        jobTitle: "Developpeur cpp junior H/F",
-        company: "PellencST",
-        city: "Pertuis",
-        department: "Vaucluse (84)",
-      },
-    };
-  },
+  props: {
+        jobTitle: String,
+        company: String,
+        city: String,
+        department: String,
+
+  }
 };
 </script>

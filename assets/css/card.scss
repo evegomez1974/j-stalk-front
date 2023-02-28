@@ -11,7 +11,6 @@ $primary : #a663cc;
 //@import './themes.scss';
 
 body {
-    background: var(--jstalk-color-background);
     font-family: "Candara";
 }
 a {
@@ -23,7 +22,7 @@ a:hover {
 }
 
 .card {
-    width: 40vw
+    width: 80%
 }
 
 .card-title {
@@ -43,7 +42,7 @@ a:hover {
 @media only screen and (max-width: 1000px) {
  
     .card{
-        width: 60vw
+        width: 80%
     }
 }
 

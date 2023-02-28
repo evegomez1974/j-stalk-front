@@ -1,17 +1,19 @@
 <template>
-  <div class="test">
-      <Card />
-  </div>
+<b-container class="bv-example-row">
+  <b-row>
+    <b-col>Column</b-col>
+    <b-col>Column</b-col>
+    <div class="w-100"></div>
+    <b-col>Column</b-col>
+    <b-col>Column</b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>
-import "../assets/css/themes.scss";
-import Card from "../components/card.vue";
 
 export default {
-  name: "name",
-  components: { Card },
-};
+  name: "name",};
 </script>
 
 <style lang="scss">
