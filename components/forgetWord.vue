@@ -8,7 +8,6 @@
               Le mot de passe doit être entre 8-25 charactères.
             </b-form-invalid-feedback>
             <b-form-valid-feedback :state="validation">
-              C'est bon !
             </b-form-valid-feedback>
           </b-form>
         </div>
@@ -19,7 +18,6 @@
               Mot de passe différent
             </b-form-invalid-feedback>
             <b-form-valid-feedback :state="validation2">
-              C'est bon !
             </b-form-valid-feedback>
           </b-form>
         </div>
@@ -55,10 +53,15 @@ export default {
   },
   computed: {
       validation() {
-        return this.NewPassWord1.length > 8 && this.NewPassWord1.length < 25
+        return this.NewPassWord1.length >= 8 && this.NewPassWord1.length < 25
       },
       validation2() {
-        return this.NewPassWord1 === this.NewPassWord2
+        if (this.NewPassWord1 === "") {
+
+        }else if (this.NewPassWord1 === this.NewPassWord2){
+          return this.NewPassWord1 === this.NewPassWord2
+        }
+
       }
     },
   methods: {
