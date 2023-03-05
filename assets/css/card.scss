@@ -3,13 +3,6 @@
     src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
   }
 
-$primary : #a663cc;
-
-// Include Bootstrap and BootstrapVue SCSS files
-@import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap-vue/src/index.scss';
-//@import './themes.scss';
-
 body {
     font-family: "Candara";
 }
@@ -22,7 +15,7 @@ a:hover {
 }
 
 .card {
-    width: 80%
+    width: 80%;
 }
 
 .card-title {
