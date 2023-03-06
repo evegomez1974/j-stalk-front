@@ -23,6 +23,8 @@ a:hover {
     color: var(--jstalk-color-dark);
     flex: 1 1;
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .modal-header{
@@ -30,6 +32,11 @@ a:hover {
     color: var(--jstalk-color-dark);
     flex: 1 1;
     padding: 1rem;
+}
+
+#favButton {
+    border-color: transparent;
+    background-color: transparent;
 }
 
 @media only screen and (max-width: 1000px) {

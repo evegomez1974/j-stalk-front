@@ -1,6 +1,9 @@
 <template>
   <div class="card">
-    <h5 class="card-title">{{ jobTitle }}</h5>
+  <div class="card-title">
+    <h5 >{{ jobTitle }}</h5>
+    <button id="favButton" @click="changeIcon" ><b-icon :icon=icon variant="light" font-scale="1.5">{{icon}}</b-icon></button>
+    </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">
@@ -50,18 +53,28 @@
 
 <script>
 import "../assets/css/card.scss"
-import { BIconCircleFill } from "bootstrap-vue";
+import { BIconCircleFill, BIconHeart, BIconHeartFill } from "bootstrap-vue";
+
 export default {
   name: "Card",
   components: {
-    BIconCircleFill,
+    BIconCircleFill, BIconHeart
   },
   props: {
         jobTitle: String,
         company: String,
         city: String,
         department: String,
-
+  },
+  data(){
+    return {
+        icon: "heart"
+    }
+  },
+  methods: {
+    changeIcon() {
+        this.icon = (this.icon === "heart" ? "heart-fill" : "heart")   
+    }
   }
 };
 </script>
