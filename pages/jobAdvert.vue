@@ -15,22 +15,41 @@
         </b-nav-form>
       </div>
       <div class="favorite-container">
-        <b-button size="md"
-          >Favoris<BIconHeart class="pl-1"></BIconHeart
-        ></b-button>
+        <b-button
+          size="md"
+          @click="showOnlyFavorites = !showOnlyFavorites"
+          >Favoris
+          <b-icon
+            v-if="showOnlyFavorites"
+			class="pl-1"
+            icon="heart-fill"
+            variant="light"
+            font-scale="1.3"
+          ></b-icon>
+		  <b-icon
+            v-else
+            class="pl-1"
+            icon="heart"
+            variant="light"
+            font-scale="1.3"
+          ></b-icon>
+        
+          <!-- <BIconHeart :v-if:this.showOnlyFavorites class="pl-1"></BIconHeart>
+		  <BIconHeartFill class="pl-1"></BIconHeartfill> -->
+        </b-button>
       </div>
     </div>
     <div class="grid-container">
       <Card
         class="grid-card"
-        v-for="(jobOffer, index) in jobOffers"
+        v-for="(jobOffer, index) in filteredJobOffers"
         :key="index"
         :jobTitle="jobOffer.jobTitle"
         :company="jobOffer.company"
         :city="jobOffer.city"
         :department="jobOffer.department"
         :favorite="jobOffer.favorite"
-        @update:favorite="changeFav(jobOffer, $event)"
+        @update:favorite="changeCardFavorite(jobOffer, $event)"
         @update:index="index = $event"
       />
     </div>
@@ -87,16 +106,22 @@ export default {
           favorite: true,
         },
       ],
+
+      showOnlyFavorites: false,
     };
   },
+  computed: {
+	filteredJobOffers() {
+		if(this.showOnlyFavorites) {
+			return this.jobOffers.filter((jobOffer) => jobOffer.favorite)
+		}else {
+			return this.jobOffers;
+		}
+	}
+  },
   methods: {
-    setMessage(payload) {
-      this.message = payload.message;
-    },
-
-    changeFav(jobOffer, newValue) {
+    changeCardFavorite(jobOffer, newValue) {
       jobOffer.favorite = newValue;
-      console.log(jobOffer.favorite);
     },
   },
 };

@@ -38,10 +38,9 @@
       </p>
       <div class="footer-card">
         <p style="font-style: italic; color: black">Il y a 15h</p>
-        <button
+        <b-button id="seeMore"
           v-b-modal="'modal-center-' + this.modalRef"
-          class="card-link-jstalk-primary"
-          >Voir plus</button
+          >Voir plus</b-button
         >
       </div>
     </div>
@@ -67,7 +66,6 @@
         </BIconCircleFill>
         Optimiser l'expérience utilisateur
       </p>
-      <button>test</button>
       <!-- <template #modal-footer>
         <button>test</button>
       </template> -->
@@ -100,7 +98,6 @@ export default {
   },
   methods: {
     changeFavorite() {
-      // this.favorite = !this.favorite
       this.$emit("update:favorite", !this.favorite);
     },
   },
