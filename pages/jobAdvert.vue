@@ -15,7 +15,9 @@
         </b-nav-form>
       </div>
       <div class="favorite-container">
-        <b-button size="md" >Favoris <BIconHeart class="pl-1"></BIconHeart></b-button>
+        <b-button size="md"
+          >Favoris<BIconHeart class="pl-1"></BIconHeart
+        ></b-button>
       </div>
     </div>
     <div class="grid-container">
@@ -23,10 +25,13 @@
         class="grid-card"
         v-for="(jobOffer, index) in jobOffers"
         :key="index"
+		:index="index"
         :jobTitle="jobOffer.jobTitle"
         :company="jobOffer.company"
         :city="jobOffer.city"
         :department="jobOffer.department"
+        :favorite="jobOffer.favorite"
+        @update:favorite="changeFav(jobOffer, $event)"
       />
     </div>
   </div>
@@ -40,7 +45,6 @@ import Card from "../components/card";
 
 import { BIconHeart } from "bootstrap-vue";
 
-
 export default {
   name: "IndexPage",
   components: { NavBar, Card, BIconHeart },
@@ -52,34 +56,49 @@ export default {
           company: "PellencST",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          favorite: true,
         },
         {
           jobTitle: "Developpeur fullstack junior H/F",
           company: "Capgemini",
           city: "Aix en Provence",
           department: "Bouches du Rhônes (13)",
+          favorite: false,
         },
         {
           jobTitle: "Developpeur back junior H/F",
           company: "Soprasteria",
           city: "Aix les milles",
           department: "Bouches du Rhônes (13)",
+          favorite: false,
         },
         {
           jobTitle: "Developpeur cpp junior H/F",
           company: "PellencSAS",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          favorite: true,
         },
         {
           jobTitle: "Developpeur cpp junior H/F",
           company: "PellencSAS",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          favorite: true,
         },
       ],
     };
-  }
+  },
+  methods: {
+    setMessage(payload) {
+      this.message = payload.message;
+    },
+
+    changeFav(jobOffer, newValue) {
+      jobOffer.favorite = newValue;
+      console.log(jobOffer.favorite)
+    }
+  },
 };
 </script>
 
@@ -93,21 +112,21 @@ export default {
 }
 
 .search-container {
-	display: flex;
-	width: 50%;
-	align-items: center;
-	justify-content: flex-start;
-	padding-left: 15%;
-	//background-color: red;
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 15%;
+  //background-color: red;
 }
 
 .favorite-container {
-	display: flex;
-	width: 50%;
-	align-items: center;
-	justify-content: flex-end;
-	padding-right: 15%;
-	//background-color: blue;
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15%;
+  //background-color: blue;
 }
 .grid-container {
   display: grid;

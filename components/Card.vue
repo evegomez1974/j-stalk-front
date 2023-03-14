@@ -1,14 +1,29 @@
 <template>
   <div class="card">
-  <div class="card-title">
-    <h5 >{{ jobTitle }}</h5>
-    <button id="favButton" @click="changeIcon" ><b-icon :icon=icon variant="light" font-scale="1.5">{{icon}}</b-icon></button>
+    <div class="card-title">
+      <h5>{{ jobTitle }}</h5>
+      <button id="favButton" @click="changeFavorite">
+        <b-icon
+          v-if="this.favorite"
+          icon="heart-fill"
+          variant="light"
+          font-scale="1.5"
+        ></b-icon>
+        <b-icon v-else icon="heart" variant="light" font-scale="1.5"></b-icon>
+      </button>
     </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
+      <span class="badge badge-secondary">Stage</span>
+      <span class="badge badge-secondary">Alternance</span>
+      <!-- <span class="badge badge-primary">Apprentissage</span>
+      <span class="badge badge-primary">Professionalisation</span>
+      <span class="badge badge-primary">6 mois</span> -->
+      <span class="badge badge-secondary">3 mois</span>
+
       <p class="card-text">
         <BIconCircleFill
           style="color: black"
@@ -22,13 +37,17 @@
         Optimiser l'expérience utilisateur
       </p>
       <div class="footer-card">
-        <p style="font-style: italic">Il y a 15h</p>
-        <a v-b-modal.modal-center href="#" class="card-link">Voir plus</a>
+        <p style="font-style: italic; color: black">Il y a 15h</p>
+        <a
+          v-b-modal.modal-center href="#"
+          class="card-link-jstalk-primary"
+          >Voir plus</a
+        >
       </div>
     </div>
     <!-- <b-button v-b-modal.modal-center>Launch centered modal</b-button> -->
 
-    <b-modal id="modal-center" centered>
+    <b-modal id="modal-center" variant="jstalk-primary" centered>
       <template #modal-title> {{ jobTitle }} </template>
 
       <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
@@ -47,34 +66,37 @@
         </BIconCircleFill>
         Optimiser l'expérience utilisateur
       </p>
+      <button>test</button>
+      <!-- <template #modal-footer>
+        <button>test</button>
+      </template> -->
     </b-modal>
   </div>
 </template>
 
 <script>
-import "../assets/css/card.scss"
-import { BIconCircleFill, BIconHeart, BIconHeartFill } from "bootstrap-vue";
+import "../assets/css/card.scss";
+import { BIconCircleFill, BIconHeart } from "bootstrap-vue";
 
 export default {
   name: "Card",
   components: {
-    BIconCircleFill, BIconHeart
+    BIconCircleFill,
+    BIconHeart,
   },
   props: {
-        jobTitle: String,
-        company: String,
-        city: String,
-        department: String,
-  },
-  data(){
-    return {
-        icon: "heart"
-    }
+    index: Number,
+    jobTitle: String,
+    company: String,
+    city: String,
+    department: String,
+    favorite: Boolean,
   },
   methods: {
-    changeIcon() {
-        this.icon = (this.icon === "heart" ? "heart-fill" : "heart")   
-    }
-  }
+    changeFavorite() {
+      // this.favorite = !this.favorite
+      this.$emit("update:favorite", !this.favorite);
+    },
+  },
 };
 </script>

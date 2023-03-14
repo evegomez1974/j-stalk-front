@@ -1,6 +1,8 @@
 $jstalk-primary: #a663cc;
 $jstalk-gray-800: #343a40;
 
+$primary: #a663cc;
+
 $theme-colors: (
     "jstalk-primary": $jstalk-primary,
     
@@ -9,7 +11,7 @@ $colors: (
     "jstalk-gray-800": $jstalk-gray-800,
 );
 
-//$card-bg: $jstalk-gray-800;
+$card-bg: #343a4011;
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';
