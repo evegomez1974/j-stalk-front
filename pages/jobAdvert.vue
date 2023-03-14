@@ -15,27 +15,22 @@
         </b-nav-form>
       </div>
       <div class="favorite-container">
-        <b-button
-          size="md"
-          @click="showOnlyFavorites = !showOnlyFavorites"
+        <b-button size="md" @click="showOnlyFavorites = !showOnlyFavorites"
           >Favoris
           <b-icon
             v-if="showOnlyFavorites"
-			class="pl-1"
+            class="pl-1"
             icon="heart-fill"
             variant="light"
             font-scale="1.3"
           ></b-icon>
-		  <b-icon
+          <b-icon
             v-else
             class="pl-1"
             icon="heart"
             variant="light"
             font-scale="1.3"
           ></b-icon>
-        
-          <!-- <BIconHeart :v-if:this.showOnlyFavorites class="pl-1"></BIconHeart>
-		  <BIconHeartFill class="pl-1"></BIconHeartfill> -->
         </b-button>
       </div>
     </div>
@@ -48,6 +43,7 @@
         :company="jobOffer.company"
         :city="jobOffer.city"
         :department="jobOffer.department"
+        :description="jobOffer.description"
         :favorite="jobOffer.favorite"
         @update:favorite="changeCardFavorite(jobOffer, $event)"
         @update:index="index = $event"
@@ -75,6 +71,8 @@ export default {
           company: "PellencST",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          description:
+            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: true,
         },
         {
@@ -82,6 +80,8 @@ export default {
           company: "Capgemini",
           city: "Aix en Provence",
           department: "Bouches du Rhônes (13)",
+          description:
+            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: false,
         },
         {
@@ -89,6 +89,8 @@ export default {
           company: "Soprasteria",
           city: "Aix les milles",
           department: "Bouches du Rhônes (13)",
+          description:
+            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: false,
         },
         {
@@ -96,6 +98,8 @@ export default {
           company: "PellencSAS",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          description:
+            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: true,
         },
         {
@@ -103,6 +107,8 @@ export default {
           company: "PellencSAS",
           city: "Pertuis",
           department: "Vaucluse (84)",
+          description:
+            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: true,
         },
       ],
@@ -111,13 +117,13 @@ export default {
     };
   },
   computed: {
-	filteredJobOffers() {
-		if(this.showOnlyFavorites) {
-			return this.jobOffers.filter((jobOffer) => jobOffer.favorite)
-		}else {
-			return this.jobOffers;
-		}
-	}
+    filteredJobOffers() {
+      if (this.showOnlyFavorites) {
+        return this.jobOffers.filter((jobOffer) => jobOffer.favorite);
+      } else {
+        return this.jobOffers;
+      }
+    },
   },
   methods: {
     changeCardFavorite(jobOffer, newValue) {
