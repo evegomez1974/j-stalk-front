@@ -4,7 +4,7 @@
 
 <script>
 
-import NavBar from "../components/card";
+import NavBar from "../components/navBar";
 
 export default {
     name: "IndexPage",

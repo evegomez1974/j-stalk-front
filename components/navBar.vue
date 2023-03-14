@@ -14,6 +14,7 @@
         <b-navbar-nav>
           <b-nav-item href="/cards">Annonces entreprises</b-nav-item>
           <b-nav-item href="#" disabled>Listes des entreprises</b-nav-item>
+          <b-nav-item href="/profil">Profil</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
