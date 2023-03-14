@@ -25,13 +25,13 @@
         class="grid-card"
         v-for="(jobOffer, index) in jobOffers"
         :key="index"
-		:index="index"
         :jobTitle="jobOffer.jobTitle"
         :company="jobOffer.company"
         :city="jobOffer.city"
         :department="jobOffer.department"
         :favorite="jobOffer.favorite"
         @update:favorite="changeFav(jobOffer, $event)"
+        @update:index="index = $event"
       />
     </div>
   </div>
@@ -96,8 +96,8 @@ export default {
 
     changeFav(jobOffer, newValue) {
       jobOffer.favorite = newValue;
-      console.log(jobOffer.favorite)
-    }
+      console.log(jobOffer.favorite);
+    },
   },
 };
 </script>

@@ -38,16 +38,17 @@
       </p>
       <div class="footer-card">
         <p style="font-style: italic; color: black">Il y a 15h</p>
-        <a
-          v-b-modal.modal-center href="#"
+        <button
+          v-b-modal="'modal-center-' + this.modalRef"
           class="card-link-jstalk-primary"
-          >Voir plus</a
+          >Voir plus</button
         >
       </div>
     </div>
     <!-- <b-button v-b-modal.modal-center>Launch centered modal</b-button> -->
 
-    <b-modal id="modal-center" variant="jstalk-primary" centered>
+    <b-modal 
+	  :id="'modal-center-' + this.modalRef" variant="jstalk-primary" centered>
       <template #modal-title> {{ jobTitle }} </template>
 
       <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
@@ -91,6 +92,11 @@ export default {
     city: String,
     department: String,
     favorite: Boolean,
+  },
+  data(){
+	return {
+		modalRef: (Math.random() + 1).toString(36).substring(7)
+	}
   },
   methods: {
     changeFavorite() {
