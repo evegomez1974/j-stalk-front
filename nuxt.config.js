@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: 'universal',
   head: {
     title: 'j-stalk',
     htmlAttrs: {
@@ -42,6 +43,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    //PAS BESOIN DE CETTE PARTIE POUR LE CODE QUE J'AI RAJOUTE POUR LE PDF TU POURRAS L'ENLEVER
+    //ENFIN SI TU LAISSES MAIS VIDE COMME CA :
+    /* 
+      extend(config, ctx) {
+      
+      }
+    */
     extend(config, ctx) {
       config.output.globalObject = 'this'
       config.module.rules.push(
@@ -50,7 +58,7 @@ export default {
           loader: 'url-loader'
         }
       )
-   }
+    }
   },
 
 
