@@ -12,7 +12,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/cards">Annonces entreprises</b-nav-item>
+          <b-nav-item href="/jobAdvert" >Annonces entreprises</b-nav-item>
           <b-nav-item href="#" disabled>Listes des entreprises</b-nav-item>
         </b-navbar-nav>
 
@@ -28,7 +28,6 @@
               >Search</b-button
             >
           </b-nav-form>
-
 
           <!-- <b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -48,11 +47,11 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-
   </div>
 </template>
 
 <script>
+import "../assets/css/navBar.scss";
 export default {
   name: "NavBar",
 };

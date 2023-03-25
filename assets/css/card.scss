@@ -3,15 +3,7 @@
     src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
   }
 
-$primary : #a663cc;
-
-// Include Bootstrap and BootstrapVue SCSS files
-@import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap-vue/src/index.scss';
-//@import './themes.scss';
-
 body {
-    background: var(--jstalk-color-background);
     font-family: "Candara";
 }
 a {
@@ -23,7 +15,7 @@ a:hover {
 }
 
 .card {
-    width: 40vw
+    width: 80%;
 }
 
 .card-title {
@@ -31,6 +23,8 @@ a:hover {
     color: var(--jstalk-color-dark);
     flex: 1 1;
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .modal-header{
@@ -40,11 +34,32 @@ a:hover {
     padding: 1rem;
 }
 
+#favButton {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+// #seeMore {
+//     color: var(--jstalk-color-primary);
+//     border-color: transparent;
+// }
+
+// #seeMore {
+//     color: white;
+//     background: #6c757d;
+//     border-radius: 5px;
+//     border-color: transparent;
+// }
+.card-text {
+    padding-top: 1rem;
+}
+
 @media only screen and (max-width: 1000px) {
  
     .card{
-        width: 60vw
+        width: 80%
     }
+
 }
 
 .footer-card {

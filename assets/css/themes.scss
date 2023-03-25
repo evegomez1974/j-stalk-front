@@ -1,11 +1,32 @@
+$jstalk-primary: #a663cc;
+$jstalk-gray-800: #343a40;
+
+$primary: #a663cc;
+
+$theme-colors: (
+    "jstalk-primary": $jstalk-primary,
+    
+);
+$colors: (
+    "jstalk-gray-800": $jstalk-gray-800,
+);
+
+$card-bg: #343a4011;
+
+// Include Bootstrap and BootstrapVue SCSS files
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
+//@import './themes.scss';
+
+
 :root {
-    --jstalk-color-primary: #b298dc;
+    --jstalk-color-primary: #a663cc;
     --jstalk-color-primary-contrast: #6f2dbd;
 
     --jstalk-color-secondary: #b9faf8;
     --jstalk-color-secondary-contrast: #b8d0eb;
 
-    --jstalk-color-tertiary: #a663cc;
+    --jstalk-color-tertiary: #b298dc;
 
     --jstalk-color-background: #ffffff;
     --jstalk-color-dark: #000000;
@@ -16,13 +37,13 @@
 
     body {
 
-        --jstalk-color-primary: #b298dc;
+        --jstalk-color-primary: #a663cc;
         --jstalk-color-primary-contrast: #6f2dbd;
 
         --jstalk-color-secondary: #b9faf8;
         --jstalk-color-secondary-contrast: #b8d0eb;
 
-        --jstalk-color-tertiary: #a663cc;
+        --jstalk-color-tertiary: #b298dc;
 
         --jstalk-color-background: #000000;
         --jstalk-color-dark: #ffffff;

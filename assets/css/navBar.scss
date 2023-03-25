@@ -3,12 +3,6 @@
     src: local("Candara"), url("../fonts/candara.ttf") format("truetype");
   }
 
-
-// Include Bootstrap and BootstrapVue SCSS files
-@import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap-vue/src/index.scss';
-//@import './themes.scss';
-
 body {
     //background: var(--jstalk-color-background);
     font-family: "Candara";
