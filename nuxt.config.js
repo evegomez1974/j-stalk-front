@@ -42,5 +42,20 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      const index = routes.findIndex(route => route.name === 'listJobOffers')
+      routes.splice(index, 1);
+      
+      routes.push({
+        name: 'listJobOffers',
+        path: '/',
+        component: resolve(__dirname, 'pages/listJobOffers.vue')
+      })
+    }
   }
 }
+
+

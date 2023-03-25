@@ -62,7 +62,6 @@ Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration 
 </template>
 
 <script>
-import "../assets/css/card.scss";
 import { BIconCircleFill, BIconHeart } from "bootstrap-vue";
 
 export default {
@@ -104,3 +103,74 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@font-face {
+    font-family: "Candara";
+    src: local("Candara"), url("../../assets/fonts/candara.ttf") format("truetype");
+  }
+
+body {
+    font-family: "Candara";
+}
+a {
+    color: var(--jstalk-color-primary)  
+}
+
+a:hover {
+    color: var(--jstalk-color-primary-contrast); 
+}
+
+.card {
+    width: 80%;
+}
+
+.card-title {
+    background: var(--jstalk-color-primary) ;
+    color: var(--jstalk-color-dark);
+    flex: 1 1;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-header{
+    background: var(--jstalk-color-primary) ;
+    color: var(--jstalk-color-dark);
+    flex: 1 1;
+    padding: 1rem;
+}
+
+#favButton {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+// #seeMore {
+//     color: var(--jstalk-color-primary);
+//     border-color: transparent;
+// }
+
+// #seeMore {
+//     color: white;
+//     background: #6c757d;
+//     border-radius: 5px;
+//     border-color: transparent;
+// }
+.card-text {
+    padding-top: 1rem;
+}
+
+@media only screen and (max-width: 1000px) {
+ 
+    .card{
+        width: 80%
+    }
+
+}
+
+.footer-card {
+    display: flex;
+    justify-content: space-between;
+}
+</style>

@@ -51,8 +51,23 @@
 </template>
 
 <script>
-import "../assets/css/navBar.scss";
 export default {
   name: "NavBar",
 };
 </script>
+
+<style lang="scss">
+@font-face {
+    font-family: "Candara";
+    src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+  }
+
+body {
+    //background: var(--jstalk-color-background);
+    font-family: "Candara";
+}
+
+.b-navbar {
+    background-color: black;
+}
+</style>

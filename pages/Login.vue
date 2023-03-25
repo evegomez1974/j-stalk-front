@@ -14,7 +14,6 @@
 <script>
 import { defineComponent } from 'vue';
 import '../assets/css/themes.scss'
-import  '../assets/css/Login.scss'
 import formLogin from '../components/formLogin'
 import forgetWord from '../components/forgetWord'
 
@@ -63,7 +62,95 @@ export default defineComponent({
 
 
 <style>
+body{
+  background: linear-gradient(rgba(0, 0, 0, 0.815), rgba(0, 0, 0, 0.815));
+  height: 100vh;
+  width:100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+#auth{
+  background-color: transparent !important;
+  color: white !important;
+}
+
+
+#titleLog {
+  display: block;
+  width: 30%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.containerLog {
+  margin: 0 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputLog {
+  margin: auto;
+  height: 40px;
+  width: 25%;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+
+}
+
+
+
+.labelOublie {
+  color: var(--jstalk-color-dark) ;
+  text-align: right !important;
+  float: right;
+  font-style: italic;
+}
+
+.labelOublie:hover {
+  color: var(--jstalk-color-secondary) ;
+  text-align: right !important;
+  float: right;
+  font-style: italic;
+}
+
+.btnRouter {
+  margin: 0 5%;
+  text-align: center;
+  margin-top: 30px;
+
+
+}
+
+
+button {
+  display: inline-block;
+  border-color: transparent ;
+  background-color: transparent ;
+}
+
+.EnterBtn {
+  margin-top: 50px;
+  background-color: hsla(160, 100%, 37%, 1);
+    border: 1px solid hsla(160, 100%, 37%, 1) ;
+    border-radius: 10px;
+    height: 40px;
+    width: 10%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color:white;
+}
+
+.EnterBtn:hover {
+  background-color: rgb(0, 59, 40) ;
+
+}
 
 
 </style>

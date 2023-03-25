@@ -56,7 +56,7 @@
 import "../assets/css/themes.scss";
 
 import NavBar from "../components/navBar";
-import Card from "../components/card";
+import Card from "../components/jobOffers/cardJobOffer";
 
 import { BIconHeart } from "bootstrap-vue";
 
