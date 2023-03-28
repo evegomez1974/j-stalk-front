@@ -35,7 +35,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    "vue2-editor/nuxt"
   ],
+
+  ssr: false, 
   bootstrapVue: {
     icons: true,
   },

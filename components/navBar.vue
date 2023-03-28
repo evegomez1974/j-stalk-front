@@ -12,7 +12,8 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/jobAdvert" >Annonces entreprises</b-nav-item>
+          <b-nav-item href="/">Annonces entreprises</b-nav-item>
+          <b-nav-item href="/addNewJobOffer">Créer une annonce</b-nav-item>
           <b-nav-item href="#" disabled>Listes des entreprises</b-nav-item>
         </b-navbar-nav>
 
@@ -58,16 +59,16 @@ export default {
 
 <style lang="scss">
 @font-face {
-    font-family: "Candara";
-    src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
-  }
+  font-family: "Candara";
+  src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+}
 
 body {
-    //background: var(--jstalk-color-background);
-    font-family: "Candara";
+  //background: var(--jstalk-color-background);
+  font-family: "Candara";
 }
 
 .b-navbar {
-    background-color: black;
+  background-color: black;
 }
 </style>

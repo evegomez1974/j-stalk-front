@@ -104,15 +104,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@font-face {
-    font-family: "Candara";
-    src: local("Candara"), url("../../assets/fonts/candara.ttf") format("truetype");
-  }
+<style lang="scss" >
 
-body {
-    font-family: "Candara";
-}
 a {
     color: var(--jstalk-color-primary)  
 }
@@ -123,6 +116,7 @@ a:hover {
 
 .card {
     width: 80%;
+    background-color: white;
 }
 
 .card-title {

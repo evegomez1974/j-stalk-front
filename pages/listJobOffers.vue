@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="grid-container">
-      <Card
-        class="grid-card"
+      <CardJobOffer
+        class="grid-CardJobOffer"
         v-for="(jobOffer, index) in filteredJobOffers"
         :key="index"
         :jobTitle="jobOffer.jobTitle"
@@ -56,13 +56,13 @@
 import "../assets/css/themes.scss";
 
 import NavBar from "../components/navBar";
-import Card from "../components/jobOffers/cardJobOffer";
+import CardJobOffer from "../components/jobOffers/cardJobOffer";
 
 import { BIconHeart } from "bootstrap-vue";
 
 export default {
   name: "IndexPage",
-  components: { NavBar, Card, BIconHeart },
+  components: { NavBar, CardJobOffer, BIconHeart },
   data() {
     return {
       jobOffers: [
@@ -134,6 +134,16 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+    font-family: "Candara";
+    src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+  }
+
+body {
+    background-color: #343a4011;
+    font-family: "Candara";
+
+}
 .header-container {
   display: flex;
   justify-content: space-around;
@@ -166,7 +176,7 @@ export default {
   grid-gap: 2vh;
 }
 
-.grid-card {
+.grid-CardJobOffer {
   justify-self: center;
 }
 </style>
