@@ -18,5 +18,14 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+    font-family: "Candara";
+    src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+  }
 
+body {
+    background-color: #343a4011;
+    font-family: "Candara";
+
+}
 </style>

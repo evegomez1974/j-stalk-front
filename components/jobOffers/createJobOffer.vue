@@ -7,41 +7,86 @@
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group
           id="input-group-1"
-          label="Email address:"
+          label="Nom de l'entreprise:"
           label-for="input-1"
-          description="We'll never share your email with anyone else."
         >
           <b-form-input
             id="input-1"
-            v-model="form.email"
-            type="email"
-            placeholder="Enter email"
+            v-model="form.company"
+            placeholder="Enter nom de l'entreprise"
             required
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-group
+          id="input-group-2"
+          label="Adresse email:"
+          label-for="input-2"
+          description="Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre."
+        >
           <b-form-input
             id="input-2"
-            v-model="form.name"
-            placeholder="Enter name"
+            v-model="form.email"
+            type="email"
+            placeholder="Entrer email"
             required
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-3" label="Food:" label-for="input-3">
+        <b-form-group
+          id="input-group-3"
+          label="Type d'emploi:"
+          label-for="input-3"
+        >
           <b-form-select
             id="input-3"
-            v-model="form.food"
-            :options="foods"
+            v-model="form.jobType"
+            :options="jobTypes"
             required
           ></b-form-select>
         </b-form-group>
 
-        <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
+        <b-form-group
+          id="input-group-4"
+          label="Type de contrat:"
+          label-for="input-4"
+        >
+          <b-form-select
+            id="input-4"
+            v-model="form.contractType"
+            :options="contractTypes"
+            required
+          ></b-form-select>
+        </b-form-group>
+
+        <b-form-group id="input-group-4" label="Ville:" label-for="input-4">
+          <b-form-select
+            id="input-4"
+            v-model="form.city"
+            :options="cities"
+            required
+          ></b-form-select>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-6"
+          label="Département:"
+          label-for="input-6"
+        >
+          <b-form-select
+            id="input-6"
+            v-model="form.department"
+            :options="departments"
+            required
+          ></b-form-select>
+        </b-form-group>
+
+        <vue-editor v-model="form.content" :editor-toolbar="customToolbar" />
+
+        <b-form-group id="input-group-5" v-slot="{ ariaDescribedby }">
           <b-form-checkbox-group
             v-model="form.checked"
-            id="checkboxes-4"
+            id="checkboxes-5"
             :aria-describedby="ariaDescribedby"
           >
             <b-form-checkbox value="me">Check me out</b-form-checkbox>
@@ -63,63 +108,58 @@
 <script>
 export default {
   name: "CreateJobOffer",
-  props: {
-    index: Number,
-    jobTitle: String,
-    company: String,
-    city: String,
-    department: String,
-    description: String,
-    favorite: Boolean,
-  },
   data() {
     return {
-      modalRef: (Math.random() + 1).toString(36).substring(7),
-      textareaContent: "",
-      jsonContent: {},
       form: {
+        company: "",
         email: "",
-        name: "",
-        food: null,
+        jobType: null,
+        contractType: null,
         checked: [],
+        content: "",
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
+      jobTypes: [
+        { text: "Selectionnez un type", value: null },
+        "Alternance",
+        "Stage",
       ],
+      contractTypes: [
+        { text: "Selectionnez un type", value: null },
+        "Apprentissage",
+        "Professionalisation",
+      ],
+      cities: [
+        { text: "Selectionnez une ville", value: null },
+        "Alternance",
+        "Stage",
+      ],
+      departments: [
+        { text: "Selectionnez un département", value: null },
+        "Ain", "Aisne","Allier","Alpes-de-Haute-Provence","Hautes-Alpes", "hautes alpes" ],
       show: true,
+      customToolbar: [["bold", "italic", "underline"], [{ list: "bullet" }]],
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      // this.form.savedText = this.content;
       alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
+      this.form.company = "";
       this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
+      this.form.jobType = null;
+      this.form.contractType = null;
       this.form.checked = [];
+      this.form.content = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });
-    },
-  },
-  computed: {
-    truncatedDescription() {
-      const maxLength = 280;
-      if (this.description.length <= maxLength) {
-        return this.text;
-      } else {
-        return this.description.substring(0, maxLength) + "...";
-      }
     },
   },
 };
@@ -144,7 +184,8 @@ a:hover {
 }
 
 .card {
-  width: 80%;
+  width: 50%;
+  background-color: white;
 }
 
 .card-title {

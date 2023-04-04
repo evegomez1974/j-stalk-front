@@ -33,10 +33,8 @@ export default {
       formatted = formatted.replace(italicRegex, '<em>$1</em>');
       formatted = formatted.replace(listRegex, '<li>$1</li>');
       formatted = `<ul>${formatted}</ul>`;
-
-
-      console.log(this.text, "text")
-    console.log(this.savedText, "savedText")
+  
+      console.log(this.savedText, "savedText")
 
       return formatted;
     },

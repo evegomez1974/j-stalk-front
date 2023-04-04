@@ -76,7 +76,7 @@ export default {
     company: String,
     city: String,
     department: String,
-	description: String,
+	  description: String,
     favorite: Boolean,
   },
   data() {
