@@ -22,7 +22,6 @@
           id="input-group-2"
           label="Adresse email:"
           label-for="input-2"
-          description="Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre."
         >
           <b-form-input
             id="input-2"
@@ -33,31 +32,62 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-3"
-          label="Type d'emploi:"
-          label-for="input-3"
-        >
-          <b-form-select
-            id="input-3"
-            v-model="form.jobType"
-            :options="jobTypes"
-            required
-          ></b-form-select>
-        </b-form-group>
+        <div id="TypesContainer">
+          <b-form-group
+            id="input-group-3"
+            label="Type d'emploi:"
+            label-for="input-3"
+          >
+            <b-form-select
+              id="input-3"
+              v-model="form.jobType"
+              :options="jobTypes"
+              required
+            ></b-form-select>
+          </b-form-group>
 
-        <b-form-group
-          id="input-group-4"
-          label="Type de contrat:"
-          label-for="input-4"
-        >
-          <b-form-select
-            id="input-4"
-            v-model="form.contractType"
-            :options="contractTypes"
-            required
-          ></b-form-select>
-        </b-form-group>
+          <b-form-group
+            id="contractType"
+            label="Type de contrat: (facultatif)"
+            label-for="input-7"
+            v-if="form.jobType === 'Alternance'"
+          >
+            <b-form-select
+              id="input-7"
+              v-model="form.contractType"
+              :options="contractTypes"
+              required
+            ></b-form-select>
+          </b-form-group>
+
+          <b-form-group
+            id="contractLength"
+			class="contractLength"
+            label="Durée du contrat: (facultatif)"
+            label-for="input-7"
+            v-if="form.jobType === 'Alternance'"
+          >
+            <b-form-select
+              id="input-7"
+              v-model="form.contractLength"
+              :options="contractLengthsAlternance"
+            ></b-form-select>
+          </b-form-group>
+
+          <b-form-group
+            id="contractLength"
+			class="contractLength"
+            label="Durée du contrat:"
+            label-for="input-7"
+            v-if="form.jobType === 'Stage'"
+          >
+            <b-form-select
+              id="input-7"
+              v-model="form.contractLength"
+              :options="contractLengthsStage"
+            ></b-form-select>
+          </b-form-group>
+        </div>
 
         <b-form-group id="input-group-4" label="Ville:" label-for="input-4">
           <b-form-select
@@ -80,6 +110,43 @@
             required
           ></b-form-select>
         </b-form-group>
+
+        <b-form-group
+          id="input-group-7"
+          label="Quel est le salaire pour ce poste ? (facultatif)"
+          label-for="input-7"
+        >
+          <div id="SalaryContainer">
+            <b-form-input
+              id="minSalary"
+              class="mr-2"
+              v-model="form.salary"
+              type="number"
+              min="0"
+              placeholder="Entrer salaire"
+            ></b-form-input>
+
+            <div id="€">
+              <p>€</p>
+            </div>
+
+            <b-form-select
+              id="input-7"
+              class="ml-2"
+              v-model="form.tempSalary"
+              type="text"
+              :options="tempsSalary"
+              required
+            ></b-form-select>
+          </div>
+        </b-form-group>
+
+        <!-- <b-form-input v-model="searchQuery" list="my-list-id" @focus="showList = true"></b-form-input>
+
+    <b-list-group id="my-list-id" class="mt-2" v-if="showList">
+      <b-list-group-item v-if="!filteredSizes.length">No results found.</b-list-group-item>
+      <b-list-group-item v-for="(size, index) in filteredSizes.slice(0, 4)" :key="index">{{ size }}</b-list-group-item>
+    </b-list-group> -->
 
         <vue-editor v-model="form.content" :editor-toolbar="customToolbar" />
 
@@ -110,11 +177,26 @@ export default {
   name: "CreateJobOffer",
   data() {
     return {
+      //   input type search
+      //   sizes: ["Aix-en-Provence",
+      //     "Avignon",
+      //     "Manosque",
+      //     "Marseille",
+      //     "Martigues",
+      //     "Orange",
+      //     "Pertuis",
+      //     "Vitrolles"],
+      //   searchQuery: '',
+      //   showList: false,
       form: {
         company: "",
         email: "",
         jobType: null,
         contractType: null,
+		contractLength: "",
+		city: "",
+		department: "",
+        salary: 0,
         checked: [],
         content: "",
       },
@@ -130,12 +212,27 @@ export default {
       ],
       cities: [
         { text: "Selectionnez une ville", value: null },
-        "Alternance",
-        "Stage",
+        "Aix-en-Provence",
+        "Avignon",
+        "Manosque",
+        "Marseille",
+        "Martigues",
+        "Orange",
+        "Pertuis",
+        "Vitrolles",
       ],
       departments: [
         { text: "Selectionnez un département", value: null },
-        "Ain", "Aisne","Allier","Alpes-de-Haute-Provence","Hautes-Alpes", "hautes alpes" ],
+        "Ain",
+        "Aisne",
+        "Allier",
+        "Alpes-de-Haute-Provence",
+        "Hautes-Alpes",
+        "hautes alpes",
+      ],
+      contractLengthsAlternance: ["1 an", "2 ans", "3ans"],
+      contractLengthsStage: ["3 mois", "6 mois", "9 mois", "1 an"],
+      tempsSalary: ["par mois", "par an"],
       show: true,
       customToolbar: [["bold", "italic", "underline"], [{ list: "bullet" }]],
     };
@@ -153,6 +250,10 @@ export default {
       this.form.email = "";
       this.form.jobType = null;
       this.form.contractType = null;
+	  this.form.contractLength = "",
+	  this.form.city = "",
+	  this.form.department = "",
+	  this.form.salary = null,
       this.form.checked = [];
       this.form.content = "";
       // Trick to reset/clear native browser form validation state
@@ -162,6 +263,15 @@ export default {
       });
     },
   },
+  //     computed: {
+  //       filteredSizes() {
+  //         if (!this.searchQuery) {
+  //           return this.sizes;
+  //         }
+
+  //         return this.sizes.filter(size => size.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  //       }
+  //     }
 };
 </script>
 
@@ -213,9 +323,43 @@ a:hover {
   justify-content: flex-end;
 }
 
+#TypesContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#contractType {
+  margin-left: 5%;
+}
+
+.contractLength {
+  margin-left: 5%;
+}
+
+#SalaryContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#€ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin: 0;
+}
+
 @media only screen and (max-width: 1000px) {
   .card {
-    width: 80%;
+    width: 50%;
   }
 }
 </style>
+
+ <!-- .list-group {
+    max-height: 200px;
+    overflow-y: auto;
+  } -->
