@@ -20,7 +20,7 @@
 
         <b-form-group
           id="input-group-email"
-          label="Adresse email:"
+          label="Adresse mail:"
           label-for="input-email"
         >
           <b-form-input
