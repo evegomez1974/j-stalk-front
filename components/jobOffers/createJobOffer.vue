@@ -4,7 +4,7 @@
       <h5>Publier une annonce :</h5>
     </div>
     <div class="card-body">
-      <b-form @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group
           id="input-group-company"
           label="Nom de l'entreprise:"
@@ -56,13 +56,12 @@
               id="select-contractType"
               v-model="form.contractType"
               :options="contractTypes"
-              required
             ></b-form-select>
           </b-form-group>
 
           <b-form-group
             id="select-group-contractLengthsAlternance"
-			class="contractLength"
+            class="contractLength"
             label="Durée du contrat: (facultatif)"
             label-for="select-contractLengthsAlternance"
             v-if="form.jobType === 'Alternance'"
@@ -77,7 +76,7 @@
           <b-form-group
             id="select-group-contractLengthsStage"
             class="contractLength"
-			label="Durée du contrat: (facultatif)"
+            label="Durée du contrat: (facultatif)"
             label-for="select-contractLengthsStage"
             v-if="form.jobType === 'Stage'"
           >
@@ -140,12 +139,15 @@
               v-model="form.tempSalary"
               type="text"
               :options="tempsSalary"
-              required
             ></b-form-select>
           </div>
         </b-form-group>
 
-        <vue-editor class="mb-4" v-model="form.content" :editor-toolbar="customToolbar" />
+        <vue-editor
+          class="mb-4"
+          v-model="form.description"
+          :editor-toolbar="customToolbar"
+        />
 
         <!-- <b-form-input v-model="searchQuery" list="my-list-id" @focus="showList = true"></b-form-input>
 
@@ -157,9 +159,10 @@
         <b-button type="submit" variant="primary">Submit</b-button>
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
-      <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
-      </b-card>
+
+      <b-modal id="modal-center" centered title="Publier une annonce" ref="my-modal" @hidden="onReset">
+        <p class="my-4">Votre annonce a bien été publiée !</p>
+      </b-modal>
     </div>
   </div>
 </template>
@@ -190,8 +193,8 @@ export default {
         city: null,
         department: null,
         salary: null,
-		tempSalary: null,
-        content: null,
+        tempSalary: null,
+        description: null,
       },
       jobTypes: [
         { text: "Selectionnez un type", value: null },
@@ -223,18 +226,23 @@ export default {
         "Hautes-Alpes",
         "hautes alpes",
       ],
-      contractLengthsAlternance: ["1 an", "2 ans", "3ans"],
-      contractLengthsStage: ["3 mois", "6 mois", "9 mois", "1 an"],
-      tempsSalary: [{ text: "Selectionnez une répétition", value: null }, "par mois", "par an"],
+      contractLengthsAlternance: [{ text: "Selectionnez une durée", value: null },"1 an", "2 ans", "3ans"],
+      contractLengthsStage: [{ text: "Selectionnez uns durée", value: null },"3 mois", "6 mois", "9 mois", "1 an"],
+      tempsSalary: [
+        { text: "Selectionnez une répétition", value: null },
+        "par mois",
+        "par an",
+      ],
       show: true,
       customToolbar: [["bold", "italic", "underline"], [{ list: "bullet" }]],
     };
   },
   methods: {
-    // onSubmit(event) {
-    //   event.preventDefault();
-    //   alert(JSON.stringify(this.form));
-    // },
+    onSubmit(event) {
+      event.preventDefault();
+	  this.$refs['my-modal'].show()
+      //alert(JSON.stringify(this.form));
+    },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
@@ -246,8 +254,8 @@ export default {
       this.form.city = null;
       this.form.department = null;
       this.form.salary = null;
-	  this.form.tempSalary = null;
-      this.form.content = null;
+      this.form.tempSalary = null;
+      this.form.description = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -289,7 +297,7 @@ a:hover {
 }
 
 .card {
-  width: 45%;
+  width: 50%;
   background-color: white;
 }
 
