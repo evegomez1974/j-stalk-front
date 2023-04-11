@@ -160,7 +160,7 @@
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
 
-      <b-modal id="modal-center" centered title="Publier une annonce" ref="my-modal" @hidden="onReset">
+      <b-modal id="modal-center" centered title="Publier une annonce" ref="my-modal" @hidden="onReset" ok-only ok-variant="secondary">
         <p class="my-4">Votre annonce a bien été publiée !</p>
       </b-modal>
     </div>
