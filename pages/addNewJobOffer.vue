@@ -1,7 +1,9 @@
 <template>
 <div>
     <NavBar />
+    <div class="createJobOfferConteneur">
     <CreateJobOffer />
+    </div>
 </div>
 </template>
 
@@ -27,5 +29,12 @@ body {
     background-color: #343a4011;
     font-family: "Candara";
 
+}
+
+.createJobOfferConteneur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
 }
 </style>

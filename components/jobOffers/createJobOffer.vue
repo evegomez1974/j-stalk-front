@@ -4,42 +4,42 @@
       <h5>Publier une annonce :</h5>
     </div>
     <div class="card-body">
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @reset="onReset" v-if="show">
         <b-form-group
-          id="input-group-1"
+          id="input-group-company"
           label="Nom de l'entreprise:"
-          label-for="input-1"
+          label-for="input-company"
         >
           <b-form-input
-            id="input-1"
+            id="input-company"
             v-model="form.company"
-            placeholder="Enter nom de l'entreprise"
+            placeholder="Enter le nom de l'entreprise"
             required
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
-          id="input-group-2"
+          id="input-group-email"
           label="Adresse email:"
-          label-for="input-2"
+          label-for="input-email"
         >
           <b-form-input
-            id="input-2"
+            id="input-email"
             v-model="form.email"
             type="email"
-            placeholder="Entrer email"
+            placeholder="Entrer un email"
             required
           ></b-form-input>
         </b-form-group>
 
-        <div id="TypesContainer">
+        <div class="typesContainer">
           <b-form-group
-            id="input-group-3"
+            id="select-group-jobType"
             label="Type d'emploi:"
-            label-for="input-3"
+            label-for="select-jobType"
           >
             <b-form-select
-              id="input-3"
+              id="select-jobType"
               v-model="form.jobType"
               :options="jobTypes"
               required
@@ -47,13 +47,13 @@
           </b-form-group>
 
           <b-form-group
-            id="contractType"
+            id="select-group-contractType"
             label="Type de contrat: (facultatif)"
-            label-for="input-7"
+            label-for="select-contractType"
             v-if="form.jobType === 'Alternance'"
           >
             <b-form-select
-              id="input-7"
+              id="select-contractType"
               v-model="form.contractType"
               :options="contractTypes"
               required
@@ -61,37 +61,41 @@
           </b-form-group>
 
           <b-form-group
-            id="contractLength"
+            id="select-group-contractLengthsAlternance"
 			class="contractLength"
             label="Durée du contrat: (facultatif)"
-            label-for="input-7"
+            label-for="select-contractLengthsAlternance"
             v-if="form.jobType === 'Alternance'"
           >
             <b-form-select
-              id="input-7"
+              id="select-contractLength"
               v-model="form.contractLength"
               :options="contractLengthsAlternance"
             ></b-form-select>
           </b-form-group>
 
           <b-form-group
-            id="contractLength"
-			class="contractLength"
-            label="Durée du contrat:"
-            label-for="input-7"
+            id="select-group-contractLengthsStage"
+            class="contractLength"
+			label="Durée du contrat: (facultatif)"
+            label-for="select-contractLengthsStage"
             v-if="form.jobType === 'Stage'"
           >
             <b-form-select
-              id="input-7"
+              id="select-contractLengthsStage"
               v-model="form.contractLength"
               :options="contractLengthsStage"
             ></b-form-select>
           </b-form-group>
         </div>
 
-        <b-form-group id="input-group-4" label="Ville:" label-for="input-4">
+        <b-form-group
+          id="select-group-city"
+          label="Ville:"
+          label-for="select-city"
+        >
           <b-form-select
-            id="input-4"
+            id="select-city"
             v-model="form.city"
             :options="cities"
             required
@@ -99,12 +103,12 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-6"
+          id="select-group-department"
           label="Département:"
-          label-for="input-6"
+          label-for="select-department"
         >
           <b-form-select
-            id="input-6"
+            id="select-department"
             v-model="form.department"
             :options="departments"
             required
@@ -112,18 +116,18 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-7"
+          id="input-group-salary"
           label="Quel est le salaire pour ce poste ? (facultatif)"
-          label-for="input-7"
+          label-for="input-salary"
         >
-          <div id="SalaryContainer">
+          <div class="salaryContainer">
             <b-form-input
-              id="minSalary"
+              id="input-minSalary"
               class="mr-2"
               v-model="form.salary"
               type="number"
               min="0"
-              placeholder="Entrer salaire"
+              placeholder="Entrer un salaire"
             ></b-form-input>
 
             <div id="€">
@@ -131,7 +135,7 @@
             </div>
 
             <b-form-select
-              id="input-7"
+              id="select-maxSalary"
               class="ml-2"
               v-model="form.tempSalary"
               type="text"
@@ -141,25 +145,14 @@
           </div>
         </b-form-group>
 
+        <vue-editor class="mb-4" v-model="form.content" :editor-toolbar="customToolbar" />
+
         <!-- <b-form-input v-model="searchQuery" list="my-list-id" @focus="showList = true"></b-form-input>
 
     <b-list-group id="my-list-id" class="mt-2" v-if="showList">
       <b-list-group-item v-if="!filteredSizes.length">No results found.</b-list-group-item>
       <b-list-group-item v-for="(size, index) in filteredSizes.slice(0, 4)" :key="index">{{ size }}</b-list-group-item>
     </b-list-group> -->
-
-        <vue-editor v-model="form.content" :editor-toolbar="customToolbar" />
-
-        <b-form-group id="input-group-5" v-slot="{ ariaDescribedby }">
-          <b-form-checkbox-group
-            v-model="form.checked"
-            id="checkboxes-5"
-            :aria-describedby="ariaDescribedby"
-          >
-            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
 
         <b-button type="submit" variant="primary">Submit</b-button>
         <b-button type="reset" variant="danger">Reset</b-button>
@@ -193,12 +186,12 @@ export default {
         email: "",
         jobType: null,
         contractType: null,
-		contractLength: "",
-		city: "",
-		department: "",
-        salary: 0,
-        checked: [],
-        content: "",
+        contractLength: null,
+        city: null,
+        department: null,
+        salary: null,
+		tempSalary: null,
+        content: null,
       },
       jobTypes: [
         { text: "Selectionnez un type", value: null },
@@ -232,17 +225,16 @@ export default {
       ],
       contractLengthsAlternance: ["1 an", "2 ans", "3ans"],
       contractLengthsStage: ["3 mois", "6 mois", "9 mois", "1 an"],
-      tempsSalary: ["par mois", "par an"],
+      tempsSalary: [{ text: "Selectionnez une répétition", value: null }, "par mois", "par an"],
       show: true,
       customToolbar: [["bold", "italic", "underline"], [{ list: "bullet" }]],
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      // this.form.savedText = this.content;
-      alert(JSON.stringify(this.form));
-    },
+    // onSubmit(event) {
+    //   event.preventDefault();
+    //   alert(JSON.stringify(this.form));
+    // },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
@@ -250,12 +242,12 @@ export default {
       this.form.email = "";
       this.form.jobType = null;
       this.form.contractType = null;
-	  this.form.contractLength = "",
-	  this.form.city = "",
-	  this.form.department = "",
-	  this.form.salary = null,
-      this.form.checked = [];
-      this.form.content = "";
+      this.form.contractLength = null;
+      this.form.city = null;
+      this.form.department = null;
+      this.form.salary = null;
+	  this.form.tempSalary = null;
+      this.form.content = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -284,6 +276,9 @@ export default {
 
 body {
   font-family: "Candara";
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 a {
   color: var(--jstalk-color-primary);
@@ -294,7 +289,7 @@ a:hover {
 }
 
 .card {
-  width: 50%;
+  width: 45%;
   background-color: white;
 }
 
@@ -323,12 +318,12 @@ a:hover {
   justify-content: flex-end;
 }
 
-#TypesContainer {
+.typesContainer {
   display: flex;
   justify-content: flex-start;
 }
 
-#contractType {
+#select-group-contractType {
   margin-left: 5%;
 }
 
@@ -336,7 +331,8 @@ a:hover {
   margin-left: 5%;
 }
 
-#SalaryContainer {
+.salaryContainer {
+  margin-bottom: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
