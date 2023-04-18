@@ -49,7 +49,12 @@ export default {
     //   }
     // },
     methVal() {
-      this.$emit('message-sent', this.myValueOublieMotDePasse);
+      if (this.email==="") {
+        alert("Veuillez renseigner votre email pour changer le mot de passe.")
+
+      }else {
+        this.$emit('message-sent', this.myValueOublieMotDePasse, this.email);
+      }
     },
     login() {
       if (this.email==="") {

@@ -26,7 +26,7 @@
             <button @click="methAnnuler">Annuler</button>
           </div>
           <div class="btnVal">
-            <button @click="methVal" >Valider</button>
+            <button @click="putPasswordById" >Valider</button>
           </div>
         </div>
     </div>
@@ -41,10 +41,6 @@ export default {
   components: {},
   data (){
     return {
-    FormData: {
-      email:'test@test.com',
-      password: '',
-    },
     NewPassWord1: '',
     NewPassWord2: '',
     myValueValideOublieMotDePasse: "oublieValider",
@@ -65,19 +61,12 @@ export default {
       }
     },
   methods: {
-    async submitForm() {
-      try {
-        const response = await axios.post('http://localhost:3000', this.formData)
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
-      }
-    },
+
     methAnnuler() {
       this.$emit('message-sent', this.myValueAnnuleOublieMotDePasse);
       console.log(this.myValueAnnuleOublieMotDePasse);
     },
-    methVal(variant = null) {
+    putPasswordById(variant = null) {
       var input1 = document.getElementById("New1").value;
       console.log(input1)
       var input2 = document.getElementById("New2").value;
@@ -102,10 +91,12 @@ export default {
             // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
             // envoyer l'id du user avec un $emit
             // et faire le put du mot de passe
+            console.log(password)
+            console.log(email)
             const bodyFormData = new FormData();
-            bodyFormData.set('password', input2)
+            bodyFormData.set('password', password)
             bodyFormData.append('email', email)
-            fetch('http://127.0.0.1:8080/userNewPassword/'+ input2 + '/' + email, {
+            fetch('http://127.0.0.1:8080/userNewPassword/'+ password + '/' + email, {
                 method: 'put',
                 headers: {
                   "Content-type": "application/json"
