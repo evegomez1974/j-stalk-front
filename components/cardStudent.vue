@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-title">
-      <h5>{{ jobTitle }}</h5>
+      <h5>STUDENT MIST</h5>
       <button id="favButton" @click="changeFavorite">
         <b-icon
           v-if="this.favorite"
