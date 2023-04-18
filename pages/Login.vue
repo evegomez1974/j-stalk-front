@@ -35,6 +35,23 @@ export default defineComponent({
       console.log(newValue);
       console.log(email);
       this.message = newValue;
+
+      if (newValue == "oublieAnnuler") {
+          this.isVisibleForm = true
+          this.isVisibleForgetWord = false
+        }
+        if (newValue == "oublieValider") {
+          variant ='success'
+          this.isVisibleForm = true
+          this.isVisibleForgetWord = false
+          this.$bvToast.toast('Le mot de passe est bien modifié !', {
+              title: ` ${variant || 'default'}`,
+              variant: variant,
+              solid: true
+            })
+        }
+
+
       const bodyFormData = new FormData();
       bodyFormData.append('email', email);
       fetch('http://127.0.0.1:8080/userEmail/' + email, {
@@ -62,20 +79,7 @@ export default defineComponent({
       })
 
 
-        if (newValue == "oublieAnnuler") {
-          this.isVisibleForm = true
-          this.isVisibleForgetWord = false
-        }
-        if (newValue == "oublieValider") {
-          variant ='success'
-          this.isVisibleForm = true
-          this.isVisibleForgetWord = false
-          this.$bvToast.toast('Le mot de passe est bien modifié !', {
-              title: ` ${variant || 'default'}`,
-              variant: variant,
-              solid: true
-            })
-        }
+
         },
         },
 

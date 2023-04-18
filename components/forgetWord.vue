@@ -41,10 +41,17 @@ export default {
   components: {},
   data (){
     return {
+    //   FormData: {
+    //     email:'test@test.com',
+    //     password:"",
+
+    // },
     NewPassWord1: '',
     NewPassWord2: '',
+    email:'test@test.com',
     myValueValideOublieMotDePasse: "oublieValider",
     myValueAnnuleOublieMotDePasse: "oublieAnnuler",
+
   }
   },
   computed: {
@@ -61,7 +68,49 @@ export default {
       }
     },
   methods: {
+    async submitForm(variant = null) {
+      var input2 = document.getElementById("New2").value;
+            this.password = input2
+             // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
+             // envoyer l'id du user avec un $emit
+             // et faire le put du mot de passe
+             console.log(this.email)
+             const bodyFormData = new FormData();
+             bodyFormData.set('password', this.password)
+             bodyFormData.set('email', this.email)
+             fetch('http://127.0.0.1:8080/userNewPassword/'+ this.password + '/' + this.email, {
+                 method: 'put',
+                 headers: {
+                   "Content-type": "application/json"
+                 },
 
+             })
+             .then(res => {
+                 console.log(res);
+                 if(res.status != 200) {
+                     this.error = "Une erreur est survenue, veuillez réessayer";
+                 }
+                 else {
+                   console.log("Mot de passe modifié")
+                   variant="success";
+                  this.$bvToast.toast('Mot de passe modifié !', {
+                    title: `Succes`,
+                    variant: variant,
+                    solid: true
+                  })
+                  this.$emit('message-sent', this.myValueValideOublieMotDePasse);
+                  console.log(this.myValueValideOublieMotDePasse);
+                 }
+
+             })
+
+      // try {
+      //   const response = await axios.post('http://localhost:3000', this.formData)
+      //   console.log(response.data)
+      // } catch (error) {
+      //   console.error(error)
+      // }
+    },
     methAnnuler() {
       this.$emit('message-sent', this.myValueAnnuleOublieMotDePasse);
       console.log(this.myValueAnnuleOublieMotDePasse);
@@ -85,48 +134,15 @@ export default {
           variant: variant,
           solid: true
         })
-      }else {
-            console.log(input2)
+       }
 
-            // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
-            // envoyer l'id du user avec un $emit
-            // et faire le put du mot de passe
-            console.log(password)
-            console.log(email)
-            const bodyFormData = new FormData();
-            bodyFormData.set('password', password)
-            bodyFormData.append('email', email)
-            fetch('http://127.0.0.1:8080/userNewPassword/'+ password + '/' + email, {
-                method: 'put',
-                headers: {
-                  "Content-type": "application/json"
-                },
-
-            })
-            .then(res => {
-                console.log(res);
-                if(res.status != 200) {
-                    this.error = "Une erreur est survenue, veuillez réessayer";
-                }
-                else {
-                    return res.json();
-                }
-            })
-            .then(data => {
-                // console.log("data:", data);
-                localStorage.setItem('PAC-token', data.token);
-            })
         }
-        // this.$emit('message-sent', this.myValueValideOublieMotDePasse);
-        // console.log(this.myValueValideOublieMotDePasse);
-
 
     },
 
   }
 
 
-}
 </script>
 
 
