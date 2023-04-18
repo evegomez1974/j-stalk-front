@@ -26,7 +26,7 @@
 <script>
 //import { AsyncLocalStorage } from 'async_hooks';
 
-
+import router from '../.nuxt/router'
 
 export default {
   name: 'FormLogin',
@@ -75,15 +75,19 @@ export default {
       .then(res => {
         if (res.status != "200") {
           this.error = "Une erreur est survenue, veuillez réessayer";
+        }else if (res.json === "Incorrect") {
+          this.error = "Une erreur est survenue, veuillez réessayer";
         }
         else {
           return res.json()
+          // res.json()
         }
       })
       .then(data => {
         localStorage.setItem('PAC-token', data.token);
         console.log(data.token)
-        router.push('/cards');
+        this.$router.push('/cards')
+        //router.push('/cards');
       })
     }
 
