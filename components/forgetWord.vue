@@ -42,7 +42,7 @@ export default {
   data (){
     return {
     FormData: {
-      email:'',
+      email:'test@test.com',
       password: '',
     },
     NewPassWord1: '',
@@ -97,9 +97,38 @@ export default {
           solid: true
         })
       }else {
-        this.$emit('message-sent', this.myValueValideOublieMotDePasse);
-        console.log(this.myValueValideOublieMotDePasse);
-      }
+            console.log(input2)
+
+            // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
+            // envoyer l'id du user avec un $emit
+            // et faire le put du mot de passe
+            const bodyFormData = new FormData();
+            bodyFormData.set('password', input2)
+            bodyFormData.append('email', email)
+            fetch('http://127.0.0.1:8080/userNewPassword/'+ input2 + '/' + email, {
+                method: 'put',
+                headers: {
+                  "Content-type": "application/json"
+                },
+
+            })
+            .then(res => {
+                console.log(res);
+                if(res.status != 200) {
+                    this.error = "Une erreur est survenue, veuillez réessayer";
+                }
+                else {
+                    return res.json();
+                }
+            })
+            .then(data => {
+                // console.log("data:", data);
+                localStorage.setItem('PAC-token', data.token);
+            })
+        }
+        // this.$emit('message-sent', this.myValueValideOublieMotDePasse);
+        // console.log(this.myValueValideOublieMotDePasse);
+
 
     },
 

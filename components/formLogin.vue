@@ -1,6 +1,7 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="login">
       <div class="containerLog">
+        <h2>Connexion</h2>
         <div>
           <input class="inputLog" type="email" v-model="email" placeholder="Email">
         </div>
@@ -15,7 +16,7 @@
             <button type="submit" @click="login">Se connecter</button>
           </div>
           <div class="btnVal">
-            <router-link to="/"><button type="submit">Inscription</button></router-link>
+            <router-link to="/SignUp"><button type="submit">Inscription</button></router-link>
           </div>
         </div>
     </div>
@@ -23,6 +24,8 @@
 </template>
 
 <script>
+//import { AsyncLocalStorage } from 'async_hooks';
+
 
 
 export default {
@@ -47,12 +50,20 @@ export default {
     // },
     methVal() {
       this.$emit('message-sent', this.myValueOublieMotDePasse);
-    }
-  },
-  login() {
-      fetch('http://127.0.0.1:3000/users/login', {
+    },
+    login() {
+      if (this.email==="") {
+        alert("Veuillez renseigner votre email pour vous connecter.")
+
+      }
+      if (this.password==="") {
+        alert("Veuillez renseigner votre email pour vous connecter.")
+
+      }
+      fetch('http://127.0.0.1:8080/users/login', {
         headers: {
-          'Authorization': 'Basic ' + btoa(`${this.email}:${this.password}`)
+          'Authorization': 'Basic ' + btoa(`${this.email}:${this.password}`),
+
         },
         method: 'get',
       })
@@ -67,11 +78,13 @@ export default {
       .then(data => {
         localStorage.setItem('PAC-token', data.token);
         console.log(data.token)
-        router.push('/');
+        router.push('/cards');
       })
     }
 
 }
+  }
+
 </script>
 
 
