@@ -17,16 +17,13 @@
       <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
-      <b-badge variant="secondary" class="badge-secondary">Stage</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">Alternance</b-badge>
-      <!-- <span class="badge badge-secondary">Apprentissage</span>
-      <span class="badge badge-secondary">Professionalisation</span>
-      <span class="badge badge-secondary">6 mois</span> -->
-      <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
 
       <p class="card-text">{{ truncatedDescription }}</p>
       <div class="footer-card">
-        <p style="font-style: italic; color: black">Il y a 15h</p>
+        <p style="font-style: italic; color: black">Il y {{datePost}}h</p>
         <b-button id="seeMore" v-b-modal="'modal-center-' + this.modalRef"
           >Voir plus</b-button
         >
@@ -44,9 +41,9 @@
       <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
-      <b-badge variant="secondary" class="badge-secondary">Stage</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">Alternance</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
 
       <p class="card-text">
         Vous intervenez au sein d'un des programmes clé d'un constructeur
@@ -74,9 +71,13 @@ export default {
     index: Number,
     jobTitle: String,
     company: String,
+    jobType: String,
+    contractType: String,
+    contractLength: String,
     city: String,
     department: String,
     description: String,
+    datePost: Date,
     favorite: Boolean,
   },
   data() {
