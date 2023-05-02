@@ -24,7 +24,7 @@
       <span class="badge badge-secondary">6 mois</span> -->
       <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
 
-      <p class="card-text"> {{ truncatedDescription }} </p>
+      <p class="card-text">{{ truncatedDescription }}</p>
       <div class="footer-card">
         <p style="font-style: italic; color: black">Il y a 15h</p>
         <b-button id="seeMore" v-b-modal="'modal-center-' + this.modalRef"
@@ -46,17 +46,17 @@
       </h6>
       <b-badge variant="secondary" class="badge-secondary">Stage</b-badge>
       <b-badge variant="secondary" class="badge-secondary">Alternance</b-badge>
-      <!-- <span class="badge badge-primary">Apprentissage</span>
-      <span class="badge badge-primary">Professionalisation</span>
-      <span class="badge badge-primary">6 mois</span> -->
       <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
 
       <p class="card-text">
-        Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société.
-Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique
+        Vous intervenez au sein d'un des programmes clé d'un constructeur
+        aéronautique. Ces programmes visent à innover et à revisiter
+        l'expérience utilisateur en opérant la transformation digitale de la
+        société. Vous vous intégrez dans nos équipes qui travaillent en étroite
+        collaboration avec les équipes client. Vous pourrez intervenir sur des
+        projets agiles, en méthode traditionnelle ou en assistance technique
       </p>
-	    <b-button>Postuler</b-button>
-
+      <b-button>Postuler</b-button>
     </b-modal>
   </div>
 </template>
@@ -76,7 +76,7 @@ export default {
     company: String,
     city: String,
     department: String,
-	  description: String,
+    description: String,
     favorite: Boolean,
   },
   data() {
@@ -92,52 +92,51 @@ export default {
     },
   },
   computed: {
-	truncatedDescription() {
-		const maxLength = 280;
-		if (this.description.length <= maxLength) {
-			return this.text;
-		} else {
-			return this.description.substring(0, maxLength) + '...';
-		}
-	}
-  }
+    truncatedDescription() {
+      const maxLength = 280;
+      if (this.description.length <= maxLength) {
+        return this.description;
+      } else {
+        return this.description.substring(0, maxLength) + "...";
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss" >
-
+<style lang="scss" scoped>
 a {
-    color: var(--jstalk-color-primary)  
+  color: var(--jstalk-color-primary);
 }
 
 a:hover {
-    color: var(--jstalk-color-primary-contrast); 
+  color: var(--jstalk-color-primary-contrast);
 }
 
 .card {
-    width: 80%;
-    background-color: white !important;
+  width: 80%;
+  background-color: white;
 }
 
 .card-title {
-    background: var(--jstalk-color-primary) ;
-    color: var(--jstalk-color-dark);
-    flex: 1 1;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
+  background: var(--jstalk-color-primary);
+  color: var(--jstalk-color-dark);
+  flex: 1 1;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.modal-header{
-    background: var(--jstalk-color-primary) ;
-    color: var(--jstalk-color-dark);
-    flex: 1 1;
-    padding: 1rem;
-}
+/*#modal-header {
+  background-color: var(--jstalk-color-primary) !important;
+  color: var(--jstalk-color-dark);
+  flex: 1 1;
+  padding: 1rem;
+}*/
 
 #favButton {
-    border-color: transparent;
-    background-color: transparent;
+  border-color: transparent;
+  background-color: transparent;
 }
 
 // #seeMore {
@@ -152,23 +151,25 @@ a:hover {
 //     border-color: transparent;
 // }
 .card-text {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 
-.badge-secondary{
-  font-weight: 500 !important;
+.badge-secondary {
+  font-weight: 500;
+}
+
+#modal-title {
+  background-color: orange;
 }
 
 @media only screen and (max-width: 1000px) {
- 
-    .card{
-        width: 80%
-    }
-
+  .card {
+    width: 80%;
+  }
 }
 
 .footer-card {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

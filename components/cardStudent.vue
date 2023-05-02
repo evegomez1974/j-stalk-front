@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <div class="card-title">
-      <h5>STUDENT MIST</h5>
+      <b-img id="circleImg" width="95px" height="95px" src="https://picsum.photos/250/250/?image=58" rounded="circle" alt="Circle image"></b-img>
+      <h4>{{ jobTitle }}</h4>
       <button id="favButton" @click="changeFavorite">
         <b-icon
           v-if="this.favorite"
@@ -13,51 +14,21 @@
       </button>
     </div>
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">
+	  <h6 class="card-subtitle mb-2 text-muted">{{ department }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{ company }} ({{ city }})</h6>
+      <!-- <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
-      </h6>
+      </h6> -->
       <b-badge variant="secondary" class="badge-secondary">Stage</b-badge>
       <b-badge variant="secondary" class="badge-secondary">Alternance</b-badge>
-      <!-- <span class="badge badge-secondary">Apprentissage</span>
-      <span class="badge badge-secondary">Professionalisation</span>
-      <span class="badge badge-secondary">6 mois</span> -->
       <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
 
-      <p class="card-text"> {{ truncatedDescription }} </p>
-      <div class="footer-card">
-        <p style="font-style: italic; color: black">Il y a 15h</p>
-        <b-button id="seeMore" v-b-modal="'modal-center-' + this.modalRef"
-          >Voir plus</b-button
-        >
-      </div>
+      <p class="card-text">{{ truncatedDescription }}</p>
+
     </div>
-
-    <b-modal
-      :id="'modal-center-' + this.modalRef"
-      variant="jstalk-primary"
-      centered
-    >
-      <template #modal-title> {{ jobTitle }} </template>
-
-      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">
-        {{ city }}, {{ department }}
-      </h6>
-      <b-badge variant="secondary" class="badge-secondary">Stage</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">Alternance</b-badge>
-      <!-- <span class="badge badge-primary">Apprentissage</span>
-      <span class="badge badge-primary">Professionalisation</span>
-      <span class="badge badge-primary">6 mois</span> -->
-      <b-badge variant="secondary" class="badge-secondary">3 mois</b-badge>
-
-      <p class="card-text">
-        Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société.
-Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique
-      </p>
-	    <b-button>Postuler</b-button>
-
-    </b-modal>
+	    <div class="footer-card">
+        	<b-button id="seeMore">Voir plus</b-button>
+      </div>
   </div>
 </template>
 
@@ -76,14 +47,18 @@ export default {
     company: String,
     city: String,
     department: String,
-	  description: String,
+    description: String,
     favorite: Boolean,
   },
   data() {
     return {
-      modalRef: (Math.random() + 1).toString(36).substring(7),
-      textareaContent: "",
-      jsonContent: {},
+      mainProps: {
+        blank: true,
+        blankColor: "#777",
+        width: 95,
+        height: 95,
+        class: "m1",
+      },
     };
   },
   methods: {
@@ -92,83 +67,102 @@ export default {
     },
   },
   computed: {
-	truncatedDescription() {
-		const maxLength = 280;
-		if (this.description.length <= maxLength) {
-			return this.text;
-		} else {
-			return this.description.substring(0, maxLength) + '...';
-		}
-	}
-  }
+    truncatedDescription() {
+      const maxLength = 280;
+      if (this.description.length <= maxLength) {
+        return this.description;
+      } else {
+        return this.description.substring(0, maxLength) + "...";
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss" >
-
+<style lang="scss" scoped>
 a {
-    color: var(--jstalk-color-primary)  
+  color: var(--jstalk-color-primary);
 }
 
 a:hover {
-    color: var(--jstalk-color-primary-contrast); 
+  color: var(--jstalk-color-primary-contrast);
 }
 
 .card {
-    width: 80%;
-    background-color: white !important;
+  width: 80%;
+  background-color: white !important;
 }
 
 .card-title {
-    background: var(--jstalk-color-primary) ;
-    color: var(--jstalk-color-dark);
-    flex: 1 1;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
+  background: var(--jstalk-color-primary);
+  color: var(--jstalk-color-dark);
+  flex: 1 1;
+  padding: 0.7em;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 }
 
-.modal-header{
-    background: var(--jstalk-color-primary) ;
-    color: var(--jstalk-color-dark);
-    flex: 1 1;
-    padding: 1rem;
+.card-body {
+	padding-top: 0px;
 }
+
+.card-subtitle {
+	padding-left: 100px;
+}
+
+/*.modal-header {
+  background: var(--jstalk-color-primary);
+  color: var(--jstalk-color-dark);
+  flex: 1 1;
+  padding: 1rem;
+}*/
 
 #favButton {
-    border-color: transparent;
-    background-color: transparent;
+  border-color: transparent;
+  background-color: transparent;
 }
 
-// #seeMore {
-//     color: var(--jstalk-color-primary);
-//     border-color: transparent;
-// }
-
-// #seeMore {
-//     color: white;
-//     background: #6c757d;
-//     border-radius: 5px;
-//     border-color: transparent;
-// }
 .card-text {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 
-.badge-secondary{
-  font-weight: 500 !important;
+.badge-secondary {
+	margin-top: 5px;
+  font-weight: 500;
 }
 
-@media only screen and (max-width: 1000px) {
- 
-    .card{
-        width: 80%
-    }
+h4 {
+	padding-left: 110px;
+	padding-top: 5px;
+}
 
+#circleImg {
+	position: absolute;
+	top: 15px;
+	left: 15px
 }
 
 .footer-card {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1em;
+  margin-right: 1em;
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .card {
+    width: 80%;
+  }
+}
+</style>
+
+<style lang="scss">
+.modal-header {
+  background: var(--jstalk-color-primary);
+  color: var(--jstalk-color-dark);
+  flex: 1 1;
+  padding: 1rem;
 }
 </style>

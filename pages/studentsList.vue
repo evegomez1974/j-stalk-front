@@ -67,21 +67,21 @@ export default {
     return {
       jobOffers: [
         {
-          jobTitle: "Developpeur IHM junior H/F",
-          company: "PellencST",
-          city: "Pertuis",
-          department: "Vaucluse (84)",
+          jobTitle: "John Mchenry",
+          company: "Ynov",
+          city: "Aix en Provence",
+          department: "3ème année de bachelor",
           description:
-            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
           favorite: true,
         },
         {
           jobTitle: "Developpeur fullstack junior H/F",
-          company: "Capgemini",
+          company: "Ecole: Ynov",
           city: "Aix en Provence",
-          department: "Bouches du Rhônes (13)",
+          department: "Année en cours: 3ème année de bachelor",
           description:
-            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
           favorite: false,
         },
         {
@@ -90,7 +90,7 @@ export default {
           city: "Aix les milles",
           department: "Bouches du Rhônes (13)",
           description:
-            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
           favorite: false,
         },
         {
@@ -99,7 +99,7 @@ export default {
           city: "Pertuis",
           department: "Vaucluse (84)",
           description:
-            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
+            "Vous intervenez u sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: true,
         },
         {
@@ -108,7 +108,7 @@ export default {
           city: "Pertuis",
           department: "Vaucluse (84)",
           description:
-            "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
+            "Vous intervene projets agiles, en méthode traditionnelle ou en assistance technique",
           favorite: true,
         },
       ],
