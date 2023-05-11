@@ -21,7 +21,7 @@
       <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
       <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
 
-      <p class="card-text">{{ truncatedDescription }}</p>
+      <p class="card-text" v-html="truncatedDescription"></p>
       <div class="footer-card">
         <p style="font-style: italic; color: black">Il y {{datePost}}h</p>
         <b-button id="seeMore" v-b-modal="'modal-center-' + this.modalRef"
@@ -77,7 +77,7 @@ export default {
     city: String,
     department: String,
     description: String,
-    datePost: Date,
+    datePost: Number,
     favorite: Boolean,
   },
   data() {

@@ -4,7 +4,11 @@
       <h5>Publier une annonce :</h5>
     </div>
     <div class="card-body">
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form
+        @submit="onSubmit, onSubmitSendData(form)"
+        @reset="onReset"
+        v-if="show"
+      >
         <b-form-group
           id="input-group-company"
           label="Nom de l'entreprise:"
@@ -28,6 +32,19 @@
             v-model="form.email"
             type="email"
             placeholder="Entrer un email"
+            required
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-jobTitle"
+          label="Nom du poste:"
+          label-for="input-jobTitle"
+        >
+          <b-form-input
+            id="input-jobTitle"
+            v-model="form.jobTitle"
+            placeholder="Enter le nom du poste"
             required
           ></b-form-input>
         </b-form-group>
@@ -160,7 +177,15 @@
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
 
-      <b-modal id="modal-center" centered title="Publier une annonce" ref="my-modal" @hidden="onReset" ok-only ok-variant="secondary">
+      <b-modal
+        id="modal-center"
+        centered
+        title="Publier une annonce"
+        ref="my-modal"
+        @hidden="onReset"
+        ok-only
+        ok-variant="secondary"
+      >
         <p class="my-4">Votre annonce a bien été publiée !</p>
       </b-modal>
     </div>
@@ -185,8 +210,9 @@ export default {
       //   searchQuery: '',
       //   showList: false,
       form: {
-        company: "",
-        email: "",
+        company: null,
+        email: null,
+        jobTitle: null,
         jobType: null,
         contractType: null,
         contractLength: null,
@@ -195,6 +221,7 @@ export default {
         salary: null,
         tempSalary: null,
         description: null,
+        favorite: false,
       },
       jobTypes: [
         { text: "Selectionnez un type", value: null },
@@ -226,8 +253,19 @@ export default {
         "Hautes-Alpes",
         "hautes alpes",
       ],
-      contractLengthsAlternance: [{ text: "Selectionnez une durée", value: null },"1 an", "2 ans", "3ans"],
-      contractLengthsStage: [{ text: "Selectionnez uns durée", value: null },"3 mois", "6 mois", "9 mois", "1 an"],
+      contractLengthsAlternance: [
+        { text: "Selectionnez une durée", value: null },
+        "1 an",
+        "2 ans",
+        "3ans",
+      ],
+      contractLengthsStage: [
+        { text: "Selectionnez uns durée", value: null },
+        "3 mois",
+        "6 mois",
+        "9 mois",
+        "1 an",
+      ],
       tempsSalary: [
         { text: "Selectionnez une répétition", value: null },
         "par mois",
@@ -238,16 +276,34 @@ export default {
     };
   },
   methods: {
+    onSubmitSendData(jobOffer) {
+      fetch("http://127.0.0.1:8080/addJobOffers", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobOffer),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+        })
+        .catch((error) => {
+          console.error("Une erreur est survenue :", error);
+        });
+    },
+
     onSubmit(event) {
       event.preventDefault();
-	  this.$refs['my-modal'].show()
+      this.$refs["my-modal"].show();
       //alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.company = "";
-      this.form.email = "";
+      this.form.company = null;
+      this.form.email = null;
+      this.form.jobTitle = null;
       this.form.jobType = null;
       this.form.contractType = null;
       this.form.contractLength = null;
