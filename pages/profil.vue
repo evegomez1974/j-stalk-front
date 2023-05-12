@@ -8,14 +8,14 @@
 
         <div class="cardUser">
           <div class="infosUserProfil">
-            <infosUserProfil />
+            <infosUserProfil v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo"  />
           </div>
         </div>
 
         <div class="cardUser">
           <div class="container">
             <pdfViewer
-              :url="'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf'"
+              :url="this.userPDF"
             >
             </pdfViewer>
 
@@ -58,6 +58,7 @@
                 >
 
                   <b-form-file
+                    id="pdf-input"
                     v-model="file"
                     :state="Boolean(file)"
                     placeholder="Choisissez un document ou drop ici"
@@ -72,7 +73,7 @@
               </form>
             </b-modal>
 
-            <listDocsUser />
+            <listDocsUser v-for="userDocs in listUserDocs" :key="userDocs.id" :userDocs="userDocs"  @message-sent="updateMessage"/>
           </div>
         </div>
 
@@ -100,7 +101,10 @@ export default {
         file: null,
         submittedTitle: [],
         submittedPdf: [],
-
+        listUserInfos: [ ],
+        listUserDocs: [ ],
+        message:"erreur",
+        userPDF: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf'
 
     };
   },
@@ -142,7 +146,116 @@ export default {
         this.$nextTick(() => {
           this.$bvModal.hide('modal-prevent-closing')
         })
+
+        // Récupération de l'élément input de type "file"
+        const inputElement = document.getElementById("pdf-input");
+
+        // Récupération du fichier sélectionné
+        const file = inputElement.files[0];
+
+        // Création d'un objet FileReader
+        const reader = new FileReader();
+
+        // Fonction de callback appelée lorsque le fichier est lu
+        reader.onload = (event) => {
+          // Conversion du fichier en base64
+          const pdfBase64 = event.target.result.replace(/^data:application\/pdf;base64,/, '');
+
+          // Envoi du PDF sérialisé à un serveur ou stockage en local
+          // ...
+
+          const bodyFormData = new FormData();
+            bodyFormData.append('name', this.title);
+            bodyFormData.append('docPDF', pdfBase64);
+            fetch('http://127.0.0.1:8080/userDocs', {
+                body: bodyFormData,
+                method: 'post',
+                headers: {
+                'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => {
+                // console.log(res);
+                if(res.status != 200) {
+                    this.error = "Une erreur est survenue, veuillez réessayer";
+                }
+                else {
+                    return res.json();
+
+                }
+            })
+            .then(res => {
+              console.log(res.data);
+
+          })
+        };
+
+        // Lecture du fichier
+        reader.readAsDataURL(file);
+
+
+
+        },
+
+        //marche pas encore
+    updateMessage(newValue, documentID) {
+      console.log(newValue);
+      this.message = newValue;
+      documentID = 2
+        if (newValue == "ok") {
+
+          fetch('http://127.0.0.1:8080/userPDF/' +  documentID , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.userPDF = data;
+        console.log(data)
+        // traitement
+      })
+      .catch(e => {
+        console.error(e);
+        } )
       }
+    }
+  },
+
+    mounted () {
+      fetch('http://127.0.0.1:8080/userInfos'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.listUserInfos = data;
+        console.log(data)
+        // traitement
+      })
+      .catch(e => {
+        console.error(e);
+      }),
+
+
+      fetch('http://127.0.0.1:8080/userDocs'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.listUserDocs = data;
+        console.log(data)
+        // traitement
+      })
+      .catch(e => {
+        console.error(e);
+      })
     }
 
 }

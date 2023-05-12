@@ -1,5 +1,5 @@
 <template>
-  <div id="webViewer" ref="viewer" />
+  <div id="webViewer" ref="viewer"></div>
 </template>
 
 <script>
