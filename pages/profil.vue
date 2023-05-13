@@ -201,7 +201,7 @@ export default {
     updateMessage(newValue, documentID) {
       console.log(newValue);
       this.message = newValue;
-      documentID = 2
+      // documentID = 2
         if (newValue == "ok") {
 
           fetch('http://127.0.0.1:8080/userPDF/' +  documentID , {
@@ -224,6 +224,7 @@ export default {
   },
 
     mounted () {
+      console.log("test")
       fetch('http://127.0.0.1:8080/userInfos'  , {
           method: 'get',
           headers: {

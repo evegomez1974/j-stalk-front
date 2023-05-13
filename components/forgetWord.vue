@@ -39,6 +39,7 @@
 export default {
   name: 'forgetWord',
   components: {},
+  props: ['childData'],
   data (){
     return {
     //   FormData: {
@@ -48,7 +49,6 @@ export default {
     // },
     NewPassWord1: '',
     NewPassWord2: '',
-    email:'test@test.com',
     myValueValideOublieMotDePasse: "oublieValider",
     myValueAnnuleOublieMotDePasse: "oublieAnnuler",
 
@@ -74,11 +74,11 @@ export default {
              // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
              // envoyer l'id du user avec un $emit
              // et faire le put du mot de passe
-             console.log(this.email)
+             console.log("ici" + this.childData)
              const bodyFormData = new FormData();
              bodyFormData.set('password', this.password)
-             bodyFormData.set('email', this.email)
-             fetch('http://127.0.0.1:8080/userNewPassword/'+ this.password + '/' + this.email, {
+             bodyFormData.set('email', this.childData)
+             fetch('http://127.0.0.1:8080/userNewPassword/'+ this.password + '/' + this.childData, {
                  method: 'put',
                  headers: {
                    "Content-type": "application/json"

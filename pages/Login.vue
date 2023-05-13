@@ -5,7 +5,7 @@
       <formLogin @message-sent="updateMessage" />
     </div>
     <div v-if="isVisibleForgetWord">
-      <forgetWord @message-sent="updateMessage" variant="success"/>
+      <forgetWord @message-sent="updateMessage" variant="success" :child-data="email"/>
     </div>
   </div>
 </template>
@@ -28,12 +28,13 @@ export default defineComponent({
       message:"erreur",
       myValueValideOublieMotDePasse: "Mot de passe modifié !",
       emailExist: false,
+      email: ""
   }
   },
   methods: {
     updateMessage(newValue, email , variant = null) {
       console.log(newValue);
-      console.log(email);
+      console.log("l'email : " + email);
       this.message = newValue;
 
       if (newValue == "oublieAnnuler") {
@@ -50,7 +51,6 @@ export default defineComponent({
               solid: true
             })
         }
-
 
       const bodyFormData = new FormData();
       bodyFormData.append('email', email);
@@ -73,6 +73,7 @@ export default defineComponent({
         if (newValue == "oublieMotDePasse" && this.emailExist === true) {
           this.isVisibleForm = !this.isVisibleForm
           this.isVisibleForgetWord = !this.isVisibleForgetWord
+          this.email = email
         }
 
       }

@@ -65,6 +65,7 @@ export default {
         alert("Veuillez renseigner votre email pour vous connecter.")
 
       }
+      // faire un verif si exist puis aller faire le token du mail verifié
       fetch('http://127.0.0.1:8080/users/login', {
         headers: {
           'Authorization': 'Basic ' + btoa(`${this.email}:${this.password}`),
