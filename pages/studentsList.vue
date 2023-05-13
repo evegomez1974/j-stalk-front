@@ -36,16 +36,19 @@
     </div>
     <div class="grid-container">
       <CardStudent
-        class="grid-CardJobOffer"
-        v-for="(jobOffer, index) in filteredJobOffers"
+        class="grid-Cardstudent"
+        v-for="(student, index) in filteredStudents"
         :key="index"
-        :jobTitle="jobOffer.jobTitle"
-        :company="jobOffer.company"
-        :city="jobOffer.city"
-        :department="jobOffer.department"
-        :description="jobOffer.description"
-        :favorite="jobOffer.favorite"
-        @update:favorite="changeCardFavorite(jobOffer, $event)"
+        :name="student.name"
+        :firstName="student.firstName"
+        :nameSchool="student.nameSchool"
+        :city="student.city"
+        :yearSchool="student.yearSchool"
+        :jobType="student.jobType"
+        :contractType="student.contractType"
+        :description="student.description"
+        :favorite="student.favorite"
+        @update:favorite="changeCardFavorite(student, $event)"
         @update:index="index = $event"
       />
     </div>
@@ -65,69 +68,87 @@ export default {
   components: { NavBar, CardStudent, BIconHeart },
   data() {
     return {
-      jobOffers: [
-        {
-          jobTitle: "John Mchenry",
-          company: "Ynov",
-          city: "Aix en Provence",
-          department: "3ème année de bachelor",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-        {
-          jobTitle: "Developpeur fullstack junior H/F",
-          company: "Ecole: Ynov",
-          city: "Aix en Provence",
-          department: "Année en cours: 3ème année de bachelor",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: false,
-        },
-        {
-          jobTitle: "Developpeur back junior H/F",
-          company: "Soprasteria",
-          city: "Aix les milles",
-          department: "Bouches du Rhônes (13)",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: false,
-        },
-        {
-          jobTitle: "Developpeur cpp junior H/F",
-          company: "PellencSAS",
-          city: "Pertuis",
-          department: "Vaucluse (84)",
-          description:
-            "Vous intervenez u sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-          favorite: true,
-        },
-        {
-          jobTitle: "Developpeur cpp junior H/F",
-          company: "PellencSAS",
-          city: "Pertuis",
-          department: "Vaucluse (84)",
-          description:
-            "Vous intervene projets agiles, en méthode traditionnelle ou en assistance technique",
-          favorite: true,
-        },
-      ],
+      students: null,
+      // [
+        // {
+        //   name: "McHenzy",
+        //   firstName: "John",
+        //   nameSchool: "Ynov",
+        //   city: "Aix en Provence",
+        //   yearSchool: "3ème année de bachelor",
+        //   description:
+        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+        //   favorite: true,
+        // },
+        // {
+        //   name: "Audibert",
+        //   firstName: "Jeannot",
+        //   nameSchool: "Ynov",
+        //   city: "Aix en Provence",
+        //   yearSchool: "2ème année de Master",
+        //   description:
+        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+        //   favorite: true,
+        // },
+        // {
+        //   name: "McHenzy",
+        //   firstName: "John",
+        //   nameSchool: "Ynov",
+        //   city: "Aix en Provence",
+        //   yearSchool: "3ème année de bachelor",
+        //   description:
+        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+        //   favorite: true,
+        // },
+        // {
+        //   name: "McHenzy",
+        //   firstName: "John",
+        //   nameSchool: "Ynov",
+        //   city: "Aix en Provence",
+        //   yearSchool: "3ème année de bachelor",
+        //   description:
+        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+        //   favorite: true,
+        // },
+        // {
+        //   name: "McHenzy",
+        //   firstName: "John",
+        //   nameSchool: "Ynov",
+        //   city: "Aix en Provence",
+        //   yearSchool: "3ème année de bachelor",
+        //   description:
+        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+        //   favorite: true,
+        // },
+      // ],
 
       showOnlyFavorites: false,
     };
   },
   computed: {
-    filteredJobOffers() {
+    filteredStudents() {
       if (this.showOnlyFavorites) {
-        return this.jobOffers.filter((jobOffer) => jobOffer.favorite);
+        return this.students.filter((student) => student.favorite);
       } else {
-        return this.jobOffers;
+        return this.students;
       }
     },
   },
+  mounted() {
+    fetch("http://127.0.0.1:8080/liststudents")
+      .then((response) => response.json())
+      .then((data) => {
+        const students = data.students.data;
+        // Mettre à jour la variable data avec les données reçues
+        this.students = students;
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue :", error);
+      });
+  },
   methods: {
-    changeCardFavorite(jobOffer, newValue) {
-      jobOffer.favorite = newValue;
+    changeCardFavorite(student, newValue) {
+      student.favorite = newValue;
     },
   },
 };
@@ -135,14 +156,13 @@ export default {
 
 <style lang="scss">
 @font-face {
-    font-family: "Candara";
-    src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
-  }
+  font-family: "Candara";
+  src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+}
 
 body {
-    background-color: #343a4011;
-    font-family: "Candara";
-
+  background-color: #343a4011;
+  font-family: "Candara";
 }
 .header-container {
   display: flex;
@@ -176,7 +196,7 @@ body {
   grid-gap: 2vh;
 }
 
-.grid-CardJobOffer {
+.grid-Cardstudent {
   justify-self: center;
 }
 </style>

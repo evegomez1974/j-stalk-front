@@ -1,5 +1,5 @@
-import { createPinia, PiniaVuePlugin } from 'pinia'
-import { createORM } from 'pinia-orm'
+import { createPinia } from 'pinia'
+import { createPiniaORMPlugin } from 'pinia-orm'
 
-Vue.use(PiniaVuePlugin)
-const pinia = createPinia().use(createORM())
+const pinia = createPinia()
+pinia.use(createPiniaORMPlugin())

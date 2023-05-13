@@ -136,7 +136,7 @@ export default {
     },
   },
   mounted() {
-  fetch('http://127.0.0.1:8080/jobOffers')
+  fetch('http://127.0.0.1:8080/listJobOffers')
     .then(response => response.json())
     .then(data => {
 

@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <b-form
-        @submit="onSubmit, onSubmitSendData(form)"
+        @submit="onSubmit($event), onSubmitSendData(form)"
         @reset="onReset"
         v-if="show"
       >

@@ -45,14 +45,7 @@
       <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
       <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
 
-      <p class="card-text">
-        Vous intervenez au sein d'un des programmes clé d'un constructeur
-        aéronautique. Ces programmes visent à innover et à revisiter
-        l'expérience utilisateur en opérant la transformation digitale de la
-        société. Vous vous intégrez dans nos équipes qui travaillent en étroite
-        collaboration avec les équipes client. Vous pourrez intervenir sur des
-        projets agiles, en méthode traditionnelle ou en assistance technique
-      </p>
+      <p class="card-text" v-html="description"></p>
       <b-button>Postuler</b-button>
     </b-modal>
   </div>
