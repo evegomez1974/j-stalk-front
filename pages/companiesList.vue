@@ -35,17 +35,15 @@
       </div>
     </div>
     <div class="grid-container">
-      <CardStudent
+      <CardCompany
         class="grid-Cardstudent"
         v-for="(student, index) in filteredStudents"
         :key="index"
         :name="student.name"
-        :firstName="student.firstName"
-        :nameSchool="student.nameSchool"
+        :phoneNumber="student.phoneNumber"
+        :email="student.email"
         :city="student.city"
-        :yearSchool="student.yearSchool"
-        :jobType="student.jobType"
-        :contractType="student.contractType"
+        :department="student.department"
         :description="student.description"
         :favorite="student.favorite"
         @update:favorite="changeCardFavorite(student, $event)"
@@ -59,68 +57,68 @@
 import "../assets/css/themes.scss";
 
 import NavBar from "../components/navBar";
-import CardStudent from "../components/cardStudent";
+import CardCompany from "../components/cardCompany";
 
 import { BIconHeart } from "bootstrap-vue";
 
 export default {
   name: "IndexPage",
-  components: { NavBar, CardStudent, BIconHeart },
+  components: { NavBar, CardCompany, BIconHeart },
   data() {
     return {
-      students: null,
-      // [
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "Audibert",
-        //   firstName: "Jeannot",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "2ème année de Master",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-      // ],
+      //students: null,
+      students: [
+        {
+          name: "PellencST",
+          phoneNumber: "1234567890",
+          email: "contact@contact.fr",
+          city: "Aix en Provence",
+          department: "Bouches-du-Rhônes (13)",
+          description:
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+          favorite: true,
+        },
+        {
+          name: "Soprasteria",
+          phoneNumber: "1234567890",
+          email: "contact@contact.fr",
+          city: "Aix en Provence",
+          department: "Bouches-du-Rhônes (13)",
+          description:
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+          favorite: true,
+        },
+        {
+          name: "Capgémini",
+          phoneNumber: "1234567890",
+          email: "contact@contact.fr",
+          city: "Aix en Provence",
+          department: "Bouches-du-Rhônes",
+          description:
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+          favorite: true,
+        },
+        {
+          name: "Alite",
+          phoneNumber: "1234567890",
+          email: "contact@contact.fr",
+          city: "Aix en Provence",
+          department: "Bouches-du-Rhônes",
+          description:
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+          favorite: true,
+        },
+        {
+          name: "Avisto",
+          phoneNumber: "1234567890",
+          email: "contact@contact.fr",
+          city: "Aix en Provence",
+          department: "Bouches-du-Rhônes",
+          description:
+            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
+          favorite: true,
+        },
+      ],
 
       showOnlyFavorites: false,
     };
@@ -134,18 +132,18 @@ export default {
       }
     },
   },
-  mounted() {
-    fetch("http://127.0.0.1:8080/listStudents")
-      .then((response) => response.json())
-      .then((data) => {
-        const students = data.students.data;
-        // Mettre à jour la variable data avec les données reçues
-        this.students = students;
-      })
-      .catch((error) => {
-        console.error("Une erreur est survenue :", error);
-      });
-  },
+  // mounted() {
+  //   fetch("http://127.0.0.1:8080/listStudents")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const students = data.students.data;
+  //       // Mettre à jour la variable data avec les données reçues
+  //       this.students = students;
+  //     })
+  //     .catch((error) => {
+  //       console.error("Une erreur est survenue :", error);
+  //     });
+  // },
   methods: {
     changeCardFavorite(student, newValue) {
       student.favorite = newValue;

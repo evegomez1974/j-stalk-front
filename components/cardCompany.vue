@@ -1,8 +1,7 @@
 <template>
   <div class="card">
     <div class="card-title">
-      <b-img id="circleImg" width="95px" height="95px" src="https://picsum.photos/250/250/?image=58" rounded="circle" alt="Circle image"></b-img>
-      <h4>{{ firstName }} {{ name }}</h4>
+      <h4>{{ name }}</h4>
       <button id="favButton" @click="changeFavorite">
         <b-icon
           v-if="this.favorite"
@@ -14,18 +13,17 @@
       </button>
     </div>
     <div class="card-body">
-	  <h6 class="card-subtitle mb-2 text-muted">{{ yearSchool }}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">{{ nameSchool }} </h6>
-      <!-- <h6 class="card-subtitle mb-2 text-muted">{{ nameSchool }} ({{ city }})</h6> -->
-      <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
-      <b-badge v-if="jobType === 'Alternance'" variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ city }}, {{ department }}
+      </h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{ formaterNumeroTelephone }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{ email }}</h6>
 
       <p class="card-text">{{ truncatedDescription }}</p>
-
     </div>
-	    <div class="footer-card">
-        	<b-button id="seeMore">Voir profil</b-button>
-      </div>
+    <div class="footer-card">
+      <b-button id="seeMore">Voir profil</b-button>
+    </div>
   </div>
 </template>
 
@@ -41,12 +39,10 @@ export default {
   props: {
     index: Number,
     name: String,
-    firstName: String,
-    nameSchool: String,
+    phoneNumber: String,
+    email: String,
     city: String,
-    yearSchool: String,
-    jobType : String,
-    contractType : String,
+    department: String,
     description: String,
     favorite: Boolean,
   },
@@ -75,6 +71,13 @@ export default {
         return this.description.substring(0, maxLength) + "...";
       }
     },
+
+        formaterNumeroTelephone() {
+
+
+      return this.phoneNumber.replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
+
+    },
   },
 };
 </script>
@@ -97,18 +100,9 @@ a:hover {
   background: var(--jstalk-color-primary);
   color: var(--jstalk-color-dark);
   flex: 1 1;
-  padding: 0.7em;
+  padding: 1em;
   display: flex;
   justify-content: space-between;
-  position: relative;
-}
-
-.card-body {
-	padding-top: 0px;
-}
-
-.card-subtitle {
-	padding-left: 100px;
 }
 
 /*.modal-header {
@@ -128,19 +122,8 @@ a:hover {
 }
 
 .badge-secondary {
-	margin-top: 5px;
+  margin-top: 5px;
   font-weight: 500;
-}
-
-h4 {
-	padding-left: 110px;
-	padding-top: 5px;
-}
-
-#circleImg {
-	position: absolute;
-	top: 15px;
-	left: 15px
 }
 
 .footer-card {
@@ -148,7 +131,6 @@ h4 {
   justify-content: flex-end;
   margin-bottom: 1em;
   margin-right: 1em;
-
 }
 
 @media only screen and (max-width: 1000px) {
