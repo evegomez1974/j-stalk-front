@@ -105,7 +105,7 @@
           </b-form-group>
         </div>
 
-        <b-form-group
+        <!-- <b-form-group
           id="select-group-city"
           label="Ville:"
           label-for="select-city"
@@ -116,6 +116,19 @@
             :options="cities"
             required
           ></b-form-select>
+        </b-form-group> -->
+
+        <b-form-group
+          id="input-group-city"
+          label="Ville:"
+          label-for="input-city"
+        >
+          <b-form-input
+            id="input-city"
+            v-model="form.city"
+            placeholder="Entrer une ville"
+            required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -233,26 +246,18 @@ export default {
         "Apprentissage",
         "Professionalisation",
       ],
-      cities: [
-        { text: "Selectionnez une ville", value: null },
-        "Aix-en-Provence",
-        "Avignon",
-        "Manosque",
-        "Marseille",
-        "Martigues",
-        "Orange",
-        "Pertuis",
-        "Vitrolles",
-      ],
-      departments: [
-        { text: "Selectionnez un département", value: null },
-        "Ain",
-        "Aisne",
-        "Allier",
-        "Alpes-de-Haute-Provence",
-        "Hautes-Alpes",
-        "hautes alpes",
-      ],
+      // cities: [
+      //   { text: "Selectionnez une ville", value: null },
+      //   "Aix-en-Provence",
+      //   "Avignon",
+      //   "Manosque",
+      //   "Marseille",
+      //   "Martigues",
+      //   "Orange",
+      //   "Pertuis",
+      //   "Vitrolles",
+      // ],
+      departments: [{ text: "Selectionnez un département", value: null }],
       contractLengthsAlternance: [
         { text: "Selectionnez une durée", value: null },
         "1 an",
@@ -319,15 +324,19 @@ export default {
       });
     },
   },
-  //     computed: {
-  //       filteredSizes() {
-  //         if (!this.searchQuery) {
-  //           return this.sizes;
-  //         }
-
-  //         return this.sizes.filter(size => size.toLowerCase().includes(this.searchQuery.toLowerCase()));
-  //       }
-  //     }
+  mounted() {
+    fetch("http://127.0.0.1:8080/listDepartments")
+      .then((response) => response.json())
+      .then((data) => {
+        const departments = data.departments.data;
+        this.departments = this.departments.concat(
+          departments.map((department) => department.name)
+        );
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue :", error);
+      });
+  },
 };
 </script>
 

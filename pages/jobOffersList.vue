@@ -70,54 +70,6 @@ export default {
   data() {
     return {
       jobOffers : null,
-      // jobOffers: [
-      //   {
-      //     jobTitle: "Developpeur IHM junior H/F",
-      //     company: "PellencST",
-      //     city: "Pertuis",
-      //     department: "Vaucluse (84)",
-      //     description:
-      //       "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-      //     favorite: true,
-      //   },
-      //   {
-      //     jobTitle: "Developpeur fullstack junior H/F",
-      //     company: "Capgemini",
-      //     city: "Aix en Provence",
-      //     department: "Bouches du Rhônes (13)",
-      //     description:
-      //       "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-      //     favorite: false,
-      //   },
-      //   {
-      //     jobTitle: "Developpeur back junior H/F",
-      //     company: "Soprasteria",
-      //     city: "Aix les milles",
-      //     department: "Bouches du Rhônes (13)",
-      //     description:
-      //       "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-      //     favorite: false,
-      //   },
-      //   {
-      //     jobTitle: "Developpeur cpp junior H/F",
-      //     company: "PellencSAS",
-      //     city: "Pertuis",
-      //     department: "Vaucluse (84)",
-      //     description:
-      //       "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-      //     favorite: true,
-      //   },
-      //   {
-      //     jobTitle: "Developpeur cpp junior H/F",
-      //     company: "PellencSAS",
-      //     city: "Pertuis",
-      //     department: "Vaucluse (84)",
-      //     description:
-      //       "Vous intervenez au sein d'un des programmes clé d'un constructeur aéronautique. Ces programmes visent à innover et à revisiter l'expérience utilisateur en opérant la transformation digitale de la société. Vous vous intégrez dans nos équipes qui travaillent en étroite collaboration avec les équipes client. Vous pourrez intervenir sur des projets agiles, en méthode traditionnelle ou en assistance technique",
-      //     favorite: true,
-      //   },
-      // ],
-
       showOnlyFavorites: false,
     };
   },
@@ -141,12 +93,6 @@ export default {
     .then(data => {
 
       const jobOffers = data.jobOffers.data
-      //console.log(jobOffers)
-      // jobOffers.forEach((jobOffer) => {
-      // const department = jobOffer.department;
-      // console.log(department);
-      // });
-      // Mettre à jour la variable data avec les données reçues
       this.jobOffers = jobOffers;
     })
     .catch(error => {

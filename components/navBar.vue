@@ -15,7 +15,7 @@
           <b-nav-item href="/">Annonces entreprises</b-nav-item>
           <b-nav-item href="/addNewJobOffer">Créer une annonce</b-nav-item>
           <b-nav-item href="/studentsList">Liste des élèves</b-nav-item>
-          <b-nav-item href="#" disabled>Listes des entreprises</b-nav-item>
+          <b-nav-item href="/companiesList">Listes des entreprises</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
