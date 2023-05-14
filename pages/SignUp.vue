@@ -2,7 +2,7 @@
   <div id="auth">
     <img id="titleLog" src="../static/j-stalk-logo-texte.png">
     <div>
-      <formSignUp @message-sent="updateMessage" />
+      <FormSignUp/>
     </div>
   </div>
 </template>
@@ -12,12 +12,12 @@
 import { defineComponent } from 'vue';
 import '../assets/css/themes.scss'
 import  '../assets/css/Login.scss'
-import formSignUp from '../components/formSignUp'
+import FormSignUp from '../components/formSignUp'
 
 
 export default defineComponent({
   name: 'signup',
-  components: { formSignUp },
+  components: { FormSignUp },
   data (){
     return {
       message:"erreur",
