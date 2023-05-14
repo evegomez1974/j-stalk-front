@@ -14,15 +14,20 @@
     </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">
+        {{ address }}
+      </h6>
+      <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
-      <h6 class="card-subtitle mb-2 text-muted">{{ formaterNumeroTelephone }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ formaterNumeroTelephone }}
+      </h6>
       <h6 class="card-subtitle mb-2 text-muted">{{ email }}</h6>
 
       <p class="card-text">{{ truncatedDescription }}</p>
     </div>
     <div class="footer-card">
-      <b-button id="seeMore">Voir profil</b-button>
+      <b-button id="seeMore">Voir l'entreprise</b-button>
     </div>
   </div>
 </template>
@@ -37,10 +42,10 @@ export default {
     BIconHeart,
   },
   props: {
-    index: Number,
     name: String,
-    phoneNumber: String,
+    phoneNumber: Number,
     email: String,
+    address: String,
     city: String,
     department: String,
     description: String,
@@ -72,11 +77,10 @@ export default {
       }
     },
 
-        formaterNumeroTelephone() {
-
-
-      return this.phoneNumber.replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
-
+    formaterNumeroTelephone() {
+      return this.phoneNumber
+        .toString()
+        .replace(/(\d{2})(?=\d{2,})/g, "$1 ");
     },
   },
 };

@@ -36,17 +36,18 @@
     </div>
     <div class="grid-container">
       <CardCompany
-        class="grid-Cardstudent"
-        v-for="(student, index) in filteredStudents"
+        class="grid-Cardcompany"
+        v-for="(company, index) in filteredCompanies"
         :key="index"
-        :name="student.name"
-        :phoneNumber="student.phoneNumber"
-        :email="student.email"
-        :city="student.city"
-        :department="student.department"
-        :description="student.description"
-        :favorite="student.favorite"
-        @update:favorite="changeCardFavorite(student, $event)"
+        :name="company.userName"
+        :phoneNumber="company.phoneNumber"
+        :email="company.email"
+        :address="company.address"
+        :city="company.city"
+        :department="company.departmentName"
+        :description="company.description"
+        :favorite="Boolean(company.favorite)"
+        @update:favorite="changeCardFavorite(company, $event)"
         @update:index="index = $event"
       />
     </div>
@@ -66,87 +67,34 @@ export default {
   components: { NavBar, CardCompany, BIconHeart },
   data() {
     return {
-      //students: null,
-      students: [
-        {
-          name: "PellencST",
-          phoneNumber: "1234567890",
-          email: "contact@contact.fr",
-          city: "Aix en Provence",
-          department: "Bouches-du-Rhônes (13)",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-        {
-          name: "Soprasteria",
-          phoneNumber: "1234567890",
-          email: "contact@contact.fr",
-          city: "Aix en Provence",
-          department: "Bouches-du-Rhônes (13)",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-        {
-          name: "Capgémini",
-          phoneNumber: "1234567890",
-          email: "contact@contact.fr",
-          city: "Aix en Provence",
-          department: "Bouches-du-Rhônes",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-        {
-          name: "Alite",
-          phoneNumber: "1234567890",
-          email: "contact@contact.fr",
-          city: "Aix en Provence",
-          department: "Bouches-du-Rhônes",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-        {
-          name: "Avisto",
-          phoneNumber: "1234567890",
-          email: "contact@contact.fr",
-          city: "Aix en Provence",
-          department: "Bouches-du-Rhônes",
-          description:
-            "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-          favorite: true,
-        },
-      ],
-
+      companies: null,
       showOnlyFavorites: false,
     };
   },
   computed: {
-    filteredStudents() {
+    filteredCompanies() {
       if (this.showOnlyFavorites) {
-        return this.students.filter((student) => student.favorite);
+        return this.companies.filter((company) => company.favorite);
       } else {
-        return this.students;
+        return this.companies;
       }
     },
   },
-  // mounted() {
-  //   fetch("http://127.0.0.1:8080/listStudents")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const students = data.students.data;
-  //       // Mettre à jour la variable data avec les données reçues
-  //       this.students = students;
-  //     })
-  //     .catch((error) => {
-  //       console.error("Une erreur est survenue :", error);
-  //     });
-  // },
+  mounted() {
+    fetch("http://127.0.0.1:8080/listCompanies")
+      .then((response) => response.json())
+      .then((data) => {
+        const companies = data.companies.data;
+        // Mettre à jour la variable data avec les données reçues
+        this.companies = companies;
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue :", error);
+      });
+  },
   methods: {
-    changeCardFavorite(student, newValue) {
-      student.favorite = newValue;
+    changeCardFavorite(company, newValue) {
+      company.favorite = newValue;
     },
   },
 };
@@ -194,7 +142,7 @@ body {
   grid-gap: 2vh;
 }
 
-.grid-Cardstudent {
+.grid-Cardcompany {
   justify-self: center;
 }
 </style>
