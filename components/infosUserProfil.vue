@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="mt-4">
-        <!-- <b-card img-src="" img-alt="Image" img-left class="mb-3" id="img-user" accept=".jpg, .png"> -->
+        <b-card img-src="" img-alt="Image" img-left class="mb-3" id="img-user" accept=".jpg, .png">
           <img :src="base64Image" alt="Image" img-left  id="img-user" width="150" height="200">
           <div id="ajout_de_photo">
             <div id="separateur_photo">
@@ -83,7 +83,7 @@ export default {
         console.log(this.base64)
         const bodyFormData = new FormData();
         bodyFormData.append('pictures', this.base64);
-        fetch('http://127.0.0.1:8080/userPictures'  , {
+        fetch('http://127.0.0.1:8080/userPictures' , {
           body: bodyFormData,
           method: 'post',
           headers: {
