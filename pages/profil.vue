@@ -197,11 +197,11 @@ export default {
 
         },
 
-        //marche pas encore
     updateMessage(newValue, documentID) {
       console.log(newValue);
+      console.log(documentID);
       this.message = newValue;
-      // documentID = 2
+
         if (newValue == "ok") {
 
           fetch('http://127.0.0.1:8080/userPDF/' +  documentID , {
@@ -212,19 +212,25 @@ export default {
       })
       .then(res => res.json())
       .then(data => {
-        this.userPDF = data;
+        // this.userPDF = data;
         console.log(data)
+        const blobData = new Uint8Array(data);
+
+      // Créer une URL blob à partir du tableau d'octets
+      const blobUrl = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
+
+      // Assigner l'URL blob à la propriété documentUrl
+      this.userPDF = blobUrl;
         // traitement
       })
-      .catch(e => {
-        console.error(e);
-        } )
+      // .catch(e => {
+      //   console.error(e);
+      //   } )
       }
     }
   },
 
     mounted () {
-      console.log("test")
       fetch('http://127.0.0.1:8080/userInfos'  , {
           method: 'get',
           headers: {
