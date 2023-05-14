@@ -4,11 +4,10 @@
         <b-card-group columns>
         <div class="laCard">
           <b-card bg-variant="dark" text-variant="white" title="Lettre">
-            <label id="docID" v_model="idDoc">{{ userDocs.documentID }}</label>
             {{ userDocs.name }}
             <b-card-text>
             </b-card-text>
-            <b-button href="#" variant="primary" @click="voirPDF">Voir</b-button>
+            <b-button href="#" variant="primary" @click="voirPDF(userDocs.documentID)">Voir</b-button>
             <b-button href="#" variant="primary" v-b-modal.modal-prevent-closing >Changer</b-button>
 
             <b-modal
@@ -83,16 +82,13 @@ export default {
         file: null,
         submittedTitle: [],
         submittedPdf: [],
-        idDoc: this.userDocs.documentID,
         myValueMessage: "ok"
 
   }
   },
   methods: {
-    voirPDF () {
-      const inputElementID = document.getElementById("docID");
-        console.log("id: " + inputElementID)
-      this.$emit('message-sent', this.myValueMessage, "2");
+    voirPDF (elementID) {
+      this.$emit('message-sent', this.myValueMessage, elementID);
     },
 
       checkFormValidityTitle() {
@@ -156,7 +152,7 @@ export default {
           bodyFormData.append('documentID', inputElement);
             bodyFormData.append('docPDF', pdfBase64);
             fetch('http://127.0.0.1:8080/userDocsModif/' + pdfBase64 + "/" + inputElement, {
-                method: 'put',
+                method: 'post',
                 headers: {
                 'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
                 },

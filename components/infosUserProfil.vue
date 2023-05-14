@@ -2,19 +2,17 @@
   <div>
     <div>
       <div class="mt-4">
-        <b-card img-src="" img-alt="" img-left class="mb-3" id="img-user" accept=".jpg, .png">{{ userInfo.pictures }}
-
+        <!-- <b-card img-src="" img-alt="Image" img-left class="mb-3" id="img-user" accept=".jpg, .png"> -->
+          <img :src="base64Image" alt="Image" img-left  id="img-user" width="150" height="200">
           <div id="ajout_de_photo">
             <div id="separateur_photo">
-
-
                 <label for="image">
                   <img id="add_photo_logo"
                   src="../assets/img/add-camera.png"
                   alt="appareil photo">
                 </label>
                   <input id="image" v-on:change="onFileChange" type="file" class="image">
-                  <button @click="methModifPictures">Envoyer</button>
+
             </div>
           </div>
 
@@ -24,15 +22,18 @@
               <b-label>{{ userInfo.nameSchool }}</b-label>
             </div>
             <div  class="zoneUser">
-              <b-label>{{ userInfo.contratType }}</b-label>
+              <b-label>{{ userInfo.contractType }}</b-label>
             </div>
             <div  class="zoneUser">
-              <b-label>{{ userInfo.postType }}</b-label>
+              <b-label>{{ userInfo.jobType }}</b-label>
             </div>
             <div  class="zoneUser">
               <b-label>{{ userInfo.yearSchool }}</b-label>
             </div>
           </b-card-text>
+          <div>
+              <b-label>{{ userInfo.description }}</b-label>
+          </div>
 
 
         </b-card>
@@ -56,13 +57,56 @@ export default {
         counter: 1,
         interval: null,
         picture: this.userInfo.pictures,
-        image: null,
+        image: document.getElementById("image"),
+        base64Image: this.userInfo.pictures
+
   }
   },
   beforeDestroy() {
       this.clearInterval()
     },
+  watch: {
+    image: function (newVal, oldVal) {
+      if(newVal) {
+        console.log(newVal)
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
+      }
+    }
+  },
   methods: {
+    createBase64Image: function(FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+        console.log(this.base64)
+        const bodyFormData = new FormData();
+        bodyFormData.append('pictures', this.base64);
+        fetch('http://127.0.0.1:8080/userPictures'  , {
+          body: bodyFormData,
+          method: 'post',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+        })
+        .then(res => {
+          // console.log(res);
+          if(res.status != 200) {
+            this.error = "Une erreur est survenue, veuillez réessayer";
+          }
+          else {
+            return res.json();
+
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+
+          })
+        };
+        reader.readAsDataURL(FileObject);
+      },
     clearInterval() {
         if (this.interval) {
           clearInterval(this.interval)
@@ -105,103 +149,15 @@ export default {
         const files = e.target.files;
       if (files.length > 0) {
         this.image = files[0];
-
-
-      // Récupération de l'élément input de type "file"
-      const inputElement = document.getElementById("image");
-
-      // Récupération du fichier sélectionné
-      const file = inputElement.files[0];
-
-      // Création d'un objet FileReader pour lire le contenu du fichier
-      const reader = new FileReader();
-
-      // Fonction appelée lorsque la lecture du fichier est terminée
-      reader.onload = () => {
-        // Récupération du contenu du fichier sous forme de tableau d'octets
-        const fileContent = new Uint8Array(reader.result);
-
-        // Conversion du tableau d'octets en objet BLOB
-        const blob = new Blob([fileContent], { type: file.type });
-
-        // Envoi du BLOB à la base de données via une requête AJAX ou fetch
-
-
-        const bodyFormData = new FormData();
-      bodyFormData.set('pictures', blob);
-            //Hasher le mot de passe
-      fetch('http://127.0.0.1:8080/userPictures/'+ blob, {
-        method: 'put',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
-        },
-
-      })
-        .then(res => {
-          console.log(res);
-          if(res.status != 200) {
-            this.error = "Une erreur est survenue, veuillez réessayer";
-          }
-          else {
-            return res.data;
-          }
-        })
-        .then(data => {
-                // console.log("data:", data);
-          localStorage.setItem('PAC-token', data.token);
-        })
-        //this.image =  this.userInfo.pictures
-
-      };
-
-      // Lecture du contenu du fichier en tant que tableau d'octets
-      reader.readAsArrayBuffer(file);
-
-
-
-
       } else {
-        this.image = null;
+        this.image = null
       }
-      // var files = e.target.files || e.dataTransfer.files;
-      // if (!files.length)
-      //   return;
-      // this.createImage(files[0]);
-    },
-    methModifPictures(){
-      if (!this.image) {
-        return;
-      }
-      console.log(this.image)
-
-      const bodyFormData = new FormData();
-      bodyFormData.set('pictures', this.image);
-            //Hasher le mot de passe
-      fetch('http://127.0.0.1:8080/userPictures/'+ this.image, {
-        method: 'put',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
-        },
-
-      })
-        .then(res => {
-          console.log(res);
-          if(res.status != 200) {
-            this.error = "Une erreur est survenue, veuillez réessayer";
-          }
-          else {
-            return res.json();
-          }
-        })
-        .then(data => {
-                // console.log("data:", data);
-          localStorage.setItem('PAC-token', data.token);
-        })
-        //this.image =  this.userInfo.pictures
-
-        }
 
     },
+
+  },
+
+
 
 
 }

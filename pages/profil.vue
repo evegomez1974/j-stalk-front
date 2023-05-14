@@ -180,7 +180,7 @@ export default {
                     this.error = "Une erreur est survenue, veuillez réessayer";
                 }
                 else {
-                    return res.json();
+                    return res.data();
 
                 }
             })
