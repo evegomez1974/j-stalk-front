@@ -204,7 +204,7 @@ export default {
 
         if (newValue == "ok") {
 
-          fetch('http://127.0.0.1:8080/userPDF/' +  documentID , {
+          fetch(`http://127.0.0.1:8080/userPDF/${documentID}` , {
           method: 'get',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`

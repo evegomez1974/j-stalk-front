@@ -20,7 +20,7 @@
               @hidden="resetModal"
               @ok="handleOk"
             >
-            <form ref="form" @submit.stop.prevent="handleSubmit">
+            <form ref="form" @submit.stop.prevent="handleSubmit(userDocs.documentID)">
                 <b-form-group
                   label="Titre"
                   label-for="title-input"
@@ -163,7 +163,7 @@ export default {
         // Prevent modal from closing
         bvModalEvent.preventDefault()
         // Trigger submit handler
-        this.handleSubmit()
+        this.handleSubmit(this.userDocs.documentID)
       },
       handleSubmit(elementID) {
         // Exit when the form isn't valid
