@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: 'universal',
   head: {
     title: 'j-stalk',
     htmlAttrs: {
@@ -22,6 +23,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -34,6 +36,7 @@ export default {
     '@nuxtjs/composition-api/module',
     '@pinia/nuxt',
   ],
+
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -50,6 +53,22 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+      //PAS BESOIN DE CETTE PARTIE POUR LE CODE QUE J'AI RAJOUTE POUR LE PDF TU POURRAS L'ENLEVER
+    //ENFIN SI TU LAISSES MAIS VIDE COMME CA :
+    /* 
+      extend(config, ctx) {
+      
+      }
+    */
+      extend(config, ctx) {
+        config.output.globalObject = 'this'
+        config.module.rules.push(
+          {
+            test: /\.pdf$/,
+            loader: 'url-loader'
+          }
+        )
+      }
   },
 
   router: {
@@ -63,7 +82,9 @@ export default {
         component: resolve(__dirname, 'pages/jobOffersList.vue')
       })
     }
-  }
+  },
+
+
 }
 
 

@@ -9,12 +9,14 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@pdftron/webviewer": "^7.1.0",
     "@nuxtjs/composition-api": "^0.33.1",
     "@pinia/nuxt": "^0.2.1",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.0",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
+    "pdfjs-dist": "^3.4.120",
     "pinia": "^2.0.36",
     "pinia-orm": "^1.6.7",
     "vue": "^2.7.10",
@@ -24,6 +26,7 @@
     "vue2-editor": "^2.10.3"
   },
   "devDependencies": {
+    "@types/pdfjs-dist": "^2.10.378",
     "sass": "^1.57.1",
     "sass-loader": "^10.4.1"
   }

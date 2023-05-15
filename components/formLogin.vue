@@ -1,21 +1,22 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="login">
       <div class="containerLog">
+        <h2>Connexion</h2>
         <div>
-          <input class="inputLog" type="email" v-model="FormData.email" placeholder="Email">
+          <input class="inputLog" type="email" v-model="email" placeholder="Email">
         </div>
         <div>
-          <input class="inputLog" type="password" v-model="FormData.password" placeholder="Mot de passe">
+          <input class="inputLog" type="password" v-model="password" placeholder="Mot de passe">
         </div>
         <div class="lien">
           <button @click="methVal"><label class="labelOublie">Mot de passe oublié ?</label></button>
         </div>
         <div class="btnRouter">
           <div class="btnVal">
-            <router-link to="/"><button type="submit" >Se connecter</button></router-link>
+            <button type="submit" @click="login">Se connecter</button>
           </div>
           <div class="btnVal">
-            <router-link to="/"><button type="submit">Inscription</button></router-link>
+            <router-link to="/SignUp"><button type="submit">Inscription</button></router-link>
           </div>
         </div>
     </div>
@@ -23,35 +24,77 @@
 </template>
 
 <script>
+//import { AsyncLocalStorage } from 'async_hooks';
 
+import router from '../.nuxt/router'
 
 export default {
   name: 'FormLogin',
   components: {},
   data (){
     return {
-    FormData: {
       email:'',
       password: '',
-    },
+
     myValueOublieMotDePasse: "oublieMotDePasse"
   }
   },
   methods: {
-    async submitForm() {
-      try {
-        const response = await axios.post('http://localhost:3000', this.formData)
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
+    // async submitForm() {
+    //   try {
+    //     const response = await axios.post('http://localhost:3000', this.formData)
+    //     console.log(response.data)
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // },
+    methVal() {
+      if (this.email==="") {
+        alert("Veuillez renseigner votre email pour changer le mot de passe.")
+
+      }else {
+        this.$emit('message-sent', this.myValueOublieMotDePasse, this.email);
       }
     },
-    methVal() {
-      this.$emit('message-sent', this.myValueOublieMotDePasse);
+    login() {
+      if (this.email==="") {
+        alert("Veuillez renseigner votre email pour vous connecter.")
+
+      }
+      if (this.password==="") {
+        alert("Veuillez renseigner votre email pour vous connecter.")
+
+      }
+      // faire un verif si exist puis aller faire le token du mail verifié
+      fetch('http://127.0.0.1:8080/users/login', {
+        headers: {
+          'Authorization': 'Basic ' + btoa(`${this.email}:${this.password}`),
+
+        },
+        method: 'get',
+      })
+      .then(res => {
+        if (res.status != "200") {
+          this.error = "Une erreur est survenue, veuillez réessayer";
+        }else if (res.json === "Incorrect") {
+          this.error = "Une erreur est survenue, veuillez réessayer";
+        }
+        else {
+          return res.json()
+          // res.json()
+        }
+      })
+      .then(data => {
+        localStorage.setItem('PAC-token', data.token);
+        console.log(data.token)
+        this.$router.push('/cards')
+        //router.push('/cards');
+      })
     }
-  }
 
 }
+  }
+
 </script>
 
 

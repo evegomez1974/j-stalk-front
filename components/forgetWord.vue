@@ -26,7 +26,7 @@
             <button @click="methAnnuler">Annuler</button>
           </div>
           <div class="btnVal">
-            <button @click="methVal" >Valider</button>
+            <button @click="putPasswordById" >Valider</button>
           </div>
         </div>
     </div>
@@ -39,16 +39,19 @@
 export default {
   name: 'forgetWord',
   components: {},
+  props: ['childData'],
   data (){
     return {
-    FormData: {
-      email:'',
-      password: '',
-    },
+    //   FormData: {
+    //     email:'test@test.com',
+    //     password:"",
+
+    // },
     NewPassWord1: '',
     NewPassWord2: '',
     myValueValideOublieMotDePasse: "oublieValider",
     myValueAnnuleOublieMotDePasse: "oublieAnnuler",
+
   }
   },
   computed: {
@@ -65,19 +68,54 @@ export default {
       }
     },
   methods: {
-    async submitForm() {
-      try {
-        const response = await axios.post('http://localhost:3000', this.formData)
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
-      }
+    async submitForm(variant = null) {
+      var input2 = document.getElementById("New2").value;
+            this.password = input2
+             // faire un autre fetch qui recup l'id de l'utilsateur via le mail dans l'input
+             // envoyer l'id du user avec un $emit
+             // et faire le put du mot de passe
+             console.log("ici" + this.childData)
+             const bodyFormData = new FormData();
+             bodyFormData.set('password', this.password)
+             bodyFormData.set('email', this.childData)
+             fetch('http://127.0.0.1:8080/userNewPassword/'+ this.password + '/' + this.childData, {
+                 method: 'put',
+                 headers: {
+                   "Content-type": "application/json"
+                 },
+
+             })
+             .then(res => {
+                 console.log(res);
+                 if(res.status != 200) {
+                     this.error = "Une erreur est survenue, veuillez réessayer";
+                 }
+                 else {
+                   console.log("Mot de passe modifié")
+                   variant="success";
+                  this.$bvToast.toast('Mot de passe modifié !', {
+                    title: `Succes`,
+                    variant: variant,
+                    solid: true
+                  })
+                  this.$emit('message-sent', this.myValueValideOublieMotDePasse);
+                  console.log(this.myValueValideOublieMotDePasse);
+                 }
+
+             })
+
+      // try {
+      //   const response = await axios.post('http://localhost:3000', this.formData)
+      //   console.log(response.data)
+      // } catch (error) {
+      //   console.error(error)
+      // }
     },
     methAnnuler() {
       this.$emit('message-sent', this.myValueAnnuleOublieMotDePasse);
       console.log(this.myValueAnnuleOublieMotDePasse);
     },
-    methVal(variant = null) {
+    putPasswordById(variant = null) {
       var input1 = document.getElementById("New1").value;
       console.log(input1)
       var input2 = document.getElementById("New2").value;
@@ -96,17 +134,15 @@ export default {
           variant: variant,
           solid: true
         })
-      }else {
-        this.$emit('message-sent', this.myValueValideOublieMotDePasse);
-        console.log(this.myValueValideOublieMotDePasse);
-      }
+       }
+
+        }
 
     },
 
   }
 
 
-}
 </script>
 
 
