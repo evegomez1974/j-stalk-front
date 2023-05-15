@@ -72,8 +72,8 @@
               v-model="formStudent.contractType"
             >
               <option disabled value="" selected>Please select one</option>
-              <option value="Alternance">Apprentissage</option>
-              <option value="Stage">Professionalisation</option>
+              <option value="Apprentissage">Apprentissage</option>
+              <option value="Professionalisation">Professionalisation</option>
             </select>
           </div>
           <div>
@@ -143,6 +143,47 @@
             ></textarea>
           </div>
         </div>
+        <div v-if="formUser.userStatus === 'company'" classe="formCompany">
+          <div>
+            <div>
+              <input
+                class="inputLog"
+                type="text"
+                v-model="formCompany.address"
+                placeholder="Adresse"
+                required
+              />
+            </div>
+            <div>
+              <input
+                class="inputLog"
+                type="text"
+                v-model="formCompany.city"
+                placeholder="Ville"
+                required
+              />
+            </div>
+            <select name="department" v-model="formCompany.department" required>
+              <option disabled value="" selected>
+                Please select one department
+              </option>
+              <option v-for="(department, index) in departments" :key="index" :value="department.id">
+                {{ department.name }}
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <textarea
+              name="message"
+              v-model="formCompany.description"
+              rows="4"
+              cols="40"
+              maxLength="200"
+              placeholder="Saisissez votre message ici"
+            ></textarea>
+          </div>
+        </div>
       </div>
       <div class="btnRouter">
         <div class="btnVal">
@@ -173,7 +214,7 @@ export default {
         email: null,
         password: null,
         name: null,
-        firstname: null,
+        firstName: null,
         phoneNumber: null,
         pictures: null,
         userStatus: "",
@@ -186,18 +227,16 @@ export default {
         typeDegree: "",
         nameSchool: null,
         description: null,
+        favorite: false,
       },
       formCompany: {
         address: null,
         city: null,
-        department: null,
+        department: "",
         description: null,
         favorite: false,
       },
-      // selectedItem: null,
-      // isVisiblestudent: false,
-      // isVisibleEcole: true,
-      // isVisibleIntervenant: false,
+      departments: null,
     };
   },
   methods: {
@@ -211,11 +250,13 @@ export default {
 
       if (formUser.userStatus === "student") {
         requestConfig.body = JSON.stringify({ ...formUser, ...formStudent });
+      }else if (formUser.userStatus === "company") {
+        requestConfig.body = JSON.stringify({...formUser, ...this.formCompany});
       }
 
-      console.log("request body", requestConfig.body)
+      console.log("request body", requestConfig.body);
 
-      fetch("http://127.0.0.1:8080/addUsers", requestConfig)
+      fetch("http://127.0.0.1:8080/users/signup", requestConfig)
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
@@ -224,6 +265,17 @@ export default {
           console.error("Une erreur est survenue :", error);
         });
     },
+  },
+  mounted() {
+    fetch("http://127.0.0.1:8080/listDepartments")
+      .then((response) => response.json())
+      .then((data) => {
+        const departments = data.departments.data;
+        return (this.departments = departments);
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue :", error);
+      });
   },
 };
 </script>
