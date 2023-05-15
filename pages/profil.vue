@@ -14,65 +14,26 @@
 
         <div class="cardUser">
           <div class="container">
-            <pdfViewer
-              :url="this.userPDF"
+            <pdfViewer v-for="pdf in userPDF" :key="pdf.id" :pdf="pdf"
             >
             </pdfViewer>
+          </div>
+        </div>
 
+        <div class="cardUser">
+          <div class="btnAddDocs" v-if="isVisibleBtnAddDoc">
+            <button @click="btnAddDoc">+</button>
+          </div>
+        </div>
+
+        <div class="cardUser">
+          <div class="addDocs" v-if="isVisibleAddDoc">
+            <addDocsVue  @message-sent-pdf="updateMessagePdf"/>
           </div>
         </div>
 
         <div class="cardUser">
           <div class="listDocsUser">
-            <label>Liste des documents</label>
-            <b-button v-b-modal.modal-prevent-closing>+</b-button>
-
-            <b-modal
-              id="modal-prevent-closing"
-              ref="modal"
-              title="Submit Your Pdf"
-              @show="resetModal"
-              @hidden="resetModal"
-              @ok="handleOk"
-            >
-              <form ref="form" @submit.stop.prevent="handleSubmit">
-                <b-form-group
-                  label="Titre"
-                  label-for="title-input"
-                  invalid-feedback="Title is required"
-                  :state="titleState"
-                >
-                  <b-form-input
-                    id="title-input"
-                    v-model="title"
-                    :state="titleState"
-                    required
-                  ></b-form-input>
-
-                </b-form-group>
-                <b-form-group
-                  label="Document Pdf"
-                  label-for="pdf-input"
-                  invalid-feedback="Pdf is required"
-                  :state="pdfState"
-                >
-
-                  <b-form-file
-                    id="pdf-input"
-                    v-model="file"
-                    :state="Boolean(file)"
-                    placeholder="Choisissez un document ou drop ici"
-                    drop-placeholder="Drop document ici..."
-                    accept=".pdf, .PDF"
-                  ></b-form-file>
-                  <div class="mt-3">Selectionner un pdf: {{ file ? file.name : '' }}</div>
-
-                </b-form-group>
-
-
-              </form>
-            </b-modal>
-
             <listDocsUser v-for="userDocs in listUserDocs" :key="userDocs.id" :userDocs="userDocs"  @message-sent="updateMessage"/>
           </div>
         </div>
@@ -86,116 +47,70 @@ import pdfViewer from "@/components/PDFViewer"
 import NavBar from "../components/navBar";
 import infosUserProfil from "../components/infosUserProfil";
 import listDocsUser from "../components/listDocsUser";
-
+import addDocsVue from "../components/addDocs"; //
 
 
 export default {
     name: "profil",
-    components: { NavBar, infosUserProfil, listDocsUser, pdfViewer },
+    components: { NavBar, infosUserProfil, listDocsUser, pdfViewer, addDocsVue },
     data() {
     return {
-        title: '',
-        pdf: '',
-        titleState: null,
-        pdfState: null,
-        file: null,
-        submittedTitle: [],
-        submittedPdf: [],
+
         listUserInfos: [ ],
         listUserDocs: [ ],
         message:"erreur",
-        userPDF: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf'
+        userPDF: '',
+        isVisibleAddDoc: false,
+        isVisibleBtnAddDoc: true,
+
 
     };
   },
+  computed: {
+     ecouteMessage(newValue, documentID) {
+       this.updateMessage(newValue, documentID)
+       console.log("dans profil new value" + documentID)
+       console.log(this.userPDF + "new")
+       return this.userPDF
+     }
+  },
+  mounted: {
+    ecouteMessage(newValue, documentID) {
+       this.updateMessage(newValue, documentID)
+       console.log("dans profil new value" + documentID)
+       console.log(this.userPDF + "new")
+       return this.userPDF
+     }
+  },
+
   methods: {
-      checkFormValidityTitle() {
-        const validTitle = this.$refs.form.checkValidity()
-        this.titleState = validTitle
-        return validTitle
-      },
-      checkFormValidityPDF() {
-        const validPDF = this.$refs.form.checkValidity()
-        this.titleState = validPDF
-        return validPDF
-      },
-      resetModal() {
-        this.title = ''
-        this.pdf = ''
-        this.titleState = null
-        this.pdfState = null
-      },
-      handleOk(bvModalEvent) {
-        // Prevent modal from closing
-        bvModalEvent.preventDefault()
-        // Trigger submit handler
-        this.handleSubmit()
-      },
-      handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidityTitle()) {
-          return
-        }
-        if (!this.checkFormValidityPDF()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedTitle.push(this.title)
-        this.submittedPdf.push(this.pdf)
-        // Hide the modal manually
-        this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
-        })
+    btnAddDoc() {
+      this.isVisibleAddDoc = true
+        this.isVisibleBtnAddDoc = false
+    },
+    updateMessagePdf(newValuePDF) {
+      console.log(newValuePDF);
+      if (newValuePDF == "pdfValide") {
+        this.isVisibleAddDoc = false
+        this.isVisibleBtnAddDoc = true
+        fetch('http://127.0.0.1:8080/userInfos'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.listUserInfos = data;
+        // console.log(data)
+        // traitement
+      })
+      .catch(e => {
+        console.error(e);
+      })
 
-        // Récupération de l'élément input de type "file"
-        const inputElement = document.getElementById("pdf-input");
-
-        // Récupération du fichier sélectionné
-        const file = inputElement.files[0];
-
-        // Création d'un objet FileReader
-        const reader = new FileReader();
-
-        // Fonction de callback appelée lorsque le fichier est lu
-        reader.onload = (event) => {
-          // Conversion du fichier en base64
-          const pdfBase64 = event.target.result.replace(/^data:application\/pdf;base64,/, '');
-
-          // Envoi du PDF sérialisé à un serveur ou stockage en local
-          // ...
-
-          const bodyFormData = new FormData();
-            bodyFormData.append('name', this.title);
-            bodyFormData.append('docPDF', pdfBase64);
-            fetch('http://127.0.0.1:8080/userDocs', {
-                body: bodyFormData,
-                method: 'post',
-                headers: {
-                'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
-                },
-            })
-            .then(res => {
-                // console.log(res);
-                if(res.status != 200) {
-                    this.error = "Une erreur est survenue, veuillez réessayer";
-                }
-                else {
-                    return res.data();
-
-                }
-            })
-            .then(res => {
-              console.log(res.data);
-
-          })
-        };
-
-        // Lecture du fichier
-        reader.readAsDataURL(file);
-
-
-
-        },
+      }
+    },
 
     updateMessage(newValue, documentID) {
       console.log(newValue);
@@ -203,7 +118,6 @@ export default {
       this.message = newValue;
 
         if (newValue == "ok") {
-
           fetch(`http://127.0.0.1:8080/userPDF/${documentID}` , {
           method: 'get',
           headers: {
@@ -212,25 +126,32 @@ export default {
       })
       .then(res => res.json())
       .then(data => {
-        // this.userPDF = data;
-        console.log(data)
-        const blobData = new Uint8Array(data);
+        this.userPDF = data;
+        console.log("chargement réussi " + this.userPDF)
+        return this.userPDF
+      //   const blobData = new Uint8Array(data);
 
-      // Créer une URL blob à partir du tableau d'octets
-      const blobUrl = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
+      // // Créer une URL blob à partir du tableau d'octets
+      // const blobUrl = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
+      //   let reader = new FileReader();
+      //   //reader.readAsDataURL(blobUrl); // convertit le blob en base64 et appelle onload
+      // // Assigner l'URL blob à la propriété documentUrl
 
-      // Assigner l'URL blob à la propriété documentUrl
-      this.userPDF = blobUrl;
+      // //L'ajouter au localstorage ?
+      // console.log(blobUrl)
+      // this.userPDF = blobUrl;
         // traitement
       })
-      // .catch(e => {
-      //   console.error(e);
-      //   } )
+       .catch(e => {
+         console.error(e);
+         } )
       }
+
     }
   },
 
     mounted () {
+
       fetch('http://127.0.0.1:8080/userInfos'  , {
           method: 'get',
           headers: {
@@ -240,7 +161,7 @@ export default {
       .then(res => res.json())
       .then(data => {
         this.listUserInfos = data;
-        console.log(data)
+        // console.log(data)
         // traitement
       })
       .catch(e => {
@@ -257,7 +178,7 @@ export default {
       .then(res => res.json())
       .then(data => {
         this.listUserDocs = data;
-        console.log(data)
+        // console.log(data)
         // traitement
       })
       .catch(e => {
@@ -270,6 +191,28 @@ export default {
 
 
 <style>
+
+.image {
+  display: none;
+}
+
+.add-photo {
+  margin: 10px;
+}
+
+.contain-photo {
+  border: 1px solid blue;
+  border-radius: 80px;
+  height: 60px;
+  width: 90px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3px;
+}
+
+
 
 b-form-input {
   margin-bottom: 10px;

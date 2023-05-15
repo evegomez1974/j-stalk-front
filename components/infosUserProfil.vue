@@ -58,7 +58,8 @@ export default {
         interval: null,
         picture: this.userInfo.pictures,
         image: document.getElementById("image"),
-        base64Image: this.userInfo.pictures
+        base64Image: this.userInfo.pictures,
+        base64:"",
 
   }
   },

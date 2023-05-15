@@ -8,7 +8,8 @@
             <b-card-text>
             </b-card-text>
             <b-button href="#" variant="primary" @click="voirPDF(userDocs.documentID)">Voir</b-button>
-            <b-button href="#" variant="primary" id="seeMore" v-b-modal="'modal-center-' + this.modalRef">Changer</b-button>
+            <!-- <b-button href="#" variant="primary" @click="afficheInfoDoc(userDocs.name, userDocs.docPDF)" id="seeMore" v-b-modal="'modal-center-' + this.modalRef" >Changer</b-button> -->
+            <b-button href="#" variant="primary" @click="suppDoc(userDocs.documentID)" >Supprimer</b-button>
 
             <b-modal
               :id="'modal-center-' + this.modalRef"
@@ -58,52 +59,7 @@
               </form>
 
           </b-modal>
-            <b-modal
-              id="'modal-prevent-closing' + this.modalRef"
-              ref="modal"
-              title="Submit Your Pdf"
-              @show="resetModal"
-              @hidden="resetModal"
-              @ok="handleOk"
-              centered
-            >
-              <form ref="form" @submit.stop.prevent="handleSubmit(userDocs.documentID)">
-                <b-form-group
-                  label="Titre"
-                  label-for="title-input"
-                  invalid-feedback="Title is required"
-                  :state="titleState"
-                >
-                  <b-form-input
-                    id="title-input"
-                    v-model="title"
-                    :state="titleState"
-                    required
-                  ></b-form-input>
 
-                </b-form-group>
-                <b-form-group
-                  label="Document Pdf"
-                  label-for="pdf-input"
-                  invalid-feedback="Pdf is required"
-                  :state="pdfState"
-                >
-
-                  <b-form-file
-                    id="pdf-input"
-                    v-model="file"
-                    :state="Boolean(file)"
-                    placeholder="Choisissez un document ou drop ici"
-                    drop-placeholder="Drop document ici..."
-                    accept=".pdf, .PDF"
-                  ></b-form-file>
-                  <div class="mt-3">Selectionner un pdf: {{ file ? file.name : '' }}</div>
-
-                </b-form-group>
-
-
-              </form>
-            </b-modal>
 
           </b-card>
         </div>
@@ -124,7 +80,7 @@ export default {
     },
   data (){
     return {
-      title: this.userDocs.name,
+        title: "",
         pdf: '',
         titleState: null,
         pdfState: null,
@@ -133,14 +89,51 @@ export default {
         submittedPdf: [],
         myValueMessage: "ok",
         modalRef: (Math.random() + 1).toString(36).substring(7),
+        base64: "",
 
   }
   },
+computed: {
+  renvoiInfos() {
+    this.afficheInfoDoc()
+    return this.name , this.docPDF
+  },
+  afficheNewDoc(documentID) {
+    voirPDF(documentID);
+    console.log("ici" + documentID);
+    this.$emit('message-sent', this.myValueMessage, documentID);
+
+  }
+},
 
   methods: {
+    suppDoc(documentID) {
 
-    voirPDF (elementID) {
-      this.$emit('message-sent', this.myValueMessage, elementID);
+      fetch(`http://127.0.0.1:8080/userDocsDelete/${documentID}` , {
+                method: 'delete',
+                headers: {
+                'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => {
+                // console.log(res);
+                if(res.status != 200) {
+                    this.error = "Une erreur est survenue, veuillez réessayer";
+                }
+                else {
+                    return res.status;
+
+                }
+            })
+    },
+    afficheInfoDoc(name, docPDF) {
+      console.log(name)
+      this.title =name
+      this.file = docPDF
+
+    },
+    voirPDF (documentID) {
+      this.$emit('message-sent', this.myValueMessage, documentID);
     },
 
       checkFormValidityTitle() {
@@ -165,7 +158,7 @@ export default {
         // Trigger submit handler
         this.handleSubmit(this.userDocs.documentID)
       },
-      handleSubmit(elementID) {
+      handleSubmit(documentID) {
         // Exit when the form isn't valid
         if (!this.checkFormValidityTitle()) {
           return
@@ -181,30 +174,30 @@ export default {
           this.$bvModal.hide('modal-prevent-closing')
         })
 
-        // Récupération de l'élément input de type "file"
-        const inputElement = document.getElementById("pdf-input");
-
-        // Récupération du fichier sélectionné
-        const file = inputElement.files[0];
-
-        // Création d'un objet FileReader
-        const reader = new FileReader();
-
-        // Fonction de callback appelée lorsque le fichier est lu
-        reader.onload = (event) => {
-          // Conversion du fichier en base64
-          const pdfBase64 = event.target.result.replace(/^data:application\/pdf;base64,/, '');
-
-          // Envoi du PDF sérialisé à un serveur ou stockage en local
-          // ...
+        var selectedFile = document.getElementById("pdf-input").files;
+      var selectedTitle = this.title;
+      console.log(documentID)
+      //document.getElementById("title").value;
+        //Check File is not Empty
+        if (selectedFile.length > 0) {
+            // Select the very first file from list
+            var fileToLoad = selectedFile[0];
+            // FileReader function for read the file.
+            var fileReader = new FileReader();
+            var base64;
+            // Onload of file read the file content
+            fileReader.onload = function(fileLoadedEvent) {
+          base64 = fileLoadedEvent.target.result;
+                // Print data in console
+        console.log(base64);
 
           const bodyFormData = new FormData();
-          bodyFormData.append('name', this.title);
-          bodyFormData.append('docPDF', pdfBase64);
-          bodyFormData.append('docPDF', elementID);
+          bodyFormData.append('name', selectedTitle);
+          bodyFormData.append('docPDF', base64);
+          bodyFormData.append('docPDF', documentID);
             fetch('http://127.0.0.1:8080/userDocsModif', {
                 body: bodyFormData,
-                method: 'put',
+                method: 'post',
                 headers: {
                 'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
                 },
@@ -219,17 +212,14 @@ export default {
 
                 }
             })
-        };
+          }
+            // Convert data to base64
+            fileReader.readAsDataURL(fileToLoad);
 
-        // Lecture du fichier
-        reader.readAsDataURL(file);
+    }
 
-
-
-        },
-    },
-
-
+  }
+}
 }
 </script>
 

@@ -1,5 +1,10 @@
 <template>
-  <div id="webViewer" ref="viewer"></div>
+  <div>
+    <div><button>Demander une lettre à un intervenant</button><button>Contacte</button></div>
+
+    <div id="webViewer" ref="viewer"></div>
+  </div>
+
 </template>
 
 <script>
@@ -10,24 +15,29 @@ if (process.browser) {
 
 export default {
   props: {
-    url: {
-      type: String,
-      required: true
-    }
-  },
-
+      pdf: Object,
+    },
+  //props: ['url'],
+  // {
+  //   url: {
+  //     type: String,
+  //     required: true
+  //   },
+  // },
+//https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf
   mounted () {
     if (process.browser && WebViewer) {
+      console.log(this.pdf.docPDF)
       WebViewer({
           path: '/webviewer',
-          initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf',
+          initialDoc: this.pdf.docPDF,
 
         }, this.$refs.viewer
       ).then(instance => {
         // Code with regards to instance can go here
       });
     }
-  }
+  },
 }
 </script>
 
