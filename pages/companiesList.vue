@@ -71,6 +71,7 @@ export default {
       showOnlyFavorites: false,
     };
   },
+
   computed: {
     filteredCompanies() {
       if (this.showOnlyFavorites) {
@@ -88,9 +89,11 @@ export default {
         // Mettre à jour la variable data avec les données reçues
         this.companies = companies;
       })
-      .catch((error) => {
-        console.error("Une erreur est survenue :", error);
-      });
+      .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
   },
   methods: {
     changeCardFavorite(company, newValue) {

@@ -78,6 +78,11 @@ export default {
 
 
            })
+           .catch(e => {
+                // console.error(e);
+                // this.verifCo = "erreur"
+                this.$router.push('/notConneted')
+            })
 
         };
             // Convert data to base64

@@ -205,7 +205,7 @@
   </div>
 </template>
 
- 
+
 <script>
 export default {
   name: "CreateJobOffer",
@@ -293,9 +293,11 @@ export default {
         .then((data) => {
           console.log(data.message);
         })
-        .catch((error) => {
-          console.error("Une erreur est survenue :", error);
-        });
+        .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
     },
 
     onSubmit(event) {
@@ -333,9 +335,11 @@ export default {
           departments.map((department) => department.name)
         );
       })
-      .catch((error) => {
-        console.error("Une erreur est survenue :", error);
-      });
+      .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
   },
 };
 </script>
