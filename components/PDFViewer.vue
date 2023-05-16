@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div><button>Demander une lettre à un intervenant</button><button>Contacte</button></div>
-
     <div id="webViewer" ref="viewer"></div>
   </div>
 
@@ -17,6 +15,7 @@ export default {
   props: {
       pdf: Object,
     },
+
   //props: ['url'],
   // {
   //   url: {

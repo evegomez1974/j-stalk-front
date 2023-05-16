@@ -8,13 +8,19 @@
 
         <div class="cardUser">
           <div class="infosUserProfil">
-            <infosUserProfil v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo"  />
+            <infosUserProfil v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo" />
           </div>
         </div>
 
         <div class="cardUser">
-          <div class="container">
-            <pdfViewer v-for="pdf in userPDF" :key="pdf.id" :pdf="pdf"
+          <div class="contact">
+            <contact v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo"/>
+          </div>
+        </div>
+
+        <div class="cardUser">
+          <div class="container" v-if="userPDF[0]">
+            <pdfViewer  :pdf="userPDF[0]"
             >
             </pdfViewer>
           </div>
@@ -47,41 +53,31 @@ import pdfViewer from "@/components/PDFViewer"
 import NavBar from "../components/navBar";
 import infosUserProfil from "../components/infosUserProfil";
 import listDocsUser from "../components/listDocsUser";
-import addDocsVue from "../components/addDocs"; //
+import addDocsVue from "../components/addDocs";
+import contact from "../components/contact";
 
 
 export default {
     name: "profil",
-    components: { NavBar, infosUserProfil, listDocsUser, pdfViewer, addDocsVue },
+    components: { NavBar, infosUserProfil, listDocsUser, pdfViewer, addDocsVue, contact },
     data() {
     return {
 
         listUserInfos: [ ],
         listUserDocs: [ ],
         message:"erreur",
-        userPDF: '',
+        userPDF: [],
         isVisibleAddDoc: false,
         isVisibleBtnAddDoc: true,
+        UserlastPDF: "",
 
 
     };
   },
   computed: {
-     ecouteMessage(newValue, documentID) {
-       this.updateMessage(newValue, documentID)
-       console.log("dans profil new value" + documentID)
-       console.log(this.userPDF + "new")
-       return this.userPDF
-     }
+
   },
-  mounted: {
-    ecouteMessage(newValue, documentID) {
-       this.updateMessage(newValue, documentID)
-       console.log("dans profil new value" + documentID)
-       console.log(this.userPDF + "new")
-       return this.userPDF
-     }
-  },
+
 
   methods: {
     btnAddDoc() {
@@ -91,9 +87,11 @@ export default {
     updateMessagePdf(newValuePDF) {
       console.log(newValuePDF);
       if (newValuePDF == "pdfValide") {
+        //this.listUserDocs = []
+        console.log(this.listUserDocs)
         this.isVisibleAddDoc = false
         this.isVisibleBtnAddDoc = true
-        fetch('http://127.0.0.1:8080/userInfos'  , {
+        fetch('http://127.0.0.1:8080/userDocs'  , {
           method: 'get',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
@@ -101,7 +99,7 @@ export default {
       })
       .then(res => res.json())
       .then(data => {
-        this.listUserInfos = data;
+        this.listUserDocs = data;
         // console.log(data)
         // traitement
       })
@@ -116,7 +114,7 @@ export default {
       console.log(newValue);
       console.log(documentID);
       this.message = newValue;
-
+      this.userPDF = []
         if (newValue == "ok") {
           fetch(`http://127.0.0.1:8080/userPDF/${documentID}` , {
           method: 'get',
@@ -184,6 +182,25 @@ export default {
       .catch(e => {
         console.error(e);
       })
+
+       fetch('http://127.0.0.1:8080/userLastDocs'  , {
+           method: 'get',
+           headers: {
+             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+           },
+       })
+       .then(res => res.json())
+       .then(data => {
+         this.userPDF = data;
+         //console.log(data)
+         // traitement
+       })
+       .catch(e => {
+         console.error(e);
+       })
+
+
+
     }
 
 }

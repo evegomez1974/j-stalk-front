@@ -32,7 +32,7 @@ export default {
     return {
       file1:"",
       title:"",
-      myValueMessage:"pdfValide"
+      myValueMessage:"pdfValide",
   }
   },
 
@@ -69,7 +69,6 @@ export default {
              this.error = "Une erreur est survenue, veuillez réessayer";
            }
            else {
-
              return res.json();
 
            }

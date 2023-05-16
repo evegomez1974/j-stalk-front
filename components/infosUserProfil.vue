@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="mt-4">
-        <b-card img-src="" img-alt="Image" img-left class="mb-3" id="img-user" accept=".jpg, .png">
+        <b-card>
           <img :src="base64Image" alt="Image" img-left  id="img-user" width="150" height="200">
           <div id="ajout_de_photo">
             <div id="separateur_photo">
@@ -12,7 +12,6 @@
                   alt="appareil photo">
                 </label>
                   <input id="image" v-on:change="onFileChange" type="file" class="image">
-
             </div>
           </div>
 
@@ -49,6 +48,7 @@ export default {
   components: {},
   props: {
       userInfo: Object,
+
     },
   data (){
     return {
@@ -56,10 +56,10 @@ export default {
         processing: false,
         counter: 1,
         interval: null,
-        picture: this.userInfo.pictures,
         image: document.getElementById("image"),
         base64Image: this.userInfo.pictures,
         base64:"",
+
 
   }
   },

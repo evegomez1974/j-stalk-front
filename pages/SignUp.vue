@@ -11,7 +11,6 @@
 <script>
 import { defineComponent } from "vue";
 import "../assets/css/themes.scss";
-import "../assets/css/Login.scss";
 import FormSignUp from "../components/formSignUp";
 
 export default defineComponent({
