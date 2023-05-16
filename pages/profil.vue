@@ -319,10 +319,6 @@ b-form-input {
   text-align: center;
 }
 
-#webViewer {
-  height: 80vh;
-  width: 45vw;
-}
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
