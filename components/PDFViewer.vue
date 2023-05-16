@@ -39,6 +39,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped >
+#webViewer {
+  height: 80vh;
+  width: 45vw;
+}
 
 </style>

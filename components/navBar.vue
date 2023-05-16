@@ -12,7 +12,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/" v-if="isVisibleEntrepise">Annonces entreprises</b-nav-item>
+          <b-nav-item href="/jobOffersList" v-if="isVisibleEntrepise">Annonces entreprises</b-nav-item>
           <b-nav-item href="/addNewJobOffer" v-if="isVisibleAnnonce">Créer une annonce</b-nav-item>
           <b-nav-item href="/studentsList" v-if="isVisibleEtudiant">Liste des élèves</b-nav-item>
           <b-nav-item href="/companiesList" v-if="isVisibleCompanie">Listes des entreprises</b-nav-item>
@@ -114,7 +114,7 @@ export default {
         this.token = localStorage.getItem('PAC-token')
         this.token= "";
         localStorage.setItem('PAC-token', this.token)
-        this.$router.push('/Login')
+        this.$router.push('/')
     }
   }
 };

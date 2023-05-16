@@ -17,7 +17,7 @@
                 >
             </div>
             <div class="btnVal">
-                <router-link to="/Login"><button type="submit" class="classBtn">Se connecter</button></router-link>
+                <router-link to="/"><button type="submit" class="classBtn">Se connecter</button></router-link>
             </div>
             </div>
         </form>
@@ -47,7 +47,7 @@
     },
     methods: {
         connectUser() {
-            this.$router.push('/Login')
+            this.$router.push('/')
         },
       updateMessage(newValue, email, variant = null) {
         console.log(newValue);

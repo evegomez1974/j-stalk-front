@@ -50,7 +50,7 @@
             :key="userInfo.id"
             :userInfo="userInfo"
           />
-          <div class="container" v-if="userPDF[0]">
+          <div class="containerPDF" v-if="userPDF[0]">
             <pdfViewer :pdf="userPDF[0]"> </pdfViewer>
           </div>
         </div>
@@ -281,8 +281,8 @@ body {
 
 .grid-column-2 {
   display: grid;
-  grid-template-rows: repeat(2, auto); 
-  grid-gap: 10px; 
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 10px;
 }
 
 .grid-row-1 {
@@ -291,7 +291,7 @@ body {
 
 .grid-row-2 {
   display: grid;
-  grid-template-columns: repeat(2, auto); 
+  grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
   padding: 10px;
 }
@@ -312,7 +312,7 @@ b-form-input {
   margin-bottom: 10px;
 }
 
-.container {
+.containerPDF {
   display: flex;
   justify-content: center;
   align-items: center;
