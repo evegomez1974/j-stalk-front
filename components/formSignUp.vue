@@ -2,8 +2,16 @@
   <form>
     <div class="containerLog">
       <h2>S'inscrire</h2>
-      <div class="selected">
-        <select name="userStatus" v-model="formUser.userStatus" required>
+      <div>
+        <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
+          name="userStatus"
+          v-model="formUser.userStatus"
+          required
+        >
           <option disabled value="" selected>Please select one</option>
           <option value="student">Etudiant</option>
           <option value="company">Entreprise</option>
@@ -15,7 +23,10 @@
         <div class="formUser">
           <div>
             <input
-              class="inputLog"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="text"
               v-model="formUser.name"
               placeholder="Nom"
@@ -24,15 +35,22 @@
           </div>
           <div>
             <input
-              class="inputLog"
+              v-if="formUser.userStatus !== 'company'"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="text"
-              v-model="formUser.firstname"
+              v-model="formUser.firstName"
               placeholder="Prénom"
             />
           </div>
           <div>
             <input
-              class="inputLog"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="number"
               v-model="formUser.phoneNumber"
               placeholder="Numero de téléphone"
@@ -41,7 +59,10 @@
           </div>
           <div>
             <input
-              class="inputLog"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="email"
               v-model="formUser.email"
               placeholder="Email"
@@ -49,7 +70,10 @@
           </div>
           <div>
             <input
-              class="inputLog"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="password"
               v-model="formUser.password"
               placeholder="Mot de passe"
@@ -59,7 +83,15 @@
         </div>
         <div v-if="formUser.userStatus === 'student'" class="formStudent">
           <div>
-            <select name="jobType" v-model="formStudent.jobType" required>
+            <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
+              name="jobType"
+              v-model="formStudent.jobType"
+              required
+            >
               <option disabled value="" selected>Please select one</option>
               <option value="Alternance">Alternance</option>
               <option value="Stage">Stage</option>
@@ -67,6 +99,10 @@
           </div>
           <div>
             <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               v-if="formStudent.jobType === 'Alternance'"
               name="jobType"
               v-model="formStudent.contractType"
@@ -78,6 +114,10 @@
           </div>
           <div>
             <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               v-if="formStudent.jobType === 'Alternance'"
               name="jobType"
               v-model="formStudent.contractLength"
@@ -88,6 +128,10 @@
               <option value="3 ans">3 ans</option>
             </select>
             <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               v-if="formStudent.jobType === 'Stage'"
               name="jobType"
               v-model="formStudent.contractLength"
@@ -101,13 +145,29 @@
             </select>
           </div>
           <div>
-            <select name="jobType" v-model="formStudent.yearSchool" required>
+            <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
+              name="jobType"
+              v-model="formStudent.yearSchool"
+              required
+            >
               <option disabled value="" selected>Please select one</option>
               <option value="1ère année">1ère année</option>
               <option value="2ème année">2ème année</option>
               <option value="3ème année">3ème année</option>
             </select>
-            <select name="jobType" v-model="formStudent.typeDegree" required>
+            <select
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
+              name="jobType"
+              v-model="formStudent.typeDegree"
+              required
+            >
               <option disabled value="" selected>Please select one</option>
               <option value="License">License</option>
               <option value="License professionnelle">
@@ -125,7 +185,10 @@
           </div>
           <div>
             <input
-              class="inputLog"
+              :class="{
+                classLog: this.formUser.userStatus === '',
+                classIns: this.formUser.userStatus !== '',
+              }"
               type="text"
               v-model="formStudent.nameSchool"
               placeholder="Nom de l'école"
@@ -143,31 +206,40 @@
             ></textarea>
           </div>
         </div>
-        <div v-if="formUser.userStatus === 'company'" classe="formCompany">
+        <div v-if="formUser.userStatus === 'company'" class="formCompany">
           <div>
             <div>
               <input
-                class="inputLog"
+                class="classIns"
                 type="text"
-                v-model="formCompany.address"
+                v-model="formCompany.aclassLogress"
                 placeholder="Adresse"
                 required
               />
             </div>
             <div>
               <input
-                class="inputLog"
+                class="classIns"
                 type="text"
                 v-model="formCompany.city"
                 placeholder="Ville"
                 required
               />
             </div>
-            <select name="department" v-model="formCompany.department" required>
+            <select
+              class="classIns"
+              name="department"
+              v-model="formCompany.department"
+              required
+            >
               <option disabled value="" selected>
                 Please select one department
               </option>
-              <option v-for="(department, index) in departments" :key="index" :value="department.id">
+              <option
+                v-for="(department, index) in departments"
+                :key="index"
+                :value="department.id"
+              >
                 {{ department.name }}
               </option>
             </select>
@@ -185,20 +257,21 @@
           </div>
         </div>
       </div>
-      <div class="btnRouter">
-        <div class="btnVal">
-          <router-link to="/Login"
-            ><button type="submit">Annuler</button></router-link
-          >
-        </div>
-        <div class="btnVal">
-          <button
-            type="submit"
-            @click="onSubmitSendData(formUser, formStudent)"
-          >
-            Inscription
-          </button>
-        </div>
+    </div>
+    <div class="btnRouter">
+      <div class="btnVal">
+        <router-link to="/Login"
+          ><button class="classBtn" type="submit">Annuler</button></router-link
+        >
+      </div>
+      <div class="btnVal">
+        <button
+          class="classBtn"
+          type="submit"
+          @click="onSubmitSenclassLogata(formUser, formStudent)"
+        >
+          Inscription
+        </button>
       </div>
     </div>
   </form>
@@ -230,7 +303,7 @@ export default {
         favorite: false,
       },
       formCompany: {
-        address: null,
+        aclassLogress: null,
         city: null,
         department: "",
         description: null,
@@ -240,7 +313,7 @@ export default {
     };
   },
   methods: {
-    onSubmitSendData(formUser, formStudent) {
+    onSubmitSenclassLogata(formUser, formStudent) {
       let requestConfig = {
         method: "PUT",
         headers: {
@@ -250,8 +323,11 @@ export default {
 
       if (formUser.userStatus === "student") {
         requestConfig.body = JSON.stringify({ ...formUser, ...formStudent });
-      }else if (formUser.userStatus === "company") {
-        requestConfig.body = JSON.stringify({...formUser, ...this.formCompany});
+      } else if (formUser.userStatus === "company") {
+        requestConfig.body = JSON.stringify({
+          ...formUser,
+          ...this.formCompany,
+        });
       }
 
       console.log("request body", requestConfig.body);
@@ -282,21 +358,35 @@ export default {
 
 
 <style scoped>
-.newSize {
-  width: 15%;
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-select {
-  border-radius: 5px;
-  padding: 5px;
+.formUser {
+  width: 100%;
 }
 
-div.btnVal {
-  width: 17%;
-  display: inline-block;
+.formStudent {
+  width: 100%;
+}
+
+.formCompany {
+  width: 100%;
+}
+
+.classIns {
+  height: 40px;
+  width: 90%;
+  margin-top: 20px;
   border-radius: 10px;
-  border-color: #4e4a55;
-  background-color: #b298dc;
-  margin-inline: 20px;
 }
+
+textarea {
+  width: 90%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
 </style>
