@@ -89,12 +89,21 @@ export default {
     },
   },
   mounted() {
-  fetch('http://127.0.0.1:8080/listJobOffers')
+
+      fetch('http://127.0.0.1:8080/listJobOffers'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
     .then(response => response.json())
     .then(data => {
 
       const jobOffers = data.jobOffers.data
       this.jobOffers = jobOffers;
+    })
+    .catch(error => {
+      console.error('Une erreur est survenue :', error);
     })
     .catch(e => {
         // console.error(e);

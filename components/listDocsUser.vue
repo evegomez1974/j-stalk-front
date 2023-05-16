@@ -9,7 +9,7 @@
             </b-card-text>
             <b-button href="#" variant="primary" @click="voirPDF(userDocs.documentID)">Voir</b-button>
             <!-- <b-button href="#" variant="primary" @click="afficheInfoDoc(userDocs.name, userDocs.docPDF)" id="seeMore" v-b-modal="'modal-center-' + this.modalRef" >Changer</b-button> -->
-            <b-button href="#" variant="primary" @click="suppDoc(userDocs.documentID)" >Supprimer</b-button>
+            <b-button href="#" variant="primary" @click="suppDoc(userDocs.documentID)" v-if="isVisibleSupp">Supprimer</b-button>
 
             <b-modal
               :id="'modal-center-' + this.modalRef"
@@ -90,6 +90,7 @@ export default {
         myValueMessage: "ok",
         modalRef: (Math.random() + 1).toString(36).substring(7),
         base64: "",
+        isVisibleSupp: true,
 
   }
   },
@@ -105,6 +106,38 @@ computed: {
 
   }
 },
+mounted () {
+    fetch('http://127.0.0.1:8080/userType'  , {
+                method: 'get',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.typeUser = data;
+                console.log(this.typeUser[0].status)
+
+            // faire le traitement des type d'users
+            if(this.typeUser[0].status === "student") {
+
+            }
+            if(this.typeUser[0].status === "school") {
+                this.isVisibleSupp = !this.isVisibleSupp
+            }
+            if(this.typeUser[0].status === "company") {
+                this.isVisibleSupp = !this.isVisibleSupp
+            }
+            if(this.typeUser[0].status === "teacher") {
+                this.isVisibleSupp = !this.isVisibleSupp
+            }
+
+            })
+            .catch(e => {
+                console.error(e);
+            })
+
+  },
 
   methods: {
     suppDoc(documentID) {

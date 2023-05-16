@@ -7,8 +7,8 @@
       <div class="listCards">
 
         <div class="cardUser">
-          <div class="infosUserProfil">
-            <infosUserProfil v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo" />
+          <div class="infosUserProfil" >
+            <infosUserProfil v-for="userInfo in listUserInfos" :key="userInfo.id" :userInfo="userInfo"/>
           </div>
         </div>
 
@@ -72,7 +72,7 @@ export default {
         isVisibleBtnAddDoc: true,
         UserlastPDF: "",
         token:"",
-        typeUser: "",
+        typeUser: [],
 
 
     };
@@ -139,51 +139,36 @@ export default {
 
     }
   },
-//    mounted: {
-//          verifTokenUser() {
-//              // verifi si user et connecté
-//              this.token = localStorage.getItem('PAC-token')
-//              console.log("le token "+this.token)
-//              if (this.token === ""){
-//                  this.$router.push('/notConnected')
-//              }else {
-//                  fetch('http://127.0.0.1:8080/userType'  , {
-//                      method: 'get',
-//                      headers: {
-//                          'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
-//                      },
-//                  })
-//                  .then(res => res.json())
-//                  .then(data => {
-//                      this.typeUser = data;
-//                      // faire le traitement des type d'users
-//                      if(this.typeUser === "student") {
 
-//                      }
-//                      if(this.typeUser === "school") {
-
-//                      }
-//                      if(this.typeUser === "company") {
-
-//                      }
-//                      if(this.typeUser === "teacher") {
-
-//                      }
-//                  })
-//                  .catch(e => {
-
-//                      console.error(e);
-//                  })
-//            }
-//          }
-
-//      },
 
     mounted () {
-        // if (this.verifCo === "erreur") {
-        //     console.log(this.verifCo);
-        //     this.$router.push('/notConnected')
-        // }
+        fetch('http://127.0.0.1:8080/userType'  , {
+                method: 'get',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.typeUser = data;
+                console.log(this.typeUser[0].status)
+            // faire le traitement des type d'users
+                if(this.typeUser[0].status === "student") {
+
+                }
+                if(this.typeUser[0].status === "school") {
+                    this.isVisibleBtnAddDoc = !this.isVisibleBtnAddDoc
+                }
+                if(this.typeUser[0].status === "company") {
+                    this.isVisibleBtnAddDoc = !this.isVisibleBtnAddDoc
+                }
+                if(this.typeUser[0].status === "teacher") {
+                    this.isVisibleBtnAddDoc = !this.isVisibleBtnAddDoc
+                }
+            })
+            .catch(e => {
+                console.error(e);
+            })
 
       fetch('http://127.0.0.1:8080/userInfos'  , {
           method: 'get',

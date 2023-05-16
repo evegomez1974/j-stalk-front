@@ -12,10 +12,10 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/">Annonces entreprises</b-nav-item>
-          <b-nav-item href="/addNewJobOffer">Créer une annonce</b-nav-item>
-          <b-nav-item href="/studentsList">Liste des élèves</b-nav-item>
-          <b-nav-item href="/companiesList">Listes des entreprises</b-nav-item>
+          <b-nav-item href="/" v-if="isVisibleEntrepise">Annonces entreprises</b-nav-item>
+          <b-nav-item href="/addNewJobOffer" v-if="isVisibleAnnonce">Créer une annonce</b-nav-item>
+          <b-nav-item href="/studentsList" v-if="isVisibleEtudiant">Liste des élèves</b-nav-item>
+          <b-nav-item href="/companiesList" v-if="isVisibleCompanie">Listes des entreprises</b-nav-item>
           <b-nav-item href="/profil">Profil</b-nav-item>
         </b-navbar-nav>
 
@@ -67,10 +67,48 @@ export default {
   name: "NavBar",
   data (){
     return {
-      token:''
+      token:'',
+      isVisibleEntrepise:true,
+      isVisibleAnnonce:true,
+      isVisibleEtudiant:true,
+      isVisibleCompanie:true,
+      typeUser:""
 
   }
   },
+  mounted () {
+    fetch('http://127.0.0.1:8080/userType'  , {
+                method: 'get',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.typeUser = data;
+                console.log(this.typeUser[0].status)
+
+            // faire le traitement des type d'users
+            if(this.typeUser[0].status === "student") {
+                this.isVisibleAnnonce = !this.isVisibleAnnonce
+            }
+            if(this.typeUser[0].status === "school") {
+                this.isVisibleAddImage = !this.isVisibleAddImage
+            }
+            if(this.typeUser[0].status === "company") {
+                this.isVisibleAddImage = !this.isVisibleAddImage
+            }
+            if(this.typeUser[0].status === "teacher") {
+                this.isVisibleAnnonce = !this.isVisibleAnnonce
+            }
+
+            })
+            .catch(e => {
+                console.error(e);
+            })
+
+  },
+
   methods: {
     decoUser() {
         this.token = localStorage.getItem('PAC-token')

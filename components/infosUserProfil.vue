@@ -4,7 +4,7 @@
       <div class="mt-4">
         <b-card>
           <img :src="base64Image" alt="Image" img-left  id="img-user" width="150" height="200">
-          <div id="ajout_de_photo">
+          <div id="ajout_de_photo" v-if="isVisibleAddImage">
             <div id="separateur_photo">
                 <label for="image">
                   <img id="add_photo_logo"
@@ -59,7 +59,8 @@ export default {
         image: document.getElementById("image"),
         base64Image: this.userInfo.pictures,
         base64:"",
-
+        isVisibleAddImage:true,
+        typeUser: []
 
   }
   },
@@ -162,7 +163,38 @@ export default {
     },
 
   },
+  mounted () {
+    fetch('http://127.0.0.1:8080/userType'  , {
+                method: 'get',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.typeUser = data;
+                console.log(this.typeUser[0].status)
 
+            // faire le traitement des type d'users
+            if(this.typeUser[0].status === "student") {
+
+            }
+            if(this.typeUser[0].status === "school") {
+                this.isVisibleAddImage = !this.isVisibleAddImage
+            }
+            if(this.typeUser[0].status === "company") {
+                this.isVisibleAddImage = !this.isVisibleAddImage
+            }
+            if(this.typeUser[0].status === "teacher") {
+                this.isVisibleAddImage = !this.isVisibleAddImage
+            }
+
+            })
+            .catch(e => {
+                console.error(e);
+            })
+
+  },
 
 
 

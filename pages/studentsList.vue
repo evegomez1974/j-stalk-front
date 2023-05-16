@@ -135,14 +135,23 @@ export default {
     },
   },
 
+
   mounted() {
-    fetch("http://127.0.0.1:8080/liststudents")
+    fetch('http://127.0.0.1:8080/liststudents'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
       .then((response) => response.json())
       .then((data) => {
         const students = data.students.data;
         // Mettre à jour la variable data avec les données reçues
         this.students = students;
       })
+      .catch(error => {
+      console.error('Une erreur est survenue :', error);
+    })
       .catch(e => {
         // console.error(e);
         // this.verifCo = "erreur"

@@ -26,7 +26,6 @@ export default {
 //https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf
   mounted () {
     if (process.browser && WebViewer) {
-      console.log(this.pdf.docPDF)
       WebViewer({
           path: '/webviewer',
           initialDoc: this.pdf.docPDF,

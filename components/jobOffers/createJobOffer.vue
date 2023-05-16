@@ -285,14 +285,17 @@ export default {
       fetch("http://127.0.0.1:8080/addJobOffers", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
-        },
+             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+           },
         body: JSON.stringify(jobOffer),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
         })
+        .catch(error => {
+      console.error('Une erreur est survenue :', error);
+    })
         .catch(e => {
         // console.error(e);
         // this.verifCo = "erreur"
@@ -327,14 +330,22 @@ export default {
     },
   },
   mounted() {
-    fetch("http://127.0.0.1:8080/listDepartments")
+      fetch('http://127.0.0.1:8080/listDepartments'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
       .then((response) => response.json())
       .then((data) => {
-        const departments = data.departments.data;
+        const departments = data;
         this.departments = this.departments.concat(
           departments.map((department) => department.name)
         );
       })
+      .catch(error => {
+      console.error('Une erreur est survenue :', error);
+    })
       .catch(e => {
         // console.error(e);
         // this.verifCo = "erreur"

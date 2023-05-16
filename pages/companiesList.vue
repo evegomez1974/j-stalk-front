@@ -82,13 +82,21 @@ export default {
     },
   },
   mounted() {
-    fetch("http://127.0.0.1:8080/listCompanies")
+      fetch('http://127.0.0.1:8080/listCompanies'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
       .then((response) => response.json())
       .then((data) => {
-        const companies = data.companies.data;
+        const companies = data;
         // Mettre à jour la variable data avec les données reçues
         this.companies = companies;
       })
+      .catch(error => {
+        console.error('Une erreur est survenue :', error);
+        })
       .catch(e => {
         // console.error(e);
         // this.verifCo = "erreur"
