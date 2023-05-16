@@ -217,12 +217,12 @@ export default {
 <style scoped>
 .pageContainer {
   height: 100%;
-  max-width: 100% !important;
+  max-width: 100%;
 }
 
 .grid2rows {
   height: 100%;
-  max-width: 100% !important;
+  max-width: 100%;
   display: grid;
   grid-template-rows: 1.5fr 0.5fr;
   grid-gap: 10px;
@@ -231,14 +231,14 @@ export default {
 .row1 {
   height: 45%;
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 0.5fr 1.5fr;
   grid-gap: 10px;
   padding: 10px;
 }
 
 .row2 {
   padding: 10px;
-  max-width: 80% !important;
+  width: 60%;
 }
 
 .column1 {
@@ -247,21 +247,20 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 100% !important;
+  width: 100%;
   border: 1px solid #6c757d;
   border-radius: 10px;
 }
 
 .column2 {
   height: 100%;
-  max-width: 80% !important;
+  width: 100%;
   display: grid;
   grid-template-rows: 0.5fr 1.5fr;
   grid-gap: 10px;
 }
 
 .subRow1 {
-  max-width: 100% !important;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 20px;
@@ -269,6 +268,7 @@ export default {
 }
 
 .subRow2 {
+  width: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -279,12 +279,11 @@ export default {
 .subItem {
   word-wrap: break-word;
   padding: 2%;
-  display: block !important;
+  display: block;
   font-size: 1em;
   font-weight: 400;
   text-align: left;
   height: auto;
-  width: 80%;
   border-top: 15px solid var(--jstalk-color-primary);
   background: white;
   border-radius: 10px;
