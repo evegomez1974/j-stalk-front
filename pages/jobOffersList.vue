@@ -73,6 +73,7 @@ export default {
       showOnlyFavorites: false,
     };
   },
+
   computed: {
     filteredJobOffers() {
       if (this.showOnlyFavorites) {
@@ -95,9 +96,11 @@ export default {
       const jobOffers = data.jobOffers.data
       this.jobOffers = jobOffers;
     })
-    .catch(error => {
-      console.error('Une erreur est survenue :', error);
-    });
+    .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
 }
 };
 </script>

@@ -125,6 +125,11 @@ computed: {
 
                 }
             })
+            .catch(e => {
+                // console.error(e);
+                // this.verifCo = "erreur"
+                this.$router.push('/notConneted')
+            })
     },
     afficheInfoDoc(name, docPDF) {
       console.log(name)
@@ -211,6 +216,11 @@ computed: {
                     return res.status();
 
                 }
+            })
+            .catch(e => {
+            // console.error(e);
+            // this.verifCo = "erreur"
+            this.$router.push('/notConneted')
             })
           }
             // Convert data to base64

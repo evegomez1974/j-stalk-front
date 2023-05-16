@@ -134,6 +134,7 @@ export default {
       }
     },
   },
+
   mounted() {
     fetch("http://127.0.0.1:8080/liststudents")
       .then((response) => response.json())
@@ -142,9 +143,11 @@ export default {
         // Mettre à jour la variable data avec les données reçues
         this.students = students;
       })
-      .catch((error) => {
-        console.error("Une erreur est survenue :", error);
-      });
+      .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
   },
   methods: {
     changeCardFavorite(student, newValue) {

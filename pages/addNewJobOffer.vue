@@ -16,6 +16,8 @@ import CreateJobOffer from "../components/jobOffers/createJobOffer";
 export default {
     name: "addNewJobOffer",
     components: { NavBar, CreateJobOffer },
+
+
 }
 </script>
 

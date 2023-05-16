@@ -55,12 +55,13 @@ import infosUserProfil from "../components/infosUserProfil";
 import listDocsUser from "../components/listDocsUser";
 import addDocsVue from "../components/addDocs";
 import contact from "../components/contact";
-
+import router from '../.nuxt/router'
 
 export default {
     name: "profil",
     components: { NavBar, infosUserProfil, listDocsUser, pdfViewer, addDocsVue, contact },
     data() {
+
     return {
 
         listUserInfos: [ ],
@@ -70,15 +71,12 @@ export default {
         isVisibleAddDoc: false,
         isVisibleBtnAddDoc: true,
         UserlastPDF: "",
+        token:"",
+        typeUser: "",
 
 
     };
   },
-  computed: {
-
-  },
-
-
   methods: {
     btnAddDoc() {
       this.isVisibleAddDoc = true
@@ -103,8 +101,11 @@ export default {
         // console.log(data)
         // traitement
       })
+
       .catch(e => {
-        console.error(e);
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
       })
 
       }
@@ -127,28 +128,62 @@ export default {
         this.userPDF = data;
         console.log("chargement réussi " + this.userPDF)
         return this.userPDF
-      //   const blobData = new Uint8Array(data);
 
-      // // Créer une URL blob à partir du tableau d'octets
-      // const blobUrl = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
-      //   let reader = new FileReader();
-      //   //reader.readAsDataURL(blobUrl); // convertit le blob en base64 et appelle onload
-      // // Assigner l'URL blob à la propriété documentUrl
-
-      // //L'ajouter au localstorage ?
-      // console.log(blobUrl)
-      // this.userPDF = blobUrl;
-        // traitement
       })
        .catch(e => {
-         console.error(e);
+        //  console.error(e);
+        //  this.verifCo = "erreur"
+        this.$router.push('/notConneted')
          } )
       }
 
     }
   },
+//    mounted: {
+//          verifTokenUser() {
+//              // verifi si user et connecté
+//              this.token = localStorage.getItem('PAC-token')
+//              console.log("le token "+this.token)
+//              if (this.token === ""){
+//                  this.$router.push('/notConnected')
+//              }else {
+//                  fetch('http://127.0.0.1:8080/userType'  , {
+//                      method: 'get',
+//                      headers: {
+//                          'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+//                      },
+//                  })
+//                  .then(res => res.json())
+//                  .then(data => {
+//                      this.typeUser = data;
+//                      // faire le traitement des type d'users
+//                      if(this.typeUser === "student") {
+
+//                      }
+//                      if(this.typeUser === "school") {
+
+//                      }
+//                      if(this.typeUser === "company") {
+
+//                      }
+//                      if(this.typeUser === "teacher") {
+
+//                      }
+//                  })
+//                  .catch(e => {
+
+//                      console.error(e);
+//                  })
+//            }
+//          }
+
+//      },
 
     mounted () {
+        // if (this.verifCo === "erreur") {
+        //     console.log(this.verifCo);
+        //     this.$router.push('/notConnected')
+        // }
 
       fetch('http://127.0.0.1:8080/userInfos'  , {
           method: 'get',
@@ -163,7 +198,9 @@ export default {
         // traitement
       })
       .catch(e => {
-        console.error(e);
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
       }),
 
 
@@ -180,7 +217,9 @@ export default {
         // traitement
       })
       .catch(e => {
-        console.error(e);
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
       })
 
        fetch('http://127.0.0.1:8080/userLastDocs'  , {
@@ -196,7 +235,9 @@ export default {
          // traitement
        })
        .catch(e => {
-         console.error(e);
+        //  console.error(e);
+        //  this.verifCo = "erreur"
+         this.$router.push('/notConneted')
        })
 
 
