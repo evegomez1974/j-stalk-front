@@ -142,7 +142,7 @@ export default {
 </script>
 
 
-<style lang="scss" >
+<style lang="scss" scoped>
 form {
   width: 100%;
   display: flex;

@@ -166,3 +166,65 @@ export default {
 };
 </script>
 
+<style lang="scss">
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.containerLog {
+  width: 60%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.classLog {
+  height: 40px;
+  width: 30%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.forgetMDP {
+  height: 40px;
+  text-align: right !important;
+  float: right;
+}
+
+#lienMDP {
+  margin-top: 10px;
+  padding-right: 35%;
+  background-color: transparent;
+  border-color: transparent;
+  font-style: italic;
+  color: white;
+}
+
+#lienMDP:hover {
+  color: var(--jstalk-color-secondary) !important;
+}
+
+.btnRouter {
+  margin-top: 20px;
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btnVal {
+  width: 30%;
+  border-radius: 10px;
+  border-color: #4e4a55;
+  background-color: #b298dc;
+}
+
+.classBtn {
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+</style>

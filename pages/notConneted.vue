@@ -39,7 +39,7 @@
   </script>
 
 
-  <style>
+  <style lang="<style lang="scss" scoped>
 
   .notConnected {
     background-color: rgb(176, 176, 176);

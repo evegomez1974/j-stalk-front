@@ -97,7 +97,7 @@
   });
   </script>
 
-  <style lang="scss">
+  <style lang="scss" scoped>
 
 .pageDeco {
     text-align: center;
