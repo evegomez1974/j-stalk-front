@@ -14,7 +14,7 @@
       </button>
     </div>
     <div class="card-body">
-	  <h6 class="card-subtitle mb-2 text-muted">{{ yearSchool }}</h6>
+	  <h6 class="card-subtitle mb-2 text-muted">{{ yearSchool }} {{ typeDegree }}</h6>
       <h6 class="card-subtitle mb-2 text-muted">{{ nameSchool }} </h6>
       <!-- <h6 class="card-subtitle mb-2 text-muted">{{ nameSchool }} ({{ city }})</h6> -->
       <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
@@ -45,6 +45,7 @@ export default {
     nameSchool: String,
     city: String,
     yearSchool: String,
+    typeDegree: String,
     jobType : String,
     contractType : String,
     description: String,

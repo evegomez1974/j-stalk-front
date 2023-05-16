@@ -44,6 +44,7 @@
         :nameSchool="student.nameSchool"
         :city="student.city"
         :yearSchool="student.yearSchool"
+        :typeDegree="student.typeDegree"
         :jobType="student.jobType"
         :contractType="student.contractType"
         :description="student.description"
@@ -69,59 +70,6 @@ export default {
   data() {
     return {
       students: null,
-      // [
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "Audibert",
-        //   firstName: "Jeannot",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "2ème année de Master",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-        // {
-        //   name: "McHenzy",
-        //   firstName: "John",
-        //   nameSchool: "Ynov",
-        //   city: "Aix en Provence",
-        //   yearSchool: "3ème année de bachelor",
-        //   description:
-        //     "Actuellement étudiant en 3ème année d’école d’ingénieur en PCSI, je recherche activement une entreprise, à partir d’octobre. N’hésitez pas à visiter mon profil.",
-        //   favorite: true,
-        // },
-      // ],
-
       showOnlyFavorites: false,
     };
   },

@@ -268,7 +268,7 @@ body {
 }
 
 .row-1 {
-  height: 50%;
+  height: 60%;
   padding: 10px;
   border: 1px solid #6c757d;
   border-radius: 10px;

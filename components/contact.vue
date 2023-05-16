@@ -10,16 +10,16 @@
       <div class="mt-4" v-if="isVisible">
         <div class="zoneInfosUser">
           <div class="zoneUser">
-              <b-badge class="badge" variant="light">{{
+              <p class="subContact" variant="light">{{
                 userInfo.email
-              }}</b-badge>
+              }}</p>
          
           </div>
           <div class="zoneUser">
        
-              <b-badge class="badge" variant="light">{{
+              <p class="subContact" variant="light">{{
                 userInfo.phoneNumber
-              }}</b-badge>
+              }}</p>
            
           </div>
         </div>
@@ -69,16 +69,20 @@ export default {
   justify-self: center;
 }
 
-.badge {
+.subContact {
+  word-wrap: break-word;
+  padding: 2%;
+  display: block !important;
   font-size: 1em;
   font-weight: 400;
   text-align: left;
-  padding-left: 5%;
-  padding-bottom: 0;
-  height: 150%;
+  height: auto;
   width: 100%;
-  border-top: 10px solid var(--jstalk-color-primary);
+  border-top: 15px solid var(--jstalk-color-primary);
+  background: white;
+  border-radius: 10px;
 }
+
 
 .image {
   display: none;

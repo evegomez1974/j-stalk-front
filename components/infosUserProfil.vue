@@ -33,33 +33,35 @@
             <h4>{{ userInfo.firstName }} {{ userInfo.name }}</h4>
           </div>
           <div class="subRow2">
-            <div class="subItem">
-              <b-badge class="badge" variant="light">{{
+            <div>
+              <p class="subItem" variant="light">{{
                 userInfo.yearSchool
-              }}</b-badge>
+              }} {{
+                userInfo.typeDegree
+              }}</p>
             </div>
-            <div class="subItem">
-              <b-badge class="badge" variant="light">{{
+            <div>
+              <p class="subItem" variant="light">{{
                 userInfo.nameSchool
-              }}</b-badge>
+              }}</p>
             </div>
-            <div class="subItem">
-              <b-badge class="badge" variant="light">{{
+            <div>
+              <b-badge class="subItem" variant="light">{{
                 userInfo.jobType
               }}</b-badge>
             </div>
-            <div class="subItem">
-              <b-badge class="badge" variant="light">{{
+            <div>
+              <p class="subItem" variant="light">{{
                 userInfo.contractType
-              }}</b-badge>
+              }}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="row2">
-        <b-badge class="badge" variant="light">{{
+        <p class="subItem" variant="light">{{
           userInfo.description
-        }}</b-badge>
+        }}</p>
       </div>
     </div>
   </div>
@@ -273,21 +275,19 @@ export default {
   grid-gap: 10px;
   padding: 10px;
 }
-.subItem {
-  border-radius: 4%;
-}
 
-.badge {
+.subItem {
   word-wrap: break-word;
+  padding: 2%;
   display: block !important;
   font-size: 1em;
   font-weight: 400;
   text-align: left;
-  padding-left: 5%;
-  padding-bottom: 0;
   height: auto;
-  width: 100% !important;
-  border-top: 10px solid var(--jstalk-color-primary);
+  width: 80%;
+  border-top: 15px solid var(--jstalk-color-primary);
+  background: white;
+  border-radius: 10px;
 }
 
 h4 {
@@ -302,5 +302,9 @@ h4 {
   height: 200px;
   margin-bottom: 4%;
   border-radius: 10px;
+}
+
+#ajout_de_photo {
+  text-align-last: center;
 }
 </style>
