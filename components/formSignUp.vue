@@ -337,15 +337,13 @@ export default {
         .then((data) => {
           console.log(data.message);
         })
-        .catch(e => {
-        // console.error(e);
-        // this.verifCo = "erreur"
-        this.$router.push('/notConneted')
-      })
+        .catch((error) => {
+          console.error("Une erreur est survenue :", error);
+        });
     },
   },
   mounted() {
-    fetch("http://127.0.0.1:8080/listDepartments")
+    fetch("http://127.0.0.1:8080/listDepartmentsSignUp")
       .then((response) => response.json())
       .then((data) => {
         const departments = data.departments.data;

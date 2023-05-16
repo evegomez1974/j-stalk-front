@@ -102,8 +102,37 @@ export default {
           })
           .then((data) => {
             localStorage.setItem("PAC-token", data.token);
-            console.log(data.token);
             this.$router.push("/");
+
+            // fetch('http://127.0.0.1:8080/userType'  , {
+            //     method: 'get',
+            //     headers: {
+            //         'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+            //     },
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     this.typeUser = data;
+            //     console.log(this.typeUser[0].status)
+
+            // // faire le traitement des type d'users
+            // if(this.typeUser[0].status === "student") {
+            //     this.$router.push("/");
+            // }
+            // if(this.typeUser[0].status === "school") {
+            //     this.$router.push("/studentsList");
+            // }
+            // if(this.typeUser[0].status === "company") {
+            //     this.$router.push("/studentsList");
+            // }
+            // if(this.typeUser[0].status === "teacher") {
+            //     this.$router.push("/studentsList");
+            // }
+
+            // })
+            // .catch(e => {
+            //     console.error(e);
+            // })
             //router.push('/cards');
           });
       }
