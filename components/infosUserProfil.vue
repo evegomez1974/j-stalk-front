@@ -266,12 +266,12 @@ export default {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   grid-gap: 10px;
-  background: #1321a3;
+ /* background: #1321a3;*/
   padding: 10px;
 }
 
 .row2 {
-  background: #1321a3;
+ /* background: #1321a3;*/
   padding: 10px;
 }
 
@@ -282,7 +282,7 @@ export default {
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  background: #13a354;
+  /*background: #13a354;*/
 }
 
 .column2 {
@@ -290,7 +290,7 @@ export default {
   display: grid;
   grid-template-rows: 0.5fr 1.5fr;
   grid-gap: 10px;
-  background-color: #13a354;
+ /* background-color: #13a354;*/
 }
 
 .subRow1 {
@@ -298,7 +298,7 @@ export default {
   padding-right: 10px;
   padding-top: 20px;
   padding-bottom: 0px;
-  background-color: #a3135b;
+/*  background-color: #a3135b;*/
 }
 
 .subRow2 {
@@ -307,13 +307,13 @@ export default {
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
   padding: 10px;
-  background-color: #a3135b;
+ /* background-color: #a3135b;*/
 }
 .subItem {
   /*  border-top: 10px solid var(--jstalk-color-primary);*/
   border-radius: 4%;
   /* padding: 10px;*/
-  background-color: #c42d12;
+/*/  background-color: #c42d12;*/
 }
 
 .badge {
@@ -335,89 +335,16 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  /*width: 200px; /* Taille fixe du rectangle */
- /* height: 200px; /* Taille fixe du rectangle */
-  background-color: #ccc; /* Couleur de fond du rectangle */
+  width: 200px; /* Taille fixe du rectangle */
+  height: 200px; /* Taille fixe du rectangle */
+  /*background-color: #ccc; /* Couleur de fond du rectangle */
   margin-bottom: 4%;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 #ajout_de_photo {
   background: peru;
 }
 
-/*img {
-  height: 20%;
-  width: 100%;
-}
-*/
-
-/*__________________________________________*/
-
-/*.zoneInfosUser {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-}
-
-.zoneUser {
-  border: 1px solid black;
-  margin: 10px;
-}
-
-.image {
-  display: none;
-}
-
-.add-photo {
-  margin: 10px;
-}
-
-.contain-photo {
-  border: 1px solid blue;
-  border-radius: 80px;
-  height: 60px;
-  width: 90px;
-  margin-left: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 3px;
-}
-
-#separateur_photo {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.separateur {
-  width: 25%;
-  height: 2px;
-  background: blue;
-}
-
-#add_photo_logo {
-  width: 8vh;
-  height: auto;
-}
-
-#add_photo_container {
-  width: 14vh;
-  height: auto;
-  padding: 1vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0.4vh solid blue;
-  border-radius: 11vh;
-}
-
-#ajout_de_photo {
-  width: 90%;
-  margin: 0 5%;
-  height: min-content;
-  display: flex;
-  flex-direction: column;
-}*/
 </style>
