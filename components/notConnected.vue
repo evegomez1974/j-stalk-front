@@ -3,20 +3,25 @@
       <div class="containerForm">
         <img src="../static/j-stalk-logo-texte.png" width="350"/>
       </div>
+      <form @submit.prevent="login">
+            <div class="containerLog">
+            <h2>Vous n'êtes pas connecté</h2>
 
-      <div class="pageDeco">
-            <div class="texteDeco">
-                <h2>Vous n'êtes pas connecté</h2>
             </div>
             <div class="btnRouter">
-          <div class="btnVal">
-            <router-link to="/Login"><button type="submit">Se connecter</button></router-link>
-          </div>
-          <div class="btnVal">
-            <router-link to="/SignUp"><button type="submit">Inscription</button></router-link>
-          </div>
-        </div>
-        </div>
+            <div class="btnVal">
+                <router-link to="/SignUp"
+                ><button class="classBtn" type="submit">
+                    Inscription
+                </button></router-link
+                >
+            </div>
+            <div class="btnVal">
+                <router-link to="/Login"><button type="submit" class="classBtn">Se connecter</button></router-link>
+            </div>
+            </div>
+        </form>
+
     </div>
   </template>
 
@@ -98,6 +103,46 @@
     text-align: center;
 }
 
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.containerLog {
+  width: 60%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.classLog {
+  height: 40px;
+  width: 30%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.forgetMDP {
+  height: 40px;
+  text-align: right !important;
+  float: right;
+}
+
+#lienMDP {
+  margin-top: 10px;
+  padding-right: 35%;
+  background-color: transparent;
+  border-color: transparent;
+  font-style: italic;
+  color: white;
+}
+
+#lienMDP:hover {
+  color: var(--jstalk-color-secondary) !important;
+}
+
 .btnRouter {
   margin-top: 20px;
   width: 40%;
@@ -112,14 +157,11 @@
   background-color: #b298dc;
 }
 
-// div.btnVal {
-//   width: 17%;
-//   display: inline-block;
-//   border-radius: 10px;
-//   border-color: #4e4a55 ;
-//   background-color: #b298dc ;
-//   margin-inline: 20px;
-// }
+.classBtn {
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+}
 
 
   html {
@@ -127,7 +169,7 @@
   }
 
   #auth {
-    background: linear-gradient(rgba(0, 0, 0, 0.815), rgba(0, 0, 0, 0.815)) !important;
+    background: linear-gradient(#343a40 , rgba(68, 67, 67, 0.815)) !important;
     //background-color: blue !important;
     color: white !important;
     height: 100vh;
