@@ -1,7 +1,9 @@
 <template>
   <div id="auth">
-    <img id="titleLog" src="../static/j-stalk-logo-texte.png" />
-    <div>
+    <div class="containerForm">
+      <img src="../static/j-stalk-logo-texte.png" width="350"/>
+    </div>    
+    <div class="containerForm">
       <FormSignUp />
     </div>
   </div>
@@ -11,7 +13,6 @@
 <script>
 import { defineComponent } from "vue";
 import "../assets/css/themes.scss";
-import "../assets/css/Login.scss";
 import FormSignUp from "../components/formSignUp";
 
 export default defineComponent({
@@ -25,8 +26,32 @@ export default defineComponent({
 });
 </script>
 
+<style lang="scss">
+html {
+  height: 100%;
+}
 
-<style>
+#auth {
+  background: linear-gradient(rgba(0, 0, 0, 0.815), rgba(0, 0, 0, 0.815)) !important;
+  //background-color: blue !important;
+  color: white !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
 </style>
+
+
 
 
