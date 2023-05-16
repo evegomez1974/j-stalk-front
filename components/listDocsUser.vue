@@ -7,23 +7,21 @@
         </b-card-header>
 
         <b-card-text>
-        
-            <b-button
-              href="#"
-              class="btn-popup"
-              variant="primary"
-              @click="voirPDF(userDocs.documentID)"
-              >Voir</b-button
-            >
-      
           <b-button
             href="#"
             class="btn-popup"
-            variant="primary"
+            variant="secondary"
+            @click="voirPDF(userDocs.documentID)"
+            >Voir</b-button
+          >
+
+          <b-button
+            href="#"
+            class="btn-popup"
+            variant="secondary"
             @click="suppDoc(userDocs.documentID)"
             >Supprimer</b-button
           >
-       
 
           <!-- <b-button href="#" variant="primary" @click="afficheInfoDoc(userDocs.name, userDocs.docPDF)" id="seeMore" v-b-modal="'modal-center-' + this.modalRef" >Changer</b-button> -->
         </b-card-text>
@@ -224,14 +222,12 @@ export default {
 <style scoped>
 .cardDocsUser {
   width: 80%;
-  background: maroon;
 }
 
 .card {
   background-color: white !important;
   padding: 0 !important;
   width: 100% !important;
-  border: 2px solid var(--jstalk-color-primary);
   justify-content: center;
 }
 
@@ -255,20 +251,5 @@ export default {
 
 .btn-popup {
   width: 40% !important;
-
 }
-
-/*.card-body {
-    border-top: 5px solid var(--jstalk-color-primary);
-    border: 5px solid var(--jstalk-color-primary);
-}*/
-
-/*.card-title {
-  background: var(--jstalk-color-primary);
-  color: var(--jstalk-color-dark);
-  flex: 1 1;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-}*/
 </style>

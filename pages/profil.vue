@@ -1,25 +1,5 @@
 <template>
   <div>
-    <!-- <div id="app">
-      <div class="grid">
-        <div class="left-column">
-          <div class="row-1">hello</div>
-          <div class="row-2">
-            <div class="grid-row-2">
-              <div class="grid-row-2-item">Item 1</div>
-              <div class="grid-row-2-item">Item 2</div>
-              <div class="grid-row-2-item">Item 3</div>
-              <div class="grid-row-2-item">Item 4</div>
-              <div class="grid-row-2-item">Item 5</div>
-            </div>
-          </div>
-        </div>
-        <div class="right-column">texto</div>
-      </div>
-    </div> -->
-
-    <!-- __________________________________ -->
-
     <div>
       <NavBar />
     </div>
@@ -35,83 +15,47 @@
             />
           </div>
           <div class="row-2">
-            <div class="grid-row-2">
-              <listDocsUser
-                class="grid-row-2-item"
-                v-for="userDocs in listUserDocs"
-                :key="userDocs.id"
-                :userDocs="userDocs"
-                @message-sent="updateMessage"
-              />
+            <div class="grid-column-2">
+              <div div class="grid-row-1">
+                <div class="btnAddDocs" v-if="isVisibleAddDoc === false">
+                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc"
+                    >Ajouter un document</b-button
+                  >
+                </div>
+                <div class="btnAddDocs" v-else>
+                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc"
+                    >Fermer</b-button
+                  >
+                </div>
+                <div class="addDocs" v-if="this.isVisibleAddDoc === true">
+                  <addDocsVue @message-sent-pdf="updateMessagePdf" />
+                </div>
+              </div>
+
+              <div class="grid-row-2">
+                <listDocsUser
+                  class="grid-row-2-item"
+                  v-for="userDocs in listUserDocs"
+                  :key="userDocs.id"
+                  :userDocs="userDocs"
+                  @message-sent="updateMessage"
+                />
+              </div>
             </div>
           </div>
         </div>
         <div class="right-column">
+          <contact
+            v-for="userInfo in listUserInfos"
+            :key="userInfo.id"
+            :userInfo="userInfo"
+          />
           <div class="container" v-if="userPDF[0]">
             <pdfViewer :pdf="userPDF[0]"> </pdfViewer>
           </div>
         </div>
       </div>
     </div>
-
-
-
-    <!-- ______________________________________ -->
-
-    <!-- fait -->
-    <!-- <div class="listCards">
-      <div class="cardUser">
-        <div class="infosUserProfil">
-          <infosUserProfil
-            v-for="userInfo in listUserInfos"
-            :key="userInfo.id"
-            :userInfo="userInfo"
-          />
-        </div>
-      </div>
-
-
-      <div class="cardUser">
-        <div class="contact">
-          <contact
-            v-for="userInfo in listUserInfos"
-            :key="userInfo.id"
-            :userInfo="userInfo"
-          />
-        </div>
-      </div> -->
-
-<!-- fait -->
-      <!-- <div class="cardUser">
-        <div class="container" v-if="userPDF[0]">
-          <pdfViewer :pdf="userPDF[0]"> </pdfViewer>
-        </div>
-      </div>
-
-      <div class="cardUser">
-        <div class="btnAddDocs" v-if="isVisibleBtnAddDoc">
-          <button @click="btnAddDoc">+</button>
-        </div>
-      </div>
-
-      <div class="cardUser">
-        <div class="addDocs" v-if="isVisibleAddDoc">
-          <addDocsVue @message-sent-pdf="updateMessagePdf" />
-        </div>
-      </div> -->
-
-<!-- fait -->
-      <!-- <div class="cardUser">
-        <div class="listDocsUser">
-          <listDocsUser
-            v-for="userDocs in listUserDocs"
-            :key="userDocs.id"
-            :userDocs="userDocs"
-            @message-sent="updateMessage"
-          />
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -141,17 +85,12 @@ export default {
       message: "erreur",
       userPDF: [],
       isVisibleAddDoc: false,
-      isVisibleBtnAddDoc: true,
       UserlastPDF: "",
     };
   },
   computed: {},
 
   methods: {
-    btnAddDoc() {
-      this.isVisibleAddDoc = true;
-      this.isVisibleBtnAddDoc = false;
-    },
     updateMessagePdf(newValuePDF) {
       console.log(newValuePDF);
       if (newValuePDF == "pdfValide") {
@@ -267,42 +206,59 @@ export default {
 
 
 <style>
+@font-face {
+  font-family: "Candara";
+  src: local("Candara"), url("../assets/fonts/candara.ttf") format("truetype");
+}
+
+body {
+  background-color: #343a4011;
+  font-family: "Candara";
+}
+
 .grid {
   display: grid;
   max-width: 100%;
-  grid-template-columns: 1fr 1fr; /* 2 colonnes de largeur égale */
-  grid-gap: 2%
+  grid-template-columns: repeat(2, minmax(0, 1fr));  grid-gap: 2%;
 }
 
 .left-column,
 .right-column {
   padding: 10px;
-  background-color: #837b7b;
 }
 
 .row-1 {
-  height: 45%;
+  height: 50%;
   padding: 10px;
-  background-color: #347d9e;
+  border: 1px solid #6c757d;
+  border-radius: 10px;
 }
 
 .row-2 {
+  margin-top: 40px;
   padding: 10px;
-  background-color: #bebc1e;
+}
+
+.grid-column-2 {
+  display: grid;
+  grid-template-rows: repeat(2, auto); 
+  grid-gap: 10px; 
+}
+
+.grid-row-1 {
+  padding: 10px;
 }
 
 .grid-row-2 {
   display: grid;
-  grid-template-columns: repeat(2, auto); /* 2 colonnes de largeur égale */
-  grid-gap: 10px; /* Espacement entre les éléments de la grille */
+  grid-template-columns: repeat(2, auto); 
+  grid-gap: 10px;
+  padding: 10px;
 }
 
 .grid-row-2-item {
   justify-self: center;
-  background: orange;
 }
-
-/*_____________________________________________*/
 
 .image {
   display: none;
@@ -312,35 +268,20 @@ export default {
   margin: 10px;
 }
 
-.contain-photo {
-  border: 1px solid blue;
-  border-radius: 80px;
-  height: 60px;
-  width: 90px;
-  margin-left: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 3px;
-}
-
 b-form-input {
   margin-bottom: 10px;
 }
 
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 20px;
 }
 
 #webViewer {
-  height: 100%;
-  width: 50%;
+  height: 80vh;
+  width: 45vw;
 }
 
 .title {
@@ -375,14 +316,6 @@ b-form-input {
 .cardUser {
   height: 350px;
 }
-
-/*
-.cvUser {
-  margin-top: 20px;
-  grid-column: 2 / 2;
-  grid-row: 1;
-
-} */
 
 .listDocsUser {
   margin-left: 20px;

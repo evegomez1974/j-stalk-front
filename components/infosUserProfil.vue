@@ -1,51 +1,32 @@
 <template>
   <div class="pageContainer">
-    <!-- <div class="grid2rows">
-      <div class="row1">
-        <div class="column1"></div>
-        <div class="column2">
-          <div class="subRow1"></div>
-          <div class="subRow2">
-            <div class="subItem"></div>
-            <div class="subItem"></div>
-            <div class="subItem"></div>
-            <div class="subItem"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row2"></div>
-    </div> -->
-
-    <!-- __________________________________ -->
 
     <div class="grid2rows">
       <div class="row1">
         <div class="column1">
           <div class="profilPicture">
-    <img
-      :src="base64Image"
-      alt="Image"
-      img-left
-      id="img-user"
-      style="max-width: 100%; max-height: 100%; object-fit: contain;"
-    />
+            <img
+              :src="base64Image"
+              alt="Image"
+              img-left
+              id="img-user"
+              style="max-width: 100%; max-height: 100%; object-fit: contain"
+            />
           </div>
           <div id="ajout_de_photo">
-            <div id="separateur_photo">
-              <label for="image">
-                <img
-                  id="add_photo_logo"
-                  src="../assets/img/add-camera.png"
-                  alt="appareil photo"
-                />
-              </label>
-              <input
-                id="image"
-                v-on:change="onFileChange"
-                type="file"
-                class="image"
+            <label for="image">
+              <img
+                id="add_photo_logo"
+                src="../assets/img/add-camera.png"
+                alt="appareil photo"
               />
-            </div>
+            </label>
+            <input
+              id="image"
+              v-on:change="onFileChange"
+              type="file"
+              class="image"
+            />
           </div>
         </div>
         <div class="column2">
@@ -82,57 +63,6 @@
         }}</b-badge>
       </div>
     </div>
-
-    <!-- <div>
-      <div class="mt-4">
-        <b-card>
-          <img
-            :src="base64Image"
-            alt="Image"
-            img-left
-            id="img-user"
-            width="150"
-            height="200"
-          />
-          <div id="ajout_de_photo">
-            <div id="separateur_photo">
-              <label for="image">
-                <img
-                  id="add_photo_logo"
-                  src="../assets/img/add-camera.png"
-                  alt="appareil photo"
-                />
-              </label>
-              <input
-                id="image"
-                v-on:change="onFileChange"
-                type="file"
-                class="image"
-              />
-            </div>
-          </div>
-
-          <h4>{{ userInfo.firstName }} {{ userInfo.name }}</h4>
-          <b-card-text class="zoneInfosUser">
-            <div class="zoneUser">
-              <b-label>{{ userInfo.nameSchool }}</b-label>
-            </div>
-            <div class="zoneUser">
-              <b-label>{{ userInfo.contractType }}</b-label>
-            </div>
-            <div class="zoneUser">
-              <b-label>{{ userInfo.jobType }}</b-label>
-            </div>
-            <div class="zoneUser">
-              <b-label>{{ userInfo.yearSchool }}</b-label>
-            </div>
-          </b-card-text>
-          <div>
-            <b-label>{{ userInfo.description }}</b-label>
-          </div>
-        </b-card>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -250,29 +180,28 @@ export default {
 <style scoped>
 .pageContainer {
   height: 100%;
-  width: 100%;
+  max-width: 100% !important;
 }
 
 .grid2rows {
   height: 100%;
-  width: 100%;
+  max-width: 100% !important;
   display: grid;
   grid-template-rows: 1.5fr 0.5fr;
   grid-gap: 10px;
 }
 
 .row1 {
-  height: 100%;
+  height: 45%;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   grid-gap: 10px;
- /* background: #1321a3;*/
   padding: 10px;
 }
 
 .row2 {
- /* background: #1321a3;*/
   padding: 10px;
+  max-width: 80% !important;
 }
 
 .column1 {
@@ -281,24 +210,25 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 100%;
-  /*background: #13a354;*/
+  max-width: 100% !important;
+  border: 1px solid #6c757d;
+  border-radius: 10px
 }
 
 .column2 {
   height: 100%;
+  max-width: 80% !important;
   display: grid;
   grid-template-rows: 0.5fr 1.5fr;
   grid-gap: 10px;
- /* background-color: #13a354;*/
 }
 
 .subRow1 {
+  max-width: 100% !important;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 20px;
   padding-bottom: 0px;
-/*  background-color: #a3135b;*/
 }
 
 .subRow2 {
@@ -307,24 +237,22 @@ export default {
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
   padding: 10px;
- /* background-color: #a3135b;*/
 }
 .subItem {
-  /*  border-top: 10px solid var(--jstalk-color-primary);*/
   border-radius: 4%;
-  /* padding: 10px;*/
-/*/  background-color: #c42d12;*/
 }
 
 .badge {
+  word-wrap: break-word; display: block !important;
   font-size: 1em;
   font-weight: 400;
   text-align: left;
   padding-left: 5%;
   padding-bottom: 0;
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: 100% !important;
   border-top: 10px solid var(--jstalk-color-primary);
+
 }
 
 h4 {
@@ -335,16 +263,9 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px; /* Taille fixe du rectangle */
-  height: 200px; /* Taille fixe du rectangle */
-  /*background-color: #ccc; /* Couleur de fond du rectangle */
+  width: 200px; 
+  height: 200px; 
   margin-bottom: 4%;
-  border: 2px solid black;
   border-radius: 10px;
 }
-
-#ajout_de_photo {
-  background: peru;
-}
-
 </style>
