@@ -94,14 +94,32 @@
 
   <style lang="scss">
 
-div.btnVal {
-  width: 17%;
-  display: inline-block;
-  border-radius: 10px;
-  border-color: #4e4a55 ;
-  background-color: #b298dc ;
-  margin-inline: 20px;
+.pageDeco {
+    text-align: center;
 }
+
+.btnRouter {
+  margin-top: 20px;
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btnVal {
+  width: 30%;
+  border-radius: 10px;
+  border-color: #4e4a55;
+  background-color: #b298dc;
+}
+
+// div.btnVal {
+//   width: 17%;
+//   display: inline-block;
+//   border-radius: 10px;
+//   border-color: #4e4a55 ;
+//   background-color: #b298dc ;
+//   margin-inline: 20px;
+// }
 
 
   html {
@@ -128,61 +146,7 @@ div.btnVal {
     margin-bottom: 30px;
   }
 
-  /*.IMG {
-    width: 20%;
-  }*/
 
-  /*.inputLog {
-   // margin: auto;
-    height: 40px;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 20px;
-    display: flex;
-  }*/
-
-  /*.labelOublie {
-    color: var(--jstalk-color-dark);
-   // text-align: right !important;
-    //float: right;
-    font-style: italic;
-   // width: 100%;
-  }
-
-  .labelOublie:hover {
-    color: var(--jstalk-color-secondary);
-    text-align: right !important;
-    float: right;
-    font-style: italic;
-  }*/
-
-  /*.btnRouter {
-    margin: 0 5%;
-    text-align: center;
-    margin-top: 30px;
-  }*/
-  /*
-  button {
-    display: inline-block;
-    border-color: transparent;
-    background-color: transparent;
-  }*/
-
-  /*.EnterBtn {
-    margin-top: 50px;
-    background-color: hsla(160, 100%, 37%, 1);
-    border: 1px solid hsla(160, 100%, 37%, 1);
-    border-radius: 10px;
-    height: 40px;
-    width: 10%;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: white;
-  }
-
-  .EnterBtn:hover {
-    background-color: rgb(0, 59, 40);
-  }*/
   </style>
 
 
