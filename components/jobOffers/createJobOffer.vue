@@ -282,10 +282,13 @@ export default {
   },
   methods: {
     onSubmitSendData(jobOffer) {
+      console.log(jobOffer)
+
       fetch("http://127.0.0.1:8080/addJobOffers", {
         method: "PUT",
         headers: {
-             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+             'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`,
+             'Content-Type': 'application/json'
            },
         body: JSON.stringify(jobOffer),
       })
@@ -379,6 +382,10 @@ a:hover {
 .card {
   width: 50%;
   background-color: white;
+}
+
+form {
+  display: block !important;
 }
 
 .card-title {

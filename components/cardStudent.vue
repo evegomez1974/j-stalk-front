@@ -19,6 +19,7 @@
       <!-- <h6 class="card-subtitle mb-2 text-muted">{{ nameSchool }} ({{ city }})</h6> -->
       <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
       <b-badge v-if="jobType === 'Alternance'" variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
+      <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
 
       <p class="card-text">{{ truncatedDescription }}</p>
 
@@ -48,6 +49,7 @@ export default {
     typeDegree: String,
     jobType : String,
     contractType : String,
+    contractLength : String,
     description: String,
     favorite: Boolean,
   },

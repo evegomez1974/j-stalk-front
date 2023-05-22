@@ -20,7 +20,7 @@
         {{ city }}, {{ department }}
       </h6>
       <h6 class="card-subtitle mb-2 text-muted">
-        {{ formaterNumeroTelephone }}
+        0{{ formaterNumeroTelephone }}
       </h6>
       <h6 class="card-subtitle mb-2 text-muted">{{ email }}</h6>
 

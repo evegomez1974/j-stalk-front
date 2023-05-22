@@ -260,7 +260,7 @@
     </div>
     <div class="btnRouter">
       <div class="btnVal">
-        <router-link to="/"
+        <router-link to="/login"
           ><button class="classBtn" type="submit">Annuler</button></router-link
         >
       </div>

@@ -47,6 +47,7 @@
         :typeDegree="student.typeDegree"
         :jobType="student.jobType"
         :contractType="student.contractType"
+        :contractLength="student.contractLength"
         :description="student.description"
         :favorite="student.favorite"
         @update:favorite="changeCardFavorite(student, $event)"

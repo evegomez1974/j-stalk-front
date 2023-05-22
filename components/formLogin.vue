@@ -102,7 +102,7 @@ export default {
           })
           .then((data) => {
             localStorage.setItem("PAC-token", data.token);
-            this.$router.push("/jobOffersList");
+            this.$router.push("/");
 
             // fetch('http://127.0.0.1:8080/userType'  , {
             //     method: 'get',
