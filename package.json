@@ -6,11 +6,13 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@pdftron/webviewer": "^7.1.0",
     "@nuxtjs/composition-api": "^0.33.1",
+    "@pdftron/webviewer": "^7.1.0",
     "@pinia/nuxt": "^0.2.1",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.0",
@@ -27,7 +29,9 @@
   },
   "devDependencies": {
     "@types/pdfjs-dist": "^2.10.378",
+    "@vitest/coverage-v8": "^0.34.6",
     "sass": "^1.57.1",
-    "sass-loader": "^10.4.1"
+    "sass-loader": "^10.4.1",
+    "vitest": "^0.34.6"
   }
 }
