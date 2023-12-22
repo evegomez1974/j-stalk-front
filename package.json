@@ -8,7 +8,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "test": "vitest",
-    "test2": "vitest --reporter=junit --outputFile=testsReports/test-junit.xml",
+    "test2": "vitest --reporter=junit --outputFile=testsReports/test-output.xml",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --ext .test.js,.js,.jsx,.cjs --fix --ignore-path .gitignore"
   },

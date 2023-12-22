@@ -13,6 +13,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+#authorization to private github
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
@@ -44,8 +50,8 @@ jobs:
         if: success() || failure()
         with:
           name: Vitest Tests                  # Name of the check run which will be created
-          path: testsReports/test-junit.xml      # Path to test results (inside artifact .zip)
-          reporter: jest-junit              # Format of test results
+          path: testsReports/test-output.xml      # Path to test results (inside artifact .zip)
+          reporter: vite-junit              # Format of test results
 
   # This workflow contains a single job called "build"
   build:
