@@ -8,7 +8,7 @@
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1703249839718,
+  "startTime": 1703252391339,
   "success": true,
   "testResults": [
     {
@@ -20,12 +20,12 @@
           "fullName": " adds 1 + 3 to equal 4",
           "status": "passed",
           "title": "adds 1 + 3 to equal 4",
-          "duration": 2,
+          "duration": 1,
           "failureMessages": []
         }
       ],
-      "startTime": 1703249840440,
-      "endTime": 1703249840442,
+      "startTime": 1703252392096,
+      "endTime": 1703252392097,
       "status": "passed",
       "message": "",
       "name": "C:/Users/evego/Documents/M1/integration_deploiement/j-stalk_front-id/sum.test.js"
