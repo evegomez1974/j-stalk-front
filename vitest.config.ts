@@ -4,6 +4,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   test: {
     reporters: ['junit'],
-    outputFile: 'testsReports/test-output.xml'
+    outputFile: 'testsReports/test-junit.xml'
   },
 })

@@ -50,7 +50,7 @@ jobs:
         if: success() || failure()
         with:
           name: Vitest Tests                  # Name of the check run which will be created
-          path: testsReports/test-output.xml      # Path to test results (inside artifact .zip)
+          path: testsReports/test-junit.xml      # Path to test results (inside artifact .zip)
           reporter: jest-junit              # Format of test results
 
   # This workflow contains a single job called "build"
