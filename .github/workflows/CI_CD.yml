@@ -45,7 +45,7 @@ jobs:
         with:
           name: Vitest Tests                  # Name of the check run which will be created
           path: testsReports/test-junit.xml      # Path to test results (inside artifact .zip)
-          reporter: junit              # Format of test results
+          reporter: jest-junit              # Format of test results
 
   # This workflow contains a single job called "build"
   build:
