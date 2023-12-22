@@ -4,235 +4,341 @@
       <h2>S'inscrire</h2>
       <div>
         <select
-              :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
-              }"
-          name="userStatus"
           v-model="formUser.userStatus"
+          :class="{
+            classLog: formUser.userStatus === '',
+            classIns: formUser.userStatus !== '',
+          }"
+          name="userStatus"
           required
         >
-          <option disabled value="" selected>Please select one</option>
-          <option value="student">Etudiant</option>
-          <option value="company">Entreprise</option>
-          <option value="school">Ecole</option>
-          <option value="teacher">Intervenant</option>
+          <option
+            disabled
+            value=""
+            selected
+          >
+            Please select one
+          </option>
+          <option value="student">
+            Etudiant
+          </option>
+          <option value="company">
+            Entreprise
+          </option>
+          <option value="school">
+            Ecole
+          </option>
+          <option value="teacher">
+            Intervenant
+          </option>
         </select>
       </div>
       <div class="container">
         <div class="formUser">
           <div>
             <input
+              v-model="formUser.name"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="text"
-              v-model="formUser.name"
               placeholder="Nom"
               required
-            />
+            >
           </div>
           <div>
             <input
               v-if="formUser.userStatus !== 'company'"
+              v-model="formUser.firstName"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="text"
-              v-model="formUser.firstName"
               placeholder="Prénom"
-            />
+            >
           </div>
           <div>
             <input
+              v-model="formUser.phoneNumber"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="number"
-              v-model="formUser.phoneNumber"
               placeholder="Numero de téléphone"
               required
-            />
+            >
           </div>
           <div>
             <input
+              v-model="formUser.email"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="email"
-              v-model="formUser.email"
               placeholder="Email"
-            />
+            >
           </div>
           <div>
             <input
+              v-model="formUser.password"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="password"
-              v-model="formUser.password"
               placeholder="Mot de passe"
               required
-            />
+            >
           </div>
         </div>
-        <div v-if="formUser.userStatus === 'student'" class="formStudent">
+        <div
+          v-if="formUser.userStatus === 'student'"
+          class="formStudent"
+        >
           <div>
             <select
-              :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
-              }"
-              name="jobType"
               v-model="formStudent.jobType"
+              :class="{
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
+              }"
+              name="jobType"
               required
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="Alternance">Alternance</option>
-              <option value="Stage">Stage</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="Alternance">
+                Alternance
+              </option>
+              <option value="Stage">
+                Stage
+              </option>
             </select>
           </div>
           <div>
             <select
-              :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
-              }"
               v-if="formStudent.jobType === 'Alternance'"
-              name="jobType"
               v-model="formStudent.contractType"
+              :class="{
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
+              }"
+              name="jobType"
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="Apprentissage">Apprentissage</option>
-              <option value="Professionalisation">Professionalisation</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="Apprentissage">
+                Apprentissage
+              </option>
+              <option value="Professionalisation">
+                Professionalisation
+              </option>
             </select>
           </div>
           <div>
             <select
-              :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
-              }"
               v-if="formStudent.jobType === 'Alternance'"
-              name="jobType"
               v-model="formStudent.contractLength"
+              :class="{
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
+              }"
+              name="jobType"
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="1 an">1 an</option>
-              <option value="2 ans">2 ans</option>
-              <option value="3 ans">3 ans</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="1 an">
+                1 an
+              </option>
+              <option value="2 ans">
+                2 ans
+              </option>
+              <option value="3 ans">
+                3 ans
+              </option>
             </select>
             <select
-              :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
-              }"
               v-if="formStudent.jobType === 'Stage'"
-              name="jobType"
               v-model="formStudent.contractLength"
+              :class="{
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
+              }"
+              name="jobType"
               required
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="3 mois">3 mois</option>
-              <option value="6 mois">6 mois</option>
-              <option value="9 mois">9 mois</option>
-              <option value="1 an">1 an</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="3 mois">
+                3 mois
+              </option>
+              <option value="6 mois">
+                6 mois
+              </option>
+              <option value="9 mois">
+                9 mois
+              </option>
+              <option value="1 an">
+                1 an
+              </option>
             </select>
           </div>
           <div>
             <select
+              v-model="formStudent.yearSchool"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               name="jobType"
-              v-model="formStudent.yearSchool"
               required
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="1ère année">1ère année</option>
-              <option value="2ème année">2ème année</option>
-              <option value="3ème année">3ème année</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="1ère année">
+                1ère année
+              </option>
+              <option value="2ème année">
+                2ème année
+              </option>
+              <option value="3ème année">
+                3ème année
+              </option>
             </select>
             <select
+              v-model="formStudent.typeDegree"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               name="jobType"
-              v-model="formStudent.typeDegree"
               required
             >
-              <option disabled value="" selected>Please select one</option>
-              <option value="License">License</option>
+              <option
+                disabled
+                value=""
+                selected
+              >
+                Please select one
+              </option>
+              <option value="License">
+                License
+              </option>
               <option value="License professionnelle">
                 License professionnelle
               </option>
-              <option value="Bachelor">Bachelor</option>
-              <option value="Master">Master</option>
-              <option value="Master professionnel">Master professionnel</option>
-              <option value="BTS">BTS</option>
-              <option value="DUT">DUT</option>
-              <option value="IUT">IUT</option>
-              <option value="CAP">CAP</option>
-              <option value="BEP">BEP</option>
+              <option value="Bachelor">
+                Bachelor
+              </option>
+              <option value="Master">
+                Master
+              </option>
+              <option value="Master professionnel">
+                Master professionnel
+              </option>
+              <option value="BTS">
+                BTS
+              </option>
+              <option value="DUT">
+                DUT
+              </option>
+              <option value="IUT">
+                IUT
+              </option>
+              <option value="CAP">
+                CAP
+              </option>
+              <option value="BEP">
+                BEP
+              </option>
             </select>
           </div>
           <div>
             <input
+              v-model="formStudent.nameSchool"
               :class="{
-                classLog: this.formUser.userStatus === '',
-                classIns: this.formUser.userStatus !== '',
+                classLog: formUser.userStatus === '',
+                classIns: formUser.userStatus !== '',
               }"
               type="text"
-              v-model="formStudent.nameSchool"
               placeholder="Nom de l'école"
               required
-            />
+            >
           </div>
           <div>
             <textarea
-              name="message"
               v-model="formStudent.description"
+              name="message"
               rows="4"
               cols="40"
               maxLength="200"
               placeholder="Saisissez votre message ici"
-            ></textarea>
+            />
           </div>
         </div>
-        <div v-if="formUser.userStatus === 'company'" class="formCompany">
+        <div
+          v-if="formUser.userStatus === 'company'"
+          class="formCompany"
+        >
           <div>
             <div>
               <input
+                v-model="formCompany.address"
                 class="classIns"
                 type="text"
-                v-model="formCompany.address"
                 placeholder="Adresse"
                 required
-              />
+              >
             </div>
             <div>
               <input
+                v-model="formCompany.city"
                 class="classIns"
                 type="text"
-                v-model="formCompany.city"
                 placeholder="Ville"
                 required
-              />
+              >
             </div>
             <select
+              v-model="formCompany.department"
               class="classIns"
               name="department"
-              v-model="formCompany.department"
               required
             >
-              <option disabled value="" selected>
+              <option
+                disabled
+                value=""
+                selected
+              >
                 Please select one department
               </option>
               <option
@@ -247,22 +353,27 @@
 
           <div>
             <textarea
-              name="message"
               v-model="formCompany.description"
+              name="message"
               rows="4"
               cols="40"
               maxLength="200"
               placeholder="Saisissez votre message ici"
-            ></textarea>
+            />
           </div>
         </div>
       </div>
     </div>
     <div class="btnRouter">
       <div class="btnVal">
-        <router-link to="/login"
-          ><button class="classBtn" type="submit">Annuler</button></router-link
-        >
+        <router-link to="/login">
+          <button
+            class="classBtn"
+            type="submit"
+          >
+            Annuler
+          </button>
+        </router-link>
       </div>
       <div class="btnVal">
         <button
@@ -312,6 +423,17 @@ export default {
       departments: null,
     };
   },
+  mounted() {
+    fetch("http://127.0.0.1:8080/listDepartmentsSignUp")
+      .then((response) => response.json())
+      .then((data) => {
+        const departments = data.departments.data;
+        return (this.departments = departments);
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue :", error);
+      });
+  },
   methods: {
     onSubmitSenclassLogata(formUser, formStudent) {
       let requestConfig = {
@@ -341,17 +463,6 @@ export default {
           console.error("Une erreur est survenue :", error);
         });
     },
-  },
-  mounted() {
-    fetch("http://127.0.0.1:8080/listDepartmentsSignUp")
-      .then((response) => response.json())
-      .then((data) => {
-        const departments = data.departments.data;
-        return (this.departments = departments);
-      })
-      .catch((error) => {
-        console.error("Une erreur est survenue :", error);
-      });
   },
 };
 </script>

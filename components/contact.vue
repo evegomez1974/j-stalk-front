@@ -1,26 +1,38 @@
 <template>
   <div>
     <div class="buttons">
-      <b-button @click="lettreIntervenant"
-        >Demander une lettre à un intervenant</b-button
-      >
-      <b-button @click="AfficheContact">Contact</b-button>
+      <b-button @click="lettreIntervenant">
+        Demander une lettre à un intervenant
+      </b-button>
+      <b-button @click="AfficheContact">
+        Contact
+      </b-button>
     </div>
     <div>
-      <div class="mt-4" v-if="isVisible">
+      <div
+        v-if="isVisible"
+        class="mt-4"
+      >
         <div class="zoneInfosUser">
           <div class="zoneUser">
-              <p class="subContact" variant="light">{{
+            <p
+              class="subContact"
+              variant="light"
+            >
+              {{
                 userInfo.email
-              }}</p>
-         
+              }}
+            </p>
           </div>
           <div class="zoneUser">
-       
-              <p class="subContact" variant="light">{{
+            <p
+              class="subContact"
+              variant="light"
+            >
+              {{
                 userInfo.phoneNumber
-              }}</p>
-           
+              }}
+            </p>
           </div>
         </div>
       </div>
@@ -30,7 +42,7 @@
 
   <script>
 export default {
-  name: "infosUserProfil",
+  name: "InfosUserProfil",
   components: {},
   props: {
     userInfo: Object,

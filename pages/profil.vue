@@ -11,33 +11,45 @@
             <infosUserProfil
               v-for="userInfo in listUserInfos"
               :key="userInfo.id"
-              :userInfo="userInfo"
+              :user-info="userInfo"
             />
           </div>
           <div class="row-2">
             <div class="grid-column-2">
-              <div div class="grid-row-1">
-                <div class="btnAddDocs" v-if="isVisibleAddDoc === false">
-                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc"
-                    >Ajouter un document</b-button
-                  >
+              <div
+                div
+                class="grid-row-1"
+              >
+                <div
+                  v-if="isVisibleAddDoc === false"
+                  class="btnAddDocs"
+                >
+                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc">
+                    Ajouter un document
+                  </b-button>
                 </div>
-                <div class="btnAddDocs" v-else>
-                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc"
-                    >Fermer</b-button
-                  >
+                <div
+                  v-else
+                  class="btnAddDocs"
+                >
+                  <b-button @click="isVisibleAddDoc = !isVisibleAddDoc">
+                    Fermer
+                  </b-button>
                 </div>
-                <div class="addDocs" v-if="this.isVisibleAddDoc === true">
+                <div
+                  v-if="isVisibleAddDoc === true"
+                  class="addDocs"
+                >
                   <addDocsVue @message-sent-pdf="updateMessagePdf" />
                 </div>
               </div>
 
               <div class="grid-row-2">
                 <listDocsUser
-                  class="grid-row-2-item"
                   v-for="userDocs in listUserDocs"
                   :key="userDocs.id"
-                  :userDocs="userDocs"
+                  class="grid-row-2-item"
+                  :user-docs="userDocs"
                   @message-sent="updateMessage"
                 />
               </div>
@@ -48,10 +60,13 @@
           <contact
             v-for="userInfo in listUserInfos"
             :key="userInfo.id"
-            :userInfo="userInfo"
+            :user-info="userInfo"
           />
-          <div class="containerPDF" v-if="userPDF[0]">
-            <pdfViewer :pdf="userPDF[0]"> </pdfViewer>
+          <div
+            v-if="userPDF[0]"
+            class="containerPDF"
+          >
+            <pdfViewer :pdf="userPDF[0]" />
           </div>
         </div>
       </div>
@@ -70,7 +85,7 @@ import "../assets/css/themes.scss";
 import router from '../.nuxt/router'
 
 export default {
-  name: "profil",
+  name: "Profil",
   components: {
     NavBar,
     infosUserProfil,
@@ -93,65 +108,6 @@ export default {
   },
   computed: {
 
-  },
-
-
-  methods: {
-    updateMessagePdf(newValuePDF) {
-      console.log(newValuePDF);
-      if (newValuePDF == "pdfValide") {
-        //this.listUserDocs = []
-        console.log(this.listUserDocs);
-        this.isVisibleAddDoc = false;
-        this.isVisibleBtnAddDoc = true;
-        fetch("http://127.0.0.1:8080/userDocs", {
-          method: "get",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
-          },
-      })
-      .then(res => res.json())
-      .then(data => {
-        this.listUserDocs = data;
-        // console.log(data)
-        // traitement
-      })
-
-      .catch(e => {
-        // console.error(e);
-        // this.verifCo = "erreur"
-        this.$router.push('/notConneted')
-      })
-
-      }
-    },
-
-    updateMessage(newValue, documentID) {
-      console.log(newValue);
-      console.log(documentID);
-      this.message = newValue;
-      this.userPDF = [];
-      if (newValue == "ok") {
-        fetch(`http://127.0.0.1:8080/userPDF/${documentID}`, {
-          method: "get",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
-          },
-      })
-      .then(res => res.json())
-      .then(data => {
-        this.userPDF = data;
-        console.log("chargement réussi " + this.userPDF)
-        return this.userPDF
-
-      })
-       .catch(e => {
-        //  console.error(e);
-        //  this.verifCo = "erreur"
-        this.$router.push('/notConneted')
-         } )
-      }
-    },
   },
 
 
@@ -239,7 +195,66 @@ export default {
 
 
 
-    }
+    },
+
+
+  methods: {
+    updateMessagePdf(newValuePDF) {
+      console.log(newValuePDF);
+      if (newValuePDF == "pdfValide") {
+        //this.listUserDocs = []
+        console.log(this.listUserDocs);
+        this.isVisibleAddDoc = false;
+        this.isVisibleBtnAddDoc = true;
+        fetch("http://127.0.0.1:8080/userDocs", {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.listUserDocs = data;
+        // console.log(data)
+        // traitement
+      })
+
+      .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
+
+      }
+    },
+
+    updateMessage(newValue, documentID) {
+      console.log(newValue);
+      console.log(documentID);
+      this.message = newValue;
+      this.userPDF = [];
+      if (newValue == "ok") {
+        fetch(`http://127.0.0.1:8080/userPDF/${documentID}`, {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
+          },
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.userPDF = data;
+        console.log("chargement réussi " + this.userPDF)
+        return this.userPDF
+
+      })
+       .catch(e => {
+        //  console.error(e);
+        //  this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+         } )
+      }
+    },
+  }
 
 }
 </script>

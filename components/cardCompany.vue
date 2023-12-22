@@ -2,14 +2,22 @@
   <div class="card">
     <div class="card-title">
       <h4>{{ name }}</h4>
-      <button id="favButton" @click="changeFavorite">
+      <button
+        id="favButton"
+        @click="changeFavorite"
+      >
         <b-icon
-          v-if="this.favorite"
+          v-if="favorite"
           icon="heart-fill"
           variant="light"
           font-scale="1.5"
-        ></b-icon>
-        <b-icon v-else icon="heart" variant="light" font-scale="1.5"></b-icon>
+        />
+        <b-icon
+          v-else
+          icon="heart"
+          variant="light"
+          font-scale="1.5"
+        />
       </button>
     </div>
     <div class="card-body">
@@ -22,12 +30,18 @@
       <h6 class="card-subtitle mb-2 text-muted">
         0{{ formaterNumeroTelephone }}
       </h6>
-      <h6 class="card-subtitle mb-2 text-muted">{{ email }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ email }}
+      </h6>
 
-      <p class="card-text">{{ truncatedDescription }}</p>
+      <p class="card-text">
+        {{ truncatedDescription }}
+      </p>
     </div>
     <div class="footer-card">
-      <b-button id="seeMore">Voir l'entreprise</b-button>
+      <b-button id="seeMore">
+        Voir l'entreprise
+      </b-button>
     </div>
   </div>
 </template>
@@ -62,11 +76,6 @@ export default {
       },
     };
   },
-  methods: {
-    changeFavorite() {
-      this.$emit("update:favorite", !this.favorite);
-    },
-  },
   computed: {
     truncatedDescription() {
       const maxLength = 280;
@@ -81,6 +90,11 @@ export default {
       return this.phoneNumber
         .toString()
         .replace(/(\d{2})(?=\d{2,})/g, "$1 ");
+    },
+  },
+  methods: {
+    changeFavorite() {
+      this.$emit("update:favorite", !this.favorite);
     },
   },
 };

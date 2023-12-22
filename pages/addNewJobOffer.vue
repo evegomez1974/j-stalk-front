@@ -1,10 +1,10 @@
 <template>
-<div>
+  <div>
     <NavBar />
     <div class="createJobOfferConteneur">
-    <CreateJobOffer />
+      <CreateJobOffer />
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ import NavBar from "../components/navBar";
 import CreateJobOffer from "../components/jobOffers/createJobOffer";
 
 export default {
-    name: "addNewJobOffer",
+    name: "AddNewJobOffer",
     components: { NavBar, CreateJobOffer },
 
 

@@ -2,50 +2,105 @@
   <div class="card">
     <div class="card-title">
       <h5>{{ jobTitle }}</h5>
-      <button id="favButton" @click="changeFavorite">
+      <button
+        id="favButton"
+        @click="changeFavorite"
+      >
         <b-icon
-          v-if="this.favorite"
+          v-if="favorite"
           icon="heart-fill"
           variant="light"
           font-scale="1.5"
-        ></b-icon>
-        <b-icon v-else icon="heart" variant="light" font-scale="1.5"></b-icon>
+        />
+        <b-icon
+          v-else
+          icon="heart"
+          variant="light"
+          font-scale="1.5"
+        />
       </button>
     </div>
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ company }}
+      </h6>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
-      <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ jobType }}
+      </b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ contractType }}
+      </b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ contractLength }}
+      </b-badge>
 
-      <p class="card-text" v-html="truncatedDescription"></p>
+      <p
+        class="card-text"
+        v-html="truncatedDescription"
+      />
       <div class="footer-card">
-        <p style="font-style: italic; color: black">Il y {{datePost}}h</p>
-        <b-button id="seeMore" v-b-modal="'modal-center-' + this.modalRef"
-          >Voir plus</b-button
+        <p style="font-style: italic; color: black">
+          Il y {{ datePost }}h
+        </p>
+        <b-button
+          id="seeMore"
+          v-b-modal="'modal-center-' + modalRef"
         >
+          Voir plus
+        </b-button>
       </div>
     </div>
 
     <b-modal
-      :id="'modal-center-' + this.modalRef"
+      :id="'modal-center-' + modalRef"
       variant="jstalk-primary"
       centered
     >
-      <template #modal-title> {{ jobTitle }} </template>
+      <template #modal-title>
+        {{ jobTitle }}
+      </template>
 
-      <h6 class="card-subtitle mb-2 text-muted">{{ company }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ company }}
+      </h6>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ city }}, {{ department }}
       </h6>
-      <b-badge variant="secondary" class="badge-secondary">{{ jobType }}</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">{{ contractType }}</b-badge>
-      <b-badge variant="secondary" class="badge-secondary">{{ contractLength }}</b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ jobType }}
+      </b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ contractType }}
+      </b-badge>
+      <b-badge
+        variant="secondary"
+        class="badge-secondary"
+      >
+        {{ contractLength }}
+      </b-badge>
 
-      <p class="card-text" v-html="description"></p>
+      <p
+        class="card-text"
+        v-html="description"
+      />
       <b-button>Postuler</b-button>
     </b-modal>
   </div>
@@ -80,11 +135,6 @@ export default {
       jsonContent: {},
     };
   },
-  methods: {
-    changeFavorite() {
-      this.$emit("update:favorite", !this.favorite);
-    },
-  },
   computed: {
     truncatedDescription() {
       const maxLength = 280;
@@ -93,6 +143,11 @@ export default {
       } else {
         return this.description.substring(0, maxLength) + "...";
       }
+    },
+  },
+  methods: {
+    changeFavorite() {
+      this.$emit("update:favorite", !this.favorite);
     },
   },
 };

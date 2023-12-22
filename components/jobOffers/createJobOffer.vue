@@ -5,9 +5,9 @@
     </div>
     <div class="card-body">
       <b-form
+        v-if="show"
         @submit="onSubmit($event), onSubmitSendData(form)"
         @reset="onReset"
-        v-if="show"
       >
         <b-form-group
           id="input-group-company"
@@ -19,7 +19,7 @@
             v-model="form.company"
             placeholder="Enter le nom de l'entreprise"
             required
-          ></b-form-input>
+          />
         </b-form-group>
 
         <b-form-group
@@ -33,7 +33,7 @@
             type="email"
             placeholder="Entrer un email"
             required
-          ></b-form-input>
+          />
         </b-form-group>
 
         <b-form-group
@@ -46,7 +46,7 @@
             v-model="form.jobTitle"
             placeholder="Enter le nom du poste"
             required
-          ></b-form-input>
+          />
         </b-form-group>
 
         <div class="typesContainer">
@@ -60,48 +60,48 @@
               v-model="form.jobType"
               :options="jobTypes"
               required
-            ></b-form-select>
+            />
           </b-form-group>
 
           <b-form-group
+            v-if="form.jobType === 'Alternance'"
             id="select-group-contractType"
             label="Type de contrat: (facultatif)"
             label-for="select-contractType"
-            v-if="form.jobType === 'Alternance'"
           >
             <b-form-select
               id="select-contractType"
               v-model="form.contractType"
               :options="contractTypes"
-            ></b-form-select>
+            />
           </b-form-group>
 
           <b-form-group
+            v-if="form.jobType === 'Alternance'"
             id="select-group-contractLengthsAlternance"
             class="contractLength"
             label="Durée du contrat: (facultatif)"
             label-for="select-contractLengthsAlternance"
-            v-if="form.jobType === 'Alternance'"
           >
             <b-form-select
               id="select-contractLength"
               v-model="form.contractLength"
               :options="contractLengthsAlternance"
-            ></b-form-select>
+            />
           </b-form-group>
 
           <b-form-group
+            v-if="form.jobType === 'Stage'"
             id="select-group-contractLengthsStage"
             class="contractLength"
             label="Durée du contrat: (facultatif)"
             label-for="select-contractLengthsStage"
-            v-if="form.jobType === 'Stage'"
           >
             <b-form-select
               id="select-contractLengthsStage"
               v-model="form.contractLength"
               :options="contractLengthsStage"
-            ></b-form-select>
+            />
           </b-form-group>
         </div>
 
@@ -128,7 +128,7 @@
             v-model="form.city"
             placeholder="Entrer une ville"
             required
-          ></b-form-input>
+          />
         </b-form-group>
 
         <b-form-group
@@ -141,7 +141,7 @@
             v-model="form.department"
             :options="departments"
             required
-          ></b-form-select>
+          />
         </b-form-group>
 
         <b-form-group
@@ -152,12 +152,12 @@
           <div class="salaryContainer">
             <b-form-input
               id="input-minSalary"
-              class="mr-2"
               v-model="form.salary"
+              class="mr-2"
               type="number"
               min="0"
               placeholder="Entrer un salaire"
-            ></b-form-input>
+            />
 
             <div id="€">
               <p>€</p>
@@ -165,17 +165,17 @@
 
             <b-form-select
               id="select-maxSalary"
-              class="ml-2"
               v-model="form.tempSalary"
+              class="ml-2"
               type="text"
               :options="tempsSalary"
-            ></b-form-select>
+            />
           </div>
         </b-form-group>
 
         <vue-editor
-          class="mb-4"
           v-model="form.description"
+          class="mb-4"
           :editor-toolbar="customToolbar"
         />
 
@@ -186,20 +186,32 @@
       <b-list-group-item v-for="(size, index) in filteredSizes.slice(0, 4)" :key="index">{{ size }}</b-list-group-item>
     </b-list-group> -->
 
-        <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
+        <b-button
+          type="submit"
+          variant="primary"
+        >
+          Submit
+        </b-button>
+        <b-button
+          type="reset"
+          variant="danger"
+        >
+          Reset
+        </b-button>
       </b-form>
 
       <b-modal
         id="modal-center"
+        ref="my-modal"
         centered
         title="Publier une annonce"
-        ref="my-modal"
-        @hidden="onReset"
         ok-only
         ok-variant="secondary"
+        @hidden="onReset"
       >
-        <p class="my-4">Votre annonce a bien été publiée !</p>
+        <p class="my-4">
+          Votre annonce a bien été publiée !
+        </p>
       </b-modal>
     </div>
   </div>
@@ -280,6 +292,29 @@ export default {
       customToolbar: [["bold", "italic", "underline"], [{ list: "bullet" }]],
     };
   },
+  mounted() {
+      fetch('http://127.0.0.1:8080/listDepartments'  , {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
+          },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        const departments = data;
+        this.departments = this.departments.concat(
+          departments.map((department) => department.name)
+        );
+      })
+      .catch(error => {
+      console.error('Une erreur est survenue :', error);
+    })
+      .catch(e => {
+        // console.error(e);
+        // this.verifCo = "erreur"
+        this.$router.push('/notConneted')
+      })
+  },
   methods: {
     onSubmitSendData(jobOffer) {
       console.log(jobOffer)
@@ -331,29 +366,6 @@ export default {
         this.show = true;
       });
     },
-  },
-  mounted() {
-      fetch('http://127.0.0.1:8080/listDepartments'  , {
-          method: 'get',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('PAC-token')}`
-          },
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        const departments = data;
-        this.departments = this.departments.concat(
-          departments.map((department) => department.name)
-        );
-      })
-      .catch(error => {
-      console.error('Une erreur est survenue :', error);
-    })
-      .catch(e => {
-        // console.error(e);
-        // this.verifCo = "erreur"
-        this.$router.push('/notConneted')
-      })
   },
 };
 </script>

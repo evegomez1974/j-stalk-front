@@ -1,34 +1,37 @@
 <template>
+  <b-card>
+    <div>
+      <b-input
+        id="title"
+        v-model="title"
+        placeholder="Titre"
+      />
+    </div>
 
-      <b-card>
-        <div>
-          <b-input placeholder="Titre" v-model="title" id="title"></b-input>
-        </div>
+    <b-form-file
+      id="inputFile"
+      v-model="file1"
+      :state="Boolean(file1)"
+      placeholder="Choose a file or drop it here..."
+      drop-placeholder="Drop file here..."
+      accept=".pdf, .PDF"
+    />
 
-        <b-form-file
-          id="inputFile"
-          v-model="file1"
-          :state="Boolean(file1)"
-          placeholder="Choose a file or drop it here..."
-          drop-placeholder="Drop file here..."
-          accept=".pdf, .PDF"
-        ></b-form-file>
+    <div class="addFile">
+      <div class="mt-3">
+        Choisir le pdf : {{ file1 ? file1.name : "" }}
+      </div>
 
-        <div class="addFile">
-        
-                <div class="mt-3">Choisir le pdf : {{ file1 ? file1.name : "" }}</div>
-
-        <b-button @click="AddDoc">Ajouter</b-button>
-
-        </div>
-
-      </b-card>
-
+      <b-button @click="AddDoc">
+        Ajouter
+      </b-button>
+    </div>
+  </b-card>
 </template>
 
 <script>
 export default {
-  name: "addDocs",
+  name: "AddDocs",
   components: {},
 
   data() {

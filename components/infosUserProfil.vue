@@ -5,27 +5,30 @@
         <div class="column1">
           <div class="profilPicture">
             <img
+              id="img-user"
               :src="base64Image"
               alt="Image"
               img-left
-              id="img-user"
               style="max-width: 100%; max-height: 100%; object-fit: contain"
-            />
+            >
           </div>
-          <div id="ajout_de_photo" v-if="isVisibleAddImage">
+          <div
+            v-if="isVisibleAddImage"
+            id="ajout_de_photo"
+          >
             <label for="image">
               <img
                 id="add_photo_logo"
                 src="../assets/img/add-camera.png"
                 alt="appareil photo"
-              />
+              >
             </label>
             <input
               id="image"
-              v-on:change="onFileChange"
               type="file"
               class="image"
-            />
+              @change="onFileChange"
+            >
           </div>
         </div>
         <div class="column2">
@@ -34,34 +37,59 @@
           </div>
           <div class="subRow2">
             <div>
-              <p class="subItem" variant="light">{{
-                userInfo.yearSchool
-              }} {{
-                userInfo.typeDegree
-              }}</p>
+              <p
+                class="subItem"
+                variant="light"
+              >
+                {{
+                  userInfo.yearSchool
+                }} {{
+                  userInfo.typeDegree
+                }}
+              </p>
             </div>
             <div>
-              <p class="subItem" variant="light">{{
-                userInfo.nameSchool
-              }}</p>
+              <p
+                class="subItem"
+                variant="light"
+              >
+                {{
+                  userInfo.nameSchool
+                }}
+              </p>
             </div>
             <div>
-              <b-badge class="subItem" variant="light">{{
-                userInfo.jobType
-              }}</b-badge>
+              <b-badge
+                class="subItem"
+                variant="light"
+              >
+                {{
+                  userInfo.jobType
+                }}
+              </b-badge>
             </div>
             <div>
-              <p class="subItem" variant="light">{{
-                userInfo.contractType
-              }}</p>
+              <p
+                class="subItem"
+                variant="light"
+              >
+                {{
+                  userInfo.contractType
+                }}
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div class="row2">
-        <p class="subItem" variant="light">{{
-          userInfo.description
-        }}</p>
+        <p
+          class="subItem"
+          variant="light"
+        >
+          {{
+            userInfo.description
+          }}
+        </p>
       </div>
     </div>
   </div>
@@ -69,7 +97,7 @@
 
 <script>
 export default {
-  name: "infosUserProfil",
+  name: "InfosUserProfil",
   components: {},
   props: {
     userInfo: Object,
@@ -87,9 +115,6 @@ export default {
       typeUser: [],
     };
   },
-  beforeDestroy() {
-    this.clearInterval();
-  },
   watch: {
     image: function (newVal, oldVal) {
       if (newVal) {
@@ -99,6 +124,38 @@ export default {
         this.base64 = null;
       }
     },
+  },
+  beforeUnmount() {
+    this.clearInterval();
+  },
+  mounted() {
+    fetch("http://127.0.0.1:8080/userType", {
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.typeUser = data;
+        console.log(this.typeUser[0].status);
+
+        // faire le traitement des type d'users
+        if (this.typeUser[0].status === "student") {
+        }
+        if (this.typeUser[0].status === "school") {
+          this.isVisibleAddImage = !this.isVisibleAddImage;
+        }
+        if (this.typeUser[0].status === "company") {
+          this.isVisibleAddImage = !this.isVisibleAddImage;
+        }
+        if (this.typeUser[0].status === "teacher") {
+          this.isVisibleAddImage = !this.isVisibleAddImage;
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   },
   methods: {
     createBase64Image: function (FileObject) {
@@ -180,35 +237,6 @@ export default {
         this.image = null;
       }
     },
-  },
-  mounted() {
-    fetch("http://127.0.0.1:8080/userType", {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("PAC-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.typeUser = data;
-        console.log(this.typeUser[0].status);
-
-        // faire le traitement des type d'users
-        if (this.typeUser[0].status === "student") {
-        }
-        if (this.typeUser[0].status === "school") {
-          this.isVisibleAddImage = !this.isVisibleAddImage;
-        }
-        if (this.typeUser[0].status === "company") {
-          this.isVisibleAddImage = !this.isVisibleAddImage;
-        }
-        if (this.typeUser[0].status === "teacher") {
-          this.isVisibleAddImage = !this.isVisibleAddImage;
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
   },
 };
 </script>

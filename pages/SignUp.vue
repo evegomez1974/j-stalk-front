@@ -1,7 +1,10 @@
 <template>
   <div id="auth">
     <div class="containerForm">
-      <img src="../static/j-stalk-logo-texte.png" width="350"/>
+      <img
+        src="../static/j-stalk-logo-texte.png"
+        width="350"
+      >
     </div>    
     <div class="containerForm">
       <FormSignUp />
@@ -16,7 +19,7 @@ import "../assets/css/themes.scss";
 import FormSignUp from "../components/formSignUp";
 
 export default defineComponent({
-  name: "signup",
+  name: "Signup",
   components: { FormSignUp },
   data() {
     return {

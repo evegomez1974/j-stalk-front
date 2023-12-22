@@ -8,39 +8,46 @@
             size="md"
             class="mr-md-2"
             placeholder="Rechercher"
-          ></b-form-input>
-          <b-button size="md" class="my-2 my-md-0" type="submit"
-            >Rechercher</b-button
+          />
+          <b-button
+            size="md"
+            class="my-2 my-md-0"
+            type="submit"
           >
+            Rechercher
+          </b-button>
         </b-nav-form>
       </div>
       <div class="favorite-container">
-        <b-button size="md" @click="showOnlyFavorites = !showOnlyFavorites"
-          >Favoris
+        <b-button
+          size="md"
+          @click="showOnlyFavorites = !showOnlyFavorites"
+        >
+          Favoris
           <b-icon
             v-if="showOnlyFavorites"
             class="pl-1"
             icon="heart-fill"
             variant="light"
             font-scale="1.3"
-          ></b-icon>
+          />
           <b-icon
             v-else
             class="pl-1"
             icon="heart"
             variant="light"
             font-scale="1.3"
-          ></b-icon>
+          />
         </b-button>
       </div>
     </div>
     <div class="grid-container">
       <CardCompany
-        class="grid-Cardcompany"
         v-for="(company, index) in filteredCompanies"
         :key="index"
+        class="grid-Cardcompany"
         :name="company.userName"
-        :phoneNumber="company.phoneNumber"
+        :phone-number="company.phoneNumber"
         :email="company.email"
         :address="company.address"
         :city="company.city"

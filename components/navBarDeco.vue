@@ -1,19 +1,31 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#"
-        ><img
+    <b-navbar
+      toggleable="lg"
+      type="dark"
+      variant="dark"
+    >
+      <b-navbar-brand href="#">
+        <img
           src="../assets/img/j-stalk-logo.png"
           height="60vh"
           alt="J-Stalk logo"
-      /></b-navbar-brand>
+        >
+      </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" />
 
-      <b-collapse id="nav-collapse" is-nav>
+      <b-collapse
+        id="nav-collapse"
+        is-nav
+      >
         <b-navbar-nav>
-          <b-nav-item href="/Login">Login</b-nav-item>
-          <b-nav-item href="/SignUp">Inscription</b-nav-item>
+          <b-nav-item href="/Login">
+            Login
+          </b-nav-item>
+          <b-nav-item href="/SignUp">
+            Inscription
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

@@ -1,16 +1,25 @@
 <template>
   <div id="auth">
     <div class="containerForm">
-      <img src="../static/j-stalk-logo-texte.png" width="350"/>
+      <img
+        src="../static/j-stalk-logo-texte.png"
+        width="350"
+      >
     </div>
-    <div v-if="isVisibleForm" class="containerForm">
+    <div
+      v-if="isVisibleForm"
+      class="containerForm"
+    >
       <formLogin @message-sent="updateMessage" />
     </div>
-    <div v-if="isVisibleForgetWord" class="containerForm">
+    <div
+      v-if="isVisibleForgetWord"
+      class="containerForm"
+    >
       <forgetWord
-        @message-sent="updateMessage"
         variant="success"
         :child-data="email"
+        @message-sent="updateMessage"
       />
     </div>
   </div>
@@ -24,7 +33,7 @@ import formLogin from "../components/formLogin";
 import forgetWord from "../components/forgetWord";
 
 export default defineComponent({
-  name: "login",
+  name: "Login",
   components: { formLogin, forgetWord },
   data() {
     return {

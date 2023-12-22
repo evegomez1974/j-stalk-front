@@ -5,37 +5,47 @@
 
       <div>
         <input
+          v-model="email"
           class="classLog"
           type="email"
-          v-model="email"
           placeholder="Email"
-        />
+        >
       </div>
       <div>
         <input
+          v-model="password"
           class="classLog"
           type="password"
-          v-model="password"
           placeholder="Mot de passe"
-        />
+        >
       </div>
 
       <div class="forgetMDP">
-        <button id="lienMDP" @click="methVal($event)">
+        <button
+          id="lienMDP"
+          @click="methVal($event)"
+        >
           Mot de passe oublié ?
         </button>
       </div>
     </div>
     <div class="btnRouter">
       <div class="btnVal">
-        <router-link to="/SignUp"
-          ><button class="classBtn" type="submit">
+        <router-link to="/SignUp">
+          <button
+            class="classBtn"
+            type="submit"
+          >
             Inscription
-          </button></router-link
-        >
+          </button>
+        </router-link>
       </div>
       <div class="btnVal">
-        <button class="classBtn" type="button" @click="login">
+        <button
+          class="classBtn"
+          type="button"
+          @click="login"
+        >
           Se connecter
         </button>
       </div>

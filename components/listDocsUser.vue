@@ -1,7 +1,10 @@
 <template>
   <div class="cardDocsUser">
     <b-card-group>
-      <b-card bg-variant="dark" text-variant="white">
+      <b-card
+        bg-variant="dark"
+        text-variant="white"
+      >
         <b-card-header>
           <b-card-title>{{ userDocs.name }}</b-card-title>
         </b-card-header>
@@ -12,8 +15,9 @@
             class="btn-popup"
             variant="secondary"
             @click="voirPDF(userDocs.documentID)"
-            >Voir</b-button
           >
+            Voir
+          </b-button>
 
           <b-button
             v-if="isVisibleSupp"
@@ -21,14 +25,15 @@
             class="btn-popup"
             variant="secondary"
             @click="suppDoc(userDocs.documentID)"
-            >Supprimer</b-button
           >
+            Supprimer
+          </b-button>
 
           <!-- <b-button href="#" variant="primary" @click="afficheInfoDoc(userDocs.name, userDocs.docPDF)" id="seeMore" v-b-modal="'modal-center-' + this.modalRef" >Changer</b-button> -->
         </b-card-text>
 
         <b-modal
-          :id="'modal-center-' + this.modalRef"
+          :id="'modal-center-' + modalRef"
           ref="modal"
           variant="jstalk-primary"
           centered
@@ -52,7 +57,7 @@
                 v-model="title"
                 :state="titleState"
                 required
-              ></b-form-input>
+              />
             </b-form-group>
             <b-form-group
               label="Document Pdf"
@@ -67,7 +72,7 @@
                 placeholder="Choisissez un document ou drop ici"
                 drop-placeholder="Drop document ici..."
                 accept=".pdf, .PDF"
-              ></b-form-file>
+              />
               <div class="mt-3">
                 Selectionner un pdf: {{ file ? file.name : "" }}
               </div>
@@ -81,7 +86,7 @@
 
 <script>
 export default {
-  name: "listDocsUser",
+  name: "ListDocsUser",
   components: {},
   props: {
     userDocs: Object,

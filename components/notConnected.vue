@@ -1,29 +1,40 @@
 <template>
-    <div id="auth">
-      <div class="containerForm">
-        <img src="../static/j-stalk-logo-texte.png" width="350"/>
-      </div>
-      <form @submit.prevent="login">
-            <div class="containerLog">
-            <h2>Vous n'êtes pas connecté</h2>
-
-            </div>
-            <div class="btnRouter">
-            <div class="btnVal">
-                <router-link to="/SignUp"
-                ><button class="classBtn" type="submit">
-                    Inscription
-                </button></router-link
-                >
-            </div>
-            <div class="btnVal">
-                <router-link to="/"><button type="submit" class="classBtn">Se connecter</button></router-link>
-            </div>
-            </div>
-        </form>
-
+  <div id="auth">
+    <div class="containerForm">
+      <img
+        src="../static/j-stalk-logo-texte.png"
+        width="350"
+      >
     </div>
-  </template>
+    <form @submit.prevent="login">
+      <div class="containerLog">
+        <h2>Vous n'êtes pas connecté</h2>
+      </div>
+      <div class="btnRouter">
+        <div class="btnVal">
+          <router-link to="/SignUp">
+            <button
+              class="classBtn"
+              type="submit"
+            >
+              Inscription
+            </button>
+          </router-link>
+        </div>
+        <div class="btnVal">
+          <router-link to="/">
+            <button
+              type="submit"
+              class="classBtn"
+            >
+              Se connecter
+            </button>
+          </router-link>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
 
 
   <script>
@@ -33,7 +44,7 @@
   import forgetWord from "../components/forgetWord";
 
   export default defineComponent({
-    name: "login",
+    name: "Login",
     components: { formLogin, forgetWord },
     data() {
       return {

@@ -1,22 +1,52 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#"
-        ><img
+    <b-navbar
+      toggleable="lg"
+      type="dark"
+      variant="dark"
+    >
+      <b-navbar-brand href="#">
+        <img
           src="../assets/img/j-stalk-logo.png"
           height="60vh"
           alt="J-Stalk logo"
-      /></b-navbar-brand>
+        >
+      </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" />
 
-      <b-collapse id="nav-collapse" is-nav>
+      <b-collapse
+        id="nav-collapse"
+        is-nav
+      >
         <b-navbar-nav>
-          <b-nav-item href="/" v-if="isVisibleEntrepise">Annonces entreprises</b-nav-item>
-          <b-nav-item href="/addNewJobOffer" v-if="isVisibleAnnonce">Créer une annonce</b-nav-item>
-          <b-nav-item href="/studentsList" v-if="isVisibleEtudiant">Liste des élèves</b-nav-item>
-          <b-nav-item href="/companiesList" v-if="isVisibleCompanie">Listes des entreprises</b-nav-item>
-          <b-nav-item href="/profil">Profil</b-nav-item>
+          <b-nav-item
+            v-if="isVisibleEntrepise"
+            href="/"
+          >
+            Annonces entreprises
+          </b-nav-item>
+          <b-nav-item
+            v-if="isVisibleAnnonce"
+            href="/addNewJobOffer"
+          >
+            Créer une annonce
+          </b-nav-item>
+          <b-nav-item
+            v-if="isVisibleEtudiant"
+            href="/studentsList"
+          >
+            Liste des élèves
+          </b-nav-item>
+          <b-nav-item
+            v-if="isVisibleCompanie"
+            href="/companiesList"
+          >
+            Listes des entreprises
+          </b-nav-item>
+          <b-nav-item href="/profil">
+            Profil
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -26,18 +56,25 @@
               size="sm"
               class="mr-sm-2"
               placeholder="Search"
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
+            />
+            <b-button
+              size="sm"
+              class="my-2 my-sm-0"
+              type="submit"
             >
+              Search
+            </b-button>
           </b-nav-form>
           <b-navbar-nav>
             <div id="ajout_de_photo">
-                <div id="separateur_photo">
-                <img id="add_photo_logo" @click="decoUser"
-                    src="../assets/img/deconnexion.png"
-                alt="appareil photo">
-                </div>
+              <div id="separateur_photo">
+                <img
+                  id="add_photo_logo"
+                  src="../assets/img/deconnexion.png"
+                  alt="appareil photo"
+                  @click="decoUser"
+                >
+              </div>
             </div>
           </b-navbar-nav>
 

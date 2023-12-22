@@ -4,9 +4,9 @@
       <div>
         <b-form @submit.stop.prevent>
           <b-form-input
+            id="New1"
             v-model="NewPassWord1"
             :state="validation"
-            id="New1"
             class="classLog"
             type="password"
             style="
@@ -16,19 +16,19 @@
               border-radius: 10px;
             "
             placeholder="Nouveau mot de passe"
-          ></b-form-input>
+          />
           <b-form-invalid-feedback :state="validation">
             Le mot de passe doit être entre 8-25 charactères.
           </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validation"> </b-form-valid-feedback>
+          <b-form-valid-feedback :state="validation" />
         </b-form>
       </div>
       <div>
         <b-form @submit.stop.prevent>
           <b-form-input
+            id="New2"
             v-model="NewPassWord2"
             :state="validation2"
-            id="New2"
             class="classLog"
             type="password"
             style="
@@ -36,21 +36,32 @@
               width: 30%;
               margin-top: 10px;
               border-radius: 10px;
-            "            placeholder="Vérifier mot de passe"
-          ></b-form-input>
+            "
+            placeholder="Vérifier mot de passe"
+          />
           <b-form-invalid-feedback :state="validation2">
             Mot de passe différent
           </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validation2"> </b-form-valid-feedback>
+          <b-form-valid-feedback :state="validation2" />
         </b-form>
       </div>
     </div>
     <div class="btnRouter">
       <div class="btnVal">
-        <button class="classBtn" @click="methAnnuler">Annuler</button>
+        <button
+          class="classBtn"
+          @click="methAnnuler"
+        >
+          Annuler
+        </button>
       </div>
       <div class="btnVal">
-        <button class="classBtn" @click="putPasswordById">Valider</button>
+        <button
+          class="classBtn"
+          @click="putPasswordById"
+        >
+          Valider
+        </button>
       </div>
     </div>
   </form>
@@ -58,7 +69,7 @@
 
 <script>
 export default {
-  name: "forgetWord",
+  name: "ForgetWord",
   components: {},
   props: ["childData"],
   data() {

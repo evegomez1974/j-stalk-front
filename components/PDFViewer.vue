@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div id="webViewer" ref="viewer"></div>
+    <div
+      id="webViewer"
+      ref="viewer"
+    />
   </div>
-
 </template>
 
 <script>
@@ -39,7 +41,7 @@ export default {
 }
 </script>
 
-<style scoped >
+<style scoped>
 #webViewer {
   height: 80vh;
   width: 45vw;

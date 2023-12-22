@@ -1,13 +1,13 @@
 <template>
+  <div>
     <div>
-        <div>
-            <navBarDeco />
-        </div>
-        <div class="notConnected">
-            <notConnected />
-        </div>
+      <navBarDeco />
     </div>
-  </template>
+    <div class="notConnected">
+      <notConnected />
+    </div>
+  </div>
+</template>
 
   <script>
     import notConnected from "../components/notConnected";
@@ -16,7 +16,7 @@
 
 
   export default {
-      name: "profil",
+      name: "Profil",
       components: { navBarDeco, notConnected },
       data() {
       return {
