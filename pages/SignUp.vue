@@ -5,7 +5,7 @@
         src="../static/j-stalk-logo-texte.png"
         width="350"
       >
-    </div>    
+    </div>
     <div class="containerForm">
       <FormSignUp />
     </div>
@@ -54,7 +54,3 @@ html {
   margin-bottom: 30px;
 }
 </style>
-
-
-
-

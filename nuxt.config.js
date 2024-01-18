@@ -46,7 +46,7 @@ export default {
     '@pinia/nuxt'
   ],
 
-  ssr: false, 
+  ssr: false,
   bootstrapVue: {
     icons: true,
   },
@@ -55,9 +55,9 @@ export default {
   build: {
       //PAS BESOIN DE CETTE PARTIE POUR LE CODE QUE J'AI RAJOUTE POUR LE PDF TU POURRAS L'ENLEVER
     //ENFIN SI TU LAISSES MAIS VIDE COMME CA :
-    /* 
+    /*
       extend(config, ctx) {
-      
+
       }
     */
       extend(config, ctx) {
@@ -75,7 +75,7 @@ export default {
     extendRoutes(routes, resolve) {
       const index = routes.findIndex(route => route.name === 'jobOffersList')
       routes.splice(index, 1);
-      
+
       routes.push({
         name: 'jobOffersList',
         path: '/',
@@ -86,5 +86,3 @@ export default {
 
 
 }
-
-

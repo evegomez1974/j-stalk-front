@@ -24,7 +24,7 @@ $ npm run start
 
 # j-stalk_front
 
-## Build Setup 
+## Build Setup
 
 ```bash
 # install dependencies
