@@ -98,6 +98,6 @@ jobs:
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
