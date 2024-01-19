@@ -102,22 +102,30 @@ jobs:
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
 
-  deploy:
-    name: Deploy docs
+  deploy_mkdocs:
+    permissions:
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
+      - name: Check out
         uses: actions/checkout@v3
-
-      - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
         with:
-          github_token: ${{ secrets.PAT }}
-        # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          # CUSTOM_DOMAIN: docs.com
-          CONFIG_FILE: docs/mkdocs.yml
-          EXTRA_PACKAGES: build-base
-          # GITHUB_DOMAIN: github.myenterprise.com
-          REQUIREMENTS: ../requirements.txt
+          token: "${{ secrets.PAT }}"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Mkdocs
+        run: pip install -r requirements.txt
+      - name: Build Mkdocs
+        run: mkdocs build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+      - name: Deploy to Github Pages
+        use: actions/deploy-pages@v4
