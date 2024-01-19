@@ -129,3 +129,4 @@ jobs:
           path: ./site
       - name: Deploy to Github Pages
         use: actions/deploy-pages@v4
+        run: mkdocs gh-deploy
