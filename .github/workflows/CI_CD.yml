@@ -29,6 +29,8 @@ jobs:
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
+      permissions:
+          contents: write
 
   pre-commit:
     runs-on: ubuntu-latest
@@ -103,14 +105,10 @@ jobs:
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
-        permissions:
-          contents: write
       - id: cz
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        permissions:
-          contents: write
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
