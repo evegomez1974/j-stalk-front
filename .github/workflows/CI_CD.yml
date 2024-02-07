@@ -102,7 +102,7 @@ jobs:
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
       - name: Build docker containers
-        run: docker-compose -f "../docker-compose.yml" build frontend
+        run: docker-compose -f "../../docker-compose.yml" build frontend
 
 
   deploy_mkdocs:
