@@ -1,0 +1,31 @@
+version: '3'
+services:
+  j-stalk-bdd:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: j-stalk-api
+    healthcheck:
+      test: ["CMD-SHELL", "mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute='SHOW DATABASES;' | grep -q 'j-stalk-api'"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ../j-stalk_back-id/:/docker-entrypoint-initdb.d
+
+  backend:
+    depends_on:
+      j-stalk-bdd:
+        condition: service_healthy
+    build:
+      context: ../j-stalk_back-id
+    ports:
+      - "8080:8080"
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./
+    ports:
+      - "3000:3000"
