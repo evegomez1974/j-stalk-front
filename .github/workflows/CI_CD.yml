@@ -101,6 +101,9 @@ jobs:
           github_token: ${{ secrets.PAT }}
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
+      - name: Build docker containers
+        run: docker-compose -f "../docker-compose.yml" build frontend
+
 
   deploy_mkdocs:
     permissions:
