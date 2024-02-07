@@ -103,6 +103,10 @@ jobs:
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
       - name: Build docker containers
         run: docker-compose -f "./docker-compose.yml" build frontend
+      - name: Update package.json with version from .cz.toml
+        run: |
+          VERSION=$(grep -oP 'version = "\K[^"]+' .cz.toml)
+          npm version $VERSION
       - name: Package Node
         uses: actions/setup-node@v3
         with:
