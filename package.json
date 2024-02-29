@@ -1,6 +1,6 @@
 {
   "name": "j-stalk_front",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "private": false,
   "scripts": {
     "dev": "nuxt",
@@ -13,7 +13,16 @@
     "lint": "eslint . --ext .test.js,.js,.jsx,.cjs --fix --ignore-path .gitignore"
   },
   "release": {
-    "branches": ["develop"]
+    "branches": [
+      "develop"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+  ]
   },
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
