@@ -85,28 +85,35 @@ jobs:
           echo test, and deploy your project.
 
   bump_version:
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    name: Semantic Release
     runs-on: ubuntu-latest
-    name: "Bump version and create changelog with commitizen"
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: "${{ secrets.PAT }}"
-      - id: cz
-        name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
+      - name: Run semantic-release
+        run: npm release
         with:
           github_token: ${{ secrets.PAT }}
-      - name: Print Version
-        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
+    # if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    # runs-on: ubuntu-latest
+    # name: "Bump version and create changelog with commitizen"
+    # steps:
+    #   - name: Check out
+    #     uses: actions/checkout@v3
+    #     with:
+    #       fetch-depth: 0
+    #       token: "${{ secrets.PAT }}"
+    #   - id: cz
+    #     name: Create bump and changelog
+    #     uses: commitizen-tools/commitizen-action@master
+    #     with:
+    #       github_token: ${{ secrets.PAT }}
+    #   - name: Print Version
+    #     run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
       # - name: Build docker containers
       #   run: docker-compose -f "./docker-compose.yml" build frontend
-      - name: Update package.json with version from .cz.toml
-        run: |
-          VERSION=$(grep -oP 'version = "\K[^"]+' .cz.toml)
-          npm version $VERSION
+      # - name: Update package.json with version from .cz.toml
+      #   run: |
+      #     VERSION=$(grep -oP 'version = "\K[^"]+' .cz.toml)
+      #     npm version $VERSION
       - name: Package Node
         uses: actions/setup-node@v3
         with:
