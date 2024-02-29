@@ -1,6 +1,7 @@
 {
   "name": "j-stalk_front",
   "version": "2.0.3",
+  "main": "nuxt.config.js",
   "private": false,
   "scripts": {
     "dev": "nuxt",
