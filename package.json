@@ -12,6 +12,9 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --ext .test.js,.js,.jsx,.cjs --fix --ignore-path .gitignore"
   },
+  "release": {
+    "branches": ["develop"]
+  },
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
     "@pdftron/webviewer": "^7.1.0",
