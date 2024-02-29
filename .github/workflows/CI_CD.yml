@@ -76,7 +76,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: npm run build
 
   release:
     name: Release
@@ -97,8 +97,6 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: npm clean-install
-      - name: Build Application
-        run: npm run build
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Release
