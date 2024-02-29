@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run semantic-release
-        run: npm release
+        run: npm run release
         env:
           GH_TOKEN: ${{ secrets.PAT }}
     # if: "!startsWith(github.event.head_commit.message, 'bump:')"
