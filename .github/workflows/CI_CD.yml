@@ -100,8 +100,8 @@ jobs:
         run: npm ci
       - name: Run semantic-release
         run: npm run release
-        with:
-          token: "${{ secrets.PAT }}"
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
     # if: "!startsWith(github.event.head_commit.message, 'bump:')"
     # runs-on: ubuntu-latest
     # name: "Bump version and create changelog with commitizen"
