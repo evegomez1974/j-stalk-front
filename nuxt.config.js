@@ -1,6 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  mode: 'universal',
+  ssr: false,
   head: {
     title: 'j-stalk',
     htmlAttrs: {
@@ -46,7 +46,6 @@ export default {
     '@pinia/nuxt'
   ],
 
-  ssr: false,
   bootstrapVue: {
     icons: true,
   },
@@ -68,8 +67,13 @@ export default {
             loader: 'url-loader'
           }
         )
+      },
+
+      babel: {
+        compact: true,
       }
   },
+
 
   router: {
     extendRoutes(routes, resolve) {
