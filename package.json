@@ -1,6 +1,6 @@
 {
   "name": "j-stalk_front",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": false,
   "scripts": {
     "dev": "nuxt",
@@ -22,7 +22,7 @@
       "@semantic-release/npm",
       "@semantic-release/git",
       "@semantic-release/github"
-  ]
+    ]
   },
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
