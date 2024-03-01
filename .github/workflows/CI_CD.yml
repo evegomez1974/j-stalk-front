@@ -112,10 +112,14 @@ jobs:
           uses: actions/checkout@v2
 
         - run: |
-          echo "Log level: ${{ inputs.logLevel }}"
+            echo "Log level: $LEVEL"
+          env:
+            LEVEL: ${{ inputs.logLevel }}
 
         - name: Incrémenter la version
-          run: npm version ${{ inputs.logLevel }}
+          run: npm version $LEVEL
+          env:
+            LEVEL: ${{ inputs.logLevel }}
 
         - name: Commit changes
           env:
