@@ -112,7 +112,7 @@ jobs:
           uses: actions/checkout@v2
 
         - run: |
-          echo "Log level: $LEVEL"
+          echo "Log level: ${{ inputs.logLevel }}"
 
         - name: Incrémenter la version
           run: npm version ${{ inputs.logLevel }}
