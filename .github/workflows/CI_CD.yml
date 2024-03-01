@@ -131,16 +131,17 @@ jobs:
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             npm version $VERSION
+            git push
           env:
             VERSION: ${{ inputs.version }}
 
-        - name: Commit changes
-          run: |
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git add package.json
-            git commit -m "Incrementing version"
-            git push
+        # - name: Commit changes
+        #   run: |
+        #     git config --global user.name "github-actions[bot]"
+        #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        #     git add package.json
+        #     git commit -m "Incrementing version"
+        #     git push
 
         - name: Package Node
           uses: actions/setup-node@v3
