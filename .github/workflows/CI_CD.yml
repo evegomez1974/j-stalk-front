@@ -129,14 +129,14 @@ jobs:
             git commit -m "Incrémentation automatique de la version"
             git push
 
-      # - name: Package Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '20.x'
-      #     registry-url: 'https://registry.npmjs.org'
-      # - run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
+        - name: Package Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: '20.x'
+            registry-url: 'https://registry.npmjs.org'
+        - run: npm publish --access public
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
 
   # release:
