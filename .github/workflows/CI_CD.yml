@@ -113,7 +113,7 @@ jobs:
       # needs: [ build ]
       permissions:
         id-token: write
-        steps:
+      steps:
         - run : npm cache clean --force
         - name: Checkout
           uses: actions/checkout@v4
