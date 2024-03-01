@@ -26,8 +26,7 @@
     ]
   },
   "files": [
-    "components",
-    "pages",
+    ".nuxt/",
     "README.md"
   ],
   "dependencies": {
