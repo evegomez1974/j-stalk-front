@@ -24,8 +24,13 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Configure Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - uses: actions/setup-python@v3
     - uses: pre-commit/action@v3.0.0
 
   verif:
@@ -97,7 +102,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
+          node-version: 20
       - name: Install dependencies
         run: npm clean-install
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
