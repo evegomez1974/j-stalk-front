@@ -123,11 +123,14 @@ jobs:
 
         - name: Commit changes
           run: |
+            git config --local user.email "github-actions@github.com"
+            git config --local user.name "GitHub Actions"
             git add package.json
-            git commit -m "Incrémentation automatique de la version"
+            git commit -m "Incrementing version"
             git push
           env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
+
 
         - name: Package Node
           uses: actions/setup-node@v3
