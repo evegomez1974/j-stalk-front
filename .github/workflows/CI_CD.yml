@@ -134,7 +134,12 @@ jobs:
             git push
           env:
             VERSION: ${{ inputs.version }}
-
+        - name: Créer un tag sur GitHub
+          run: |
+            git tag -a v${{ inputs.version }} -m "Version ${{ inputs.version }}"
+            git push origin v${{ inputs.version }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
         # - name: Commit changes
         #   run: |
         #     git config --global user.name "github-actions[bot]"
