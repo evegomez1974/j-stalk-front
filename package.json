@@ -25,6 +25,11 @@
       "@semantic-release/github"
     ]
   },
+  "files": [
+    "components",
+    "pages",
+    "README.md"
+  ],
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
     "@pdftron/webviewer": "^7.1.0",
