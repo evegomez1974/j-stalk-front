@@ -98,15 +98,6 @@ jobs:
       - name: Run a one-line script
         run: npm run build
 
-  # log-the-inputs:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: |
-  #         echo "Log level: $LEVEL"
-  #       env:
-  #         LEVEL: ${{ inputs.logLevel }}
-
-
   increment-version:
       if: github.event_name == 'workflow_dispatch'
       runs-on: ubuntu-latest
@@ -157,7 +148,26 @@ jobs:
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
-
+  github_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          release_name: Release ${{ steps.extract_version.outputs.version }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
   # release:
   #   name: Release
   #   runs-on: ubuntu-latest

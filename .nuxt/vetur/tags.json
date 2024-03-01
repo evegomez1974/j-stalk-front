@@ -1,0 +1,47 @@
+{
+  "AddDocs": {
+    "description": "Auto imported from components/addDocs.vue"
+  },
+  "CardCompany": {
+    "description": "Auto imported from components/cardCompany.vue"
+  },
+  "CardStudent": {
+    "description": "Auto imported from components/cardStudent.vue"
+  },
+  "Contact": {
+    "description": "Auto imported from components/contact.vue"
+  },
+  "ForgetWord": {
+    "description": "Auto imported from components/forgetWord.vue"
+  },
+  "FormLogin": {
+    "description": "Auto imported from components/formLogin.vue"
+  },
+  "FormSignUp": {
+    "description": "Auto imported from components/formSignUp.vue"
+  },
+  "InfosUserProfil": {
+    "description": "Auto imported from components/infosUserProfil.vue"
+  },
+  "ListDocsUser": {
+    "description": "Auto imported from components/listDocsUser.vue"
+  },
+  "NavBar": {
+    "description": "Auto imported from components/navBar.vue"
+  },
+  "NavBarDeco": {
+    "description": "Auto imported from components/navBarDeco.vue"
+  },
+  "NotConnected": {
+    "description": "Auto imported from components/notConnected.vue"
+  },
+  "PDFViewer": {
+    "description": "Auto imported from components/PDFViewer.vue"
+  },
+  "JobOffersCardJobOffer": {
+    "description": "Auto imported from components/jobOffers/cardJobOffer.vue"
+  },
+  "JobOffersCreateJobOffer": {
+    "description": "Auto imported from components/jobOffers/createJobOffer.vue"
+  }
+}
