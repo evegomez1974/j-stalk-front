@@ -1,6 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
 name: CI
+# env:
+#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 # Controls when the workflow will run
 on:
@@ -25,8 +28,8 @@ on:
 
 #authorization to private github
 permissions:
-  contents: read
-  actions: read
+  contents: write
+  actions: write
   checks: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -107,6 +110,7 @@ jobs:
   increment-version:
       if: github.event_name == 'workflow_dispatch'
       runs-on: ubuntu-latest
+      needs: [ build ]
       steps:
         - name: Checkout repository
           uses: actions/checkout@v2
@@ -195,3 +199,16 @@ jobs:
           path: docs/site
       - name: Deploy to Github Pages
         uses: actions/deploy-pages@v4
+
+  # Deploy-Preview:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install Vercel CLI
+  #       run: npm install --global vercel@latest
+  #     - name: Pull Vercel Environment Information
+  #       run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+  #     - name: Build Project Artifacts
+  #       run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+  #     - name: Deploy Project Artifacts to Vercel
+  #       run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
