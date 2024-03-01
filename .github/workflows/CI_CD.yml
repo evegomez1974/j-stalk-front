@@ -113,11 +113,14 @@ jobs:
       # needs: [ build ]
       permissions:
         id-token: write
-      steps:
-        - name: Checkout repository
+        steps:
+        - run : npm cache clean --force
+        - name: Checkout
           uses: actions/checkout@v4
+        - name: Configure Node
+          uses: actions/setup-node@v4
           with:
-            token: "${{ secrets.PAT }}"
+            node-version: 20
         - run: |
             echo "Update version: $VERSION"
           env:
@@ -130,6 +133,8 @@ jobs:
 
         - name: Commit changes
           run: |
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "github-actions[bot]"
             git add package.json
             git commit -m "Incrementing version"
             git push
