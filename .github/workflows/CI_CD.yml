@@ -16,12 +16,12 @@ on:
       logLevel:
         description: 'Log level'
         required: true
-        default: 'warning'
+        default: 'patch'
         type: choice
         options:
-        - info
-        - warning
-        - debug
+        - patch
+        - minor
+        - major
 
 #authorization to private github
 permissions:
@@ -95,13 +95,35 @@ jobs:
       - name: Run a one-line script
         run: npm run build
 
-  log-the-inputs:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
+  # log-the-inputs:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: |
+  #         echo "Log level: $LEVEL"
+  #       env:
+  #         LEVEL: ${{ inputs.logLevel }}
+
+
+  increment-version:
+      if: github.event_name == 'workflow_dispatch'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - run: |
           echo "Log level: $LEVEL"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
+
+        - name: Incrémenter la version
+          run: npm version ${{ inputs.logLevel }}
+
+        - name: Commit changes
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+          run: |
+            git add package.json
+            git commit -m "Incrémentation automatique de la version"
+            git push
 
       # - name: Package Node
       #   uses: actions/setup-node@v3
