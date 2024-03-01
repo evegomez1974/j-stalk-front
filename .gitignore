@@ -67,7 +67,6 @@ typings/
 
 # nuxt.js build output
 .nuxt
-j-stalk_front_prod
 
 # Nuxt generate
 dist

@@ -26,7 +26,7 @@
     ]
   },
   "files": [
-    "j-stalk_front_prod",
+    ".nuxt/",
     "README.md"
   ],
   "dependencies": {
