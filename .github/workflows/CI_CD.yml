@@ -135,7 +135,10 @@ jobs:
     steps:
       - name: Récupérer le dernier tag
         id: get_last_tag
-        run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
       - name: Créer une release
         id: create_release
         uses: actions/create-release@v1
