@@ -3,55 +3,47 @@
     "name": "addNewJobOffer",
     "path": "/addNewJobOffer",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\addNewJobOffer.vue",
-    "chunkName": "pages/addNewJobOffer",
-    "_name": "_01b6f912"
+    "chunkName": "pages/addNewJobOffer"
   },
   {
     "name": "companiesList",
     "path": "/companiesList",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\companiesList.vue",
-    "chunkName": "pages/companiesList",
-    "_name": "_cda83596"
+    "chunkName": "pages/companiesList"
   },
   {
     "name": "Login",
     "path": "/Login",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\Login.vue",
-    "chunkName": "pages/Login",
-    "_name": "_e86e2136"
+    "chunkName": "pages/Login"
   },
   {
     "name": "notConneted",
     "path": "/notConneted",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\notConneted.vue",
-    "chunkName": "pages/notConneted",
-    "_name": "_c0550c6e"
+    "chunkName": "pages/notConneted"
   },
   {
     "name": "profil",
     "path": "/profil",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\profil.vue",
-    "chunkName": "pages/profil",
-    "_name": "_c0e4ad60"
+    "chunkName": "pages/profil"
   },
   {
     "name": "SignUp",
     "path": "/SignUp",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\SignUp.vue",
-    "chunkName": "pages/SignUp",
-    "_name": "_0313d66c"
+    "chunkName": "pages/SignUp"
   },
   {
     "name": "studentsList",
     "path": "/studentsList",
     "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\studentsList.vue",
-    "chunkName": "pages/studentsList",
-    "_name": "_63005f6a"
+    "chunkName": "pages/studentsList"
   },
   {
     "name": "jobOffersList",
     "path": "/",
-    "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\jobOffersList.vue",
-    "_name": "_52f6520e"
+    "component": "C:\\\\Users\\\\evego\\\\Documents\\\\M1\\\\integration_deploiement\\\\j-stalk_front-id\\\\pages\\\\jobOffersList.vue"
   }
 ]

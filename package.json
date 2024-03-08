@@ -5,7 +5,7 @@
   "private": false,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && nuxt build",
     "start": "nuxt start",
     "release": "semantic-release",
     "generate": "nuxt generate",
