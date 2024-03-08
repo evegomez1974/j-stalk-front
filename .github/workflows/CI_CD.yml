@@ -138,11 +138,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ new-release ]
     steps:
-      - name: Étape2
-        env:
-          OUTPUT_TAG: ${{needs.new-release.outputs.outputTag}}
-        run: |
-          echo "$OUTPUT_TAG"
       - name: Checkout
         uses: actions/checkout@v4
         with:
