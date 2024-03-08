@@ -125,18 +125,21 @@ jobs:
             git push --tags origin develop
           env:
             VERSION: ${{ inputs.version }}
-        # - name: Créer une release
-        #   id: create_release
-        #   uses: actions/create-release@v1
-        #   env:
-        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #   with:
-        #     tag_name: ${{ github.ref }}
-        #     release_name: Release ${{ github.ref }}
-        #     body: |
-        #       Description de la release ici
-        #     draft: false
-        #     prerelease: false
+        - name: Récupérer le dernier tag
+          id: get_last_tag
+          run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+        - name: Créer une release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ steps.get_last_tag.outputs.tag }}
+            release_name: Release ${{ steps.get_last_tag.outputs.tag }}
+            body: |
+              Description de la release ici
+            draft: false
+            prerelease: false
         - name: Package Node
           uses: actions/setup-node@v3
           with:
