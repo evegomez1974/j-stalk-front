@@ -150,7 +150,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ create_and_publish_new_version ]
     permissions:
-      contents: write
+      contents: read
     environment:
       name: Vercel Deploiement
       url: https://j-stalk-front.vercel.app/
