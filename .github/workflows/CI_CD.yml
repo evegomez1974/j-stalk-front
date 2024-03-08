@@ -100,6 +100,8 @@ jobs:
         url: https://j-stalk-front.vercel.app/
       permissions:
         contents: write
+      outputs:
+        outputTag: ${{ steps.get_last_tag.outputs.tag }}
       steps:
         - run : npm cache clean --force
         - name: Checkout
@@ -156,8 +158,10 @@ jobs:
     needs: create_and_publish_new_version
     steps:
       - name: Étape2
+        env:
+          OUTPUT_TAG: ${{needs.create_and_publish_new_version.outputs.outputTag}}
         run: |
-          echo "Output from job1: ${{ needs.create_and_publish_new_version.outputs.tag }}"
+          echo "$OUTPUT_TAG"
 
   # Deploy-Production:
   #   if: github.event_name == 'workflow_dispatch'
@@ -180,60 +184,32 @@ jobs:
   #     - name: Deploy Project Artifacts to Vercel
   #       run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  deploy_mkdocs:
-    if: github.event_name == 'workflow_dispatch'
-    needs: [ create_and_publish_new_version ]
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out
-        uses: actions/checkout@v4
-        with:
-          token: "${{ secrets.PAT }}"
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-      - name: Install Mkdocs
-        run: pip install -r requirements.txt
-      - name: Build Mkdocs
-        run: mkdocs build --config-file docs/mkdocs.yml
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/site
-      - name: Deploy to Github Pages
-        uses: actions/deploy-pages@v4
-
-  # release:
-  #   name: Release
-  #   runs-on: ubuntu-latest
-  #   needs: [ build ]
+  # deploy_mkdocs:
+  #   if: github.event_name == 'workflow_dispatch'
+  #   needs: [ create_and_publish_new_version ]
   #   permissions:
-  #     contents: write # to be able to publish a GitHub release
-  #     issues: write # to be able to comment on released issues
-  #     pull-requests: write # to be able to comment on released pull requests
-  #     id-token: write # to enable use of OIDC for npm provenance
+  #     id-token: write
+  #     pages: write
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Checkout
+  #     - name: Check out
   #       uses: actions/checkout@v4
   #       with:
-  #         fetch-depth: 0
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
+  #         token: "${{ secrets.PAT }}"
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v2
   #       with:
-  #         node-version: 20
-  #     - name: Install dependencies
-  #       run: npm clean-install
-  #     - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-  #       run: npm audit signatures
-  #     - name: Release
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.PAT }}
-  #         NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
-  #       run: npm run release
+  #         python-version: "3.x"
+  #     - name: Install Mkdocs
+  #       run: pip install -r requirements.txt
+  #     - name: Build Mkdocs
+  #       run: mkdocs build --config-file docs/mkdocs.yml
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: docs/site
+  #     - name: Deploy to Github Pages
+  #       uses: actions/deploy-pages@v4
