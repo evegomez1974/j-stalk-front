@@ -77,13 +77,13 @@ export default {
 
   router: {
     extendRoutes(routes, resolve) {
-      const index = routes.findIndex(route => route.name === 'jobOffersList')
+      const index = routes.findIndex(route => route.name === 'login')
       routes.splice(index, 1);
 
       routes.push({
-        name: 'jobOffersList',
+        name: 'login',
         path: '/',
-        component: resolve(__dirname, 'pages/jobOffersList.vue')
+        component: resolve(__dirname, 'pages/Login.vue')
       })
     }
   },
