@@ -122,23 +122,9 @@ jobs:
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             npm version $VERSION
-            git push
+            git push --tags origin develop
           env:
             VERSION: ${{ inputs.version }}
-        # - name: Créer un tag sur GitHub
-        #   run: |
-        #     git tag -a v${{ inputs.version }} -m "Version ${{ inputs.version }}"
-        #     git push origin v${{ inputs.version }}
-        #   env:
-        #     GITHUB_TOKEN: ${{ secrets.PAT }}
-        # - name: Commit changes
-        #   run: |
-        #     git config --global user.name "github-actions[bot]"
-        #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        #     git add package.json
-        #     git commit -m "Incrementing version"
-        #     git push
-
         - name: Package Node
           uses: actions/setup-node@v3
           with:
@@ -148,32 +134,38 @@ jobs:
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
-  tag_release:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
+  # tag_release:
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: Checkout repository
+  #         uses: actions/checkout@v2
 
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '14'
+  #       - name: Setup Node.js
+  #         uses: actions/setup-node@v2
+  #         with:
+  #           node-version: '14'
 
-        - name: Set up Git
-          run: |
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+  #       - name: Set up Git
+  #         run: |
+  #           git config --global user.name "github-actions[bot]"
+  #           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        - name: Get new version
-          id: get_version
-          run: |
-            NEW_VERSION=$(node -p "require('./package.json').version")
-            echo "::set-output name=NEW_VERSION::$NEW_VERSION"
+  #       - name: Get new version
+  #         id: get_version
+  #         run: |
+  #           NEW_VERSION=$(node -p "require('./package.json').version")
+  #           echo "::set-output name=NEW_VERSION::$NEW_VERSION"
 
-        - name: Create and push tag
-          run: |
-            git tag -a "v${{ steps.get_version.outputs.NEW_VERSION }}" -m "Version ${{ steps.get_version.outputs.NEW_VERSION }}"
-            git push origin "v${{ steps.get_version.outputs.NEW_VERSION }}"
+  #       - name: Create and push tag
+  #         run: |
+  #           git tag -a "v${{ steps.get_version.outputs.NEW_VERSION }}" -m "Version ${{ steps.get_version.outputs.NEW_VERSION }}"
+  #           git push origin "v${{ steps.get_version.outputs.NEW_VERSION }}"
+
+  #       - name: Créer une release à partir du dernier tag
+  #         run: |
+  #           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+  #           gh release create $latest_tag --title "Release $latest_tag" --notes "Notes de la release"
+
 
   # github_release:
   #   if: github.event_name == 'workflow_dispatch'
