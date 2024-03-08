@@ -127,7 +127,7 @@ jobs:
             VERSION: ${{ inputs.version }}
         - name: Récupérer le dernier tag
           id: get_last_tag
-          run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+          run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
         - name: Créer une release
           id: create_release
           uses: actions/create-release@v1
