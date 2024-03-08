@@ -125,121 +125,43 @@ jobs:
             git push --tags origin develop
           env:
             VERSION: ${{ inputs.version }}
-        - name: Récupérer le dernier tag
-          id: get_last_tag
-          run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
-        - name: Créer une release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ steps.get_last_tag.outputs.tag }}
-            release_name: Release ${{ steps.get_last_tag.outputs.tag }}
-            body: |
-              Description de la release ici
-            draft: false
-            prerelease: false
-        - name: Package Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: '20.x'
-            registry-url: 'https://registry.npmjs.org'
-        - run: npm publish --access public
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
-  github-example-tags:
+  new-release:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     needs: [ increment-version ]
+    permissions:
+      contents: write
     steps:
-     - name: GitHub Tag Name example
-       run: |
-         echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-         echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+      - name: Récupérer le dernier tag
+        id: get_last_tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+      - name: Créer une release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_last_tag.outputs.tag }}
+          release_name: Release ${{ steps.get_last_tag.outputs.tag }}
+          body: |
+            Nouvelle release effectuée.
+          draft: false
+          prerelease: false
 
-  # tag_release:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout repository
-  #         uses: actions/checkout@v2
-
-  #       - name: Setup Node.js
-  #         uses: actions/setup-node@v2
-  #         with:
-  #           node-version: '14'
-
-  #       - name: Set up Git
-  #         run: |
-  #           git config --global user.name "github-actions[bot]"
-  #           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-  #       - name: Get new version
-  #         id: get_version
-  #         run: |
-  #           NEW_VERSION=$(node -p "require('./package.json').version")
-  #           echo "::set-output name=NEW_VERSION::$NEW_VERSION"
-
-  #       - name: Create and push tag
-  #         run: |
-  #           git tag -a "v${{ steps.get_version.outputs.NEW_VERSION }}" -m "Version ${{ steps.get_version.outputs.NEW_VERSION }}"
-  #           git push origin "v${{ steps.get_version.outputs.NEW_VERSION }}"
-
-  #       - name: Créer une release à partir du dernier tag
-  #         run: |
-  #           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-  #           gh release create $latest_tag --title "Release $latest_tag" --notes "Notes de la release"
-
-
-  # github_release:
-  #   if: github.event_name == 'workflow_dispatch'
-  #   name: Create Release
-  #   runs-on: ubuntu-latest
-  #   needs: [ increment-version ]
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #     - name: Create Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.PAT }} # This token is provided by Actions, you do not need to create your own token
-  #       with:
-  #         tag_name: v${{ steps.extract_version.outputs.version }}
-  #         release_name: Release v${{ steps.extract_version.outputs.version }}
-  #         body: |
-  #           Changes in this Release
-  #           - First Change
-  #           - Second Change
-  #         draft: false
-  #         prerelease: false
-  # release:
-  #   name: Release
-  #   runs-on: ubuntu-latest
-  #   needs: [ build ]
-  #   permissions:
-  #     contents: write # to be able to publish a GitHub release
-  #     issues: write # to be able to comment on released issues
-  #     pull-requests: write # to be able to comment on released pull requests
-  #     id-token: write # to enable use of OIDC for npm provenance
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - name: Install dependencies
-  #       run: npm clean-install
-  #     - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-  #       run: npm audit signatures
-  #     - name: Release
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.PAT }}
-  #         NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
-  #       run: npm run release
+  publish-release:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    needs: [ new-release ]
+    steps:
+      - name: Package Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
   deploy_mkdocs:
     needs: [ pre-commit ]
@@ -282,3 +204,32 @@ jobs:
   #       run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
   #     - name: Deploy Project Artifacts to Vercel
   #       run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+
+  # release:
+  #   name: Release
+  #   runs-on: ubuntu-latest
+  #   needs: [ build ]
+  #   permissions:
+  #     contents: write # to be able to publish a GitHub release
+  #     issues: write # to be able to comment on released issues
+  #     pull-requests: write # to be able to comment on released pull requests
+  #     id-token: write # to enable use of OIDC for npm provenance
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #     - name: Install dependencies
+  #       run: npm clean-install
+  #     - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+  #       run: npm audit signatures
+  #     - name: Release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.PAT }}
+  #         NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
+  #       run: npm run release
