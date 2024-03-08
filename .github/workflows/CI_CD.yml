@@ -26,9 +26,6 @@ on:
         - minor
         - major
 
-  release:
-    types: [created]
-
 #authorization to private github
 permissions:
   contents: write
@@ -124,18 +121,27 @@ jobs:
         - name: Récupérer le dernier tag
           id: get_last_tag
           run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
-        - name: Créer une release
-          id: create_release
-          uses: actions/create-release@v1
+        # - name: Créer une release
+        #   id: create_release
+        #   uses: actions/create-release@v1
+        #   env:
+        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   with:
+        #     tag_name: ${{ steps.get_last_tag.outputs.tag }}
+        #     release_name: Release ${{ steps.get_last_tag.outputs.tag }}
+        #     body: |
+        #       Nouvelle release publiée
+        #     draft: false
+        #     prerelease: false
+        - name: Create release
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ steps.get_last_tag.outputs.tag }}
-            release_name: Release ${{ steps.get_last_tag.outputs.tag }}
-            body: |
-              Nouvelle release publiée
-            draft: false
-            prerelease: false
+            tag: ${{ steps.get_last_tag.outputs.tag }}
+          run: |
+            gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --generate-notes
         - name: Package Node
           uses: actions/setup-node@v3
           with:
