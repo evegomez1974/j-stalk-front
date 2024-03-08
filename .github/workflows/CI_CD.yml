@@ -148,6 +148,7 @@ jobs:
 
   github-example-tags:
     runs-on: ubuntu-latest
+    needs: [ increment-version ]
     steps:
      - name: GitHub Tag Name example
        run: |
