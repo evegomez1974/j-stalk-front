@@ -22,6 +22,7 @@ on:
         default: ''
         type: choice
         options:
+        - ''
         - patch
         - minor
         - major
