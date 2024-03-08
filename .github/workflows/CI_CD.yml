@@ -26,6 +26,8 @@ on:
         - minor
         - major
 
+  release:
+    type: [created]
 #authorization to private github
 permissions:
   contents: write
@@ -140,7 +142,7 @@ jobs:
           run: |
             gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --title="Release ${tag#v}" \
               --generate-notes
         - name: Package Node
           uses: actions/setup-node@v3
