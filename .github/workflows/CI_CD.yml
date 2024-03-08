@@ -183,6 +183,9 @@ jobs:
     needs: [ pre-commit ]
     permissions:
       contents: write
+    environment:
+      name: Vercel Deploiement
+      url: https://j-stalk-front.vercel.app/
     steps:
       - name: Checkout
         uses: actions/checkout@v4
