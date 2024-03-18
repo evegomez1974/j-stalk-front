@@ -25,7 +25,7 @@ on:
         - preview
         - production
       version:
-        if: ${{ github.event.inputs.typeDeploy == 'production' }}
+        if: ${{ inputs.typeDeploy == 'production' }}
         description: 'Update version'
         required: false
         default: ''
