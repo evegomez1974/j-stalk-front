@@ -13,28 +13,28 @@ on:
   pull_request:
     branches: ["develop"]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
       typeDeploy:
         description: 'Update deploy'
-        required: false
+        required: true
         default: preview
         type: choice
         options:
-        - preview
-        - production
+          - preview
+          - production
       version:
-        if: "${{ github.event.inputs.typeDeploy == 'production' }}"
         description: 'Update version'
-        required: false
-        default: ''
+        required: true
         type: choice
         options:
-        - ''
-        - patch
-        - minor
-        - major
+          - ''
+          - patch
+          - minor
+          - major
+    types:
+      preview: # Validation pour le déploiement en mode "preview"
+        - version
 
 #authorization to private github
 permissions:
