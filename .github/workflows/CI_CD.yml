@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Update version'
+        description: 'New Release'
         required: false
         default: ''
         type: choice
