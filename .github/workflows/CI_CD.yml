@@ -94,6 +94,9 @@ jobs:
   deploy_preview:
     runs-on: ubuntu-latest
     needs: [ build ]
+    environment:
+      name: Preview Deploiement
+      url: https://j-stalk-front-evegomez-ynovcom-j-stalk-fronts-projects.vercel.app/
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
