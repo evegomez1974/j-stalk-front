@@ -34,7 +34,7 @@ on:
         - patch
         - minor
         - major
-        visible: ${{ github.event.inputs.typeDeploy == 'production' }}
+        visible: ${{ inputs.typeDeploy == 'production' }}
 
 #authorization to private github
 permissions:
