@@ -16,6 +16,14 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
+      typeDeploy:
+        description: 'Update deploy'
+        required: false
+        default: preview
+        type: choice
+        options:
+        - preview
+        - production
       version:
         description: 'Update version'
         required: false
@@ -26,6 +34,7 @@ on:
         - patch
         - minor
         - major
+        visible: ${{ github.event.inputs.typeDeploy == 'production' }}
 
 #authorization to private github
 permissions:
